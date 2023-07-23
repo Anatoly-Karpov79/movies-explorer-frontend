@@ -1,0 +1,95 @@
+.aboutme {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.aboutme__title {
+    display: flex;
+    margin: 110px 0 0 70px;
+    color: #000;
+font-family: Inter;
+font-size: 22px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -0.88px;
+
+}
+
+.aboutme__line {
+    width: 89%;
+    margin-top: 23px;
+}
+
+.aboutme__content {
+    width: 89%;
+    display: flex;
+    flex-direction: row;
+    margin: 70px 0 0 70px;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.aboutme__info {
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.aboutme__info-header {
+    color: #000;
+font-family: Inter;
+font-size: 50px;
+font-style: normal;
+font-weight: 400;
+line-height: 58px; /* 116% */
+letter-spacing: -2px;
+margin: 0;
+}
+
+.aboutme__info-about{
+    color: #000;
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 111.111% */
+}
+
+.aboutme__info-description {
+    width: 600px;
+    color: #000;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; /* 157.143% */
+
+}
+
+.aboutme__foto{
+    display: flex;
+    width: 270px;
+    height: 327px;
+    margin-right: 0;
+}
+
+.aboutme__timeline-info{
+    height: 36;
+ color: #000;
+background: #F2F2F2;
+}
+
+.aboutme__timeline-info-black{
+    background: #000;
+    color: #FFF;
+}
+
+.aboutme__timeline-description{
+    color: #A0A0A0;
+}

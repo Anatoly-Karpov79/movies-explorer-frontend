@@ -3,7 +3,7 @@ import './Techs.css'
 
 const Techs = () => {
     return (
-        <div className="techs">
+        <section className="techs" id="techs">
             <h2 className="techs__title">Технологии</h2>
             <hr className="techs__line"></hr>
             <div className="techs__content">
@@ -22,7 +22,7 @@ const Techs = () => {
                 <li className="techs__list-item">Express.js</li>
                 <li className="techs__list-item">mongoDB</li>
             </ul>
-        </div>
+        </section>
 
     )
 }
