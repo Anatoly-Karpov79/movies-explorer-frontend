@@ -1,29 +1,36 @@
+import React, { useState } from "react";
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import Header from "../Header/Header";
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Movies from '../Movies/movies';
 import About from '../About/About';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+
 
 function App() {
+
+
   return (
     <div className="App">
-      <header>
-        <p>
-          Начало дипломного проекта.
-        </p>
-
-      </header>
+     
+      
       <Routes>
-          <Route path="/" element={<About />} />;
-          <Route path="/movies" element={<Movies/>} />;
-          <Route path="/saved-movies" element={<SavedMovies/>} />;
-          <Route path="/profile" element={<Profile/>} />;
-          <Route path="/sign-in" element={<Login/>} />
-          <Route path="/sign-up" element={<Register/>} />;
+          <Route exact path="/" element={ <About />} />;
+          <Route exact path="/movies" element={<Movies/>} />;
+          <Route exact path="/saved-movies" element={<SavedMovies/>} />;
+          <Route exact path="/profile" element={<Profile/>} />;
+          <Route exact path="/signin" element={<Login/>} />
+          <Route exact path="/signup" element={<Register/>} />;
       </Routes>
+      
+      
+            
+      
     </div>
   );
 }

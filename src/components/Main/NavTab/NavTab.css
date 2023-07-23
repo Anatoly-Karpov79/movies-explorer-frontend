@@ -1,0 +1,29 @@
+.navtab{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.navtab__link{
+    display: flex;
+    width: 96px;
+height: 36px;
+border-radius: 10px;
+background: #E8E8E8;
+color: #FFF;
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 16px;
+justify-content: center;
+    align-items: center;
+    transition: 1s background-color;
+
+}
+
+.navtab__link:hover{
+    background: gray;
+    transition-delay:0.5s;
+
+}
