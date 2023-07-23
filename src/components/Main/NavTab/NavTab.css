@@ -19,6 +19,7 @@ line-height: 16px;
 justify-content: center;
     align-items: center;
     transition: 1s background-color;
+    text-decoration: none;
 
 }
 
