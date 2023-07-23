@@ -17,14 +17,14 @@ const AboutProject = () => {
                     <p className="aboutproject__info-description">У каждого этапа был мягкий и жёсткий
                         дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
                 </div>
-                
+
             </div>
             <div className="aboutproject__timeline">
-                    <p className="aboutproject__timeline-info">4 неделя</p>
-                    <p className="aboutproject__timeline-description">Back-end</p>
-                    <p className="aboutproject__timeline-info">1 неделя</p>
-                    <p className="aboutproject__timeline-description">Front-end</p>
-                </div>
+                <p className="aboutproject__timeline-info aboutproject__timeline-info-black">1 неделя</p>
+                <p className="aboutproject__timeline-info">4 недели</p>
+                <p className="aboutproject__timeline-description">Back-end</p>
+                <p className="aboutproject__timeline-description">Front-end</p>
+            </div>
         </div>
 
     )

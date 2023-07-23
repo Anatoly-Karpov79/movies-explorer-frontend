@@ -32,6 +32,7 @@
 }
 
 .aboutproject__info {
+    max-width: 550px;
     display: flex;
     flex-direction: column;
     margin: 26px 0 0 0;
@@ -59,4 +60,26 @@
 .aboutproject__timeline{
     display: grid;
     grid-template-columns: 1fr 4fr;
+    margin: 119px 70px 0 70px;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.aboutproject__timeline-info{
+    height: 36;
+ color: #000;
+background: #F2F2F2;
+}
+
+.aboutproject__timeline-info-black{
+    background: #000;
+    color: #FFF;
+}
+
+.aboutproject__timeline-description{
+    color: #A0A0A0;
 }
