@@ -1,5 +1,6 @@
 import './AboutMe.css'
 import myfoto from '../../../images/me.jpg'
+import { Link } from 'react-router-dom';
 
 
 const AboutMe = () => {
@@ -16,6 +17,7 @@ const AboutMe = () => {
                         убедился, что мне интересна разработка. Хочу развиваться в этом направлении, постоянно
                         расширяя и углубляя свои знания.
                     </p>
+                    <p>Github <Link>https://github.com/Anatoly-Karpov79</Link></p>
                 </div>
                 <div className="aboutme__foto">
                     <img className="aboutme__foto" src={myfoto} alt="фото студента" />

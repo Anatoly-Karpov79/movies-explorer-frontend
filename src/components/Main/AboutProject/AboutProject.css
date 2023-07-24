@@ -2,6 +2,7 @@
     width: auto;
     display: flex;
     flex-direction: column;
+    height: 608px;
 
 }
 
@@ -35,7 +36,7 @@
     max-width: 550px;
     display: flex;
     flex-direction: column;
-    margin: 26px 0 0 0;
+    margin: 0 0 0 0;
 }
 
 .aboutproject__info-header {
@@ -47,6 +48,7 @@
     line-height: normal;
     letter-spacing: -0.8px;
     text-align: left;
+    margin: 0;
 }
 
 .aboutproject__info-description {
@@ -62,7 +64,7 @@
 .aboutproject__timeline{
     display: grid;
     grid-template-columns: 1fr 4fr;
-    margin: 119px 70px 0 70px;
+    margin: 110px 70px 110px 70px;
     text-align: center;
     font-family: Inter;
     font-size: 14px;
