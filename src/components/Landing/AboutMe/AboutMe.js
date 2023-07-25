@@ -1,5 +1,5 @@
 import './AboutMe.css'
-import myfoto from '../../../../images/me.jpg'
+import myfoto from '../../../images/me.jpg'
 import { Link } from 'react-router-dom';
 
 

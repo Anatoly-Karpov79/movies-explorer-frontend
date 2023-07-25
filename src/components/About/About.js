@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-import Landing from '../App/Landing/Landing';
+import Landing from '../Landing/Landing';
 
 
 const About = () => {

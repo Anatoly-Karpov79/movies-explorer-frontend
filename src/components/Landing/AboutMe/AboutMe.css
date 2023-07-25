@@ -62,7 +62,7 @@ line-height: 20px; /* 111.111% */
 }
 
 .aboutme__info-description {
-    width: 47%;
+    width: 99%;
     color: #000;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Inter;
