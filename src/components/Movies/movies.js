@@ -1,7 +1,9 @@
+import Header2 from "./Header2/Header2";
+
 const Movies = () => {
     return(
         <div>
-            <h2>Movies</h2>
+            <Header2 />
         </div>
     )
 }
