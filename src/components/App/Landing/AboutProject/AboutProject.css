@@ -1,8 +1,9 @@
 .aboutproject {
-    width: auto;
+   
     display: flex;
     flex-direction: column;
     height: 608px;
+    box-sizing: border-box;
 
 }
 
@@ -20,8 +21,10 @@
 }
 
 .aboutproject__line {
-    width: 89%;
-    margin-top: 23px;
+   
+    
+    box-sizing: border-box;
+    margin: 23px 70px 0 70px;
 }
 
 .aboutproject__content {

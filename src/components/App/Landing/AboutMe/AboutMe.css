@@ -1,5 +1,5 @@
 .aboutme {
-    width: auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 
@@ -19,7 +19,8 @@ letter-spacing: -0.88px;
 }
 
 .aboutme__line {
-    width: 89%;
+    box-sizing: border-box;
+    margin: 0 70px 0 70px;
     margin-top: 23px;
 }
 

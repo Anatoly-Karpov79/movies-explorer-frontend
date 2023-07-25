@@ -1,7 +1,8 @@
 .portfolio {
-    width: auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    padding: 79px 70px 20px 70px;
 
 }
 
@@ -18,7 +19,7 @@
 }
 
 .portfolio__container {
-    margin: 0 70px 0 70px;
+    
     display: grid;
     grid-template-columns: 95% 5%;
     align-items: center;
@@ -49,8 +50,8 @@ letter-spacing: -1.2px;
 }
 
 .portfolio__line {
-    width: 89%;
-    margin: 0px 70px 0 70px;
-
+    width: 100%;
+    box-sizing: border-box;
+    color: #E8E8E8;
    
 }

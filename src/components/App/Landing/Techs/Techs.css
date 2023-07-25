@@ -1,5 +1,5 @@
 .techs {
-    width: auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background: #F5F5F5;
@@ -21,8 +21,9 @@
 }
 
 .techs__line {
-    width: 89%;
-    margin-top: 23px;
+    box-sizing: border-box;
+    margin: 23px 70px 0 70px;
+    margin-top: 
 }
 
 .techs__content {
