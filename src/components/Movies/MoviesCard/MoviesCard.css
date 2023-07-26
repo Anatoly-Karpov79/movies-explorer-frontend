@@ -4,6 +4,8 @@ height: 271px;
 display: grid;
 grid-template-columns: 4fr 1fr;
 grid-template-rows: 1fr 1fr 4fr;
+background: #FDFDFD;
+box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
 }
 
 .moviescard__name{
@@ -24,7 +26,7 @@ margin: 14px 0 0 14px;
     grid-column-end: 3;
     width: 30px;
 height: 30px;
-margin: 10px 0 0 10px;
+margin: 19px 0 0 19px;
 }
 
 .moviescard__duration{

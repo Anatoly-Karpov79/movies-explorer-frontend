@@ -2,7 +2,7 @@ import movie from '../../../images/movie.png';
 import saved from '../../../images/saved.png';
 import './MoviesCard.css'
 
-const MoviesCard = () => {
+function MoviesCard ()  {
 
     return (
         <div className="moviescard">
@@ -13,14 +13,8 @@ const MoviesCard = () => {
                 className="moviescard__image"
                 src={movie}
                 alt="33 слова о дизайне"
-
             />
-            
-            
-            
-
-
-        </div>
+           </div>
     );
 }
 

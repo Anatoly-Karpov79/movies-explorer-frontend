@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from "../Header/Header";
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import Movies from '../Movies/movies';
+import Movies from '../Movies/Movies';
 import About from '../About/About';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';

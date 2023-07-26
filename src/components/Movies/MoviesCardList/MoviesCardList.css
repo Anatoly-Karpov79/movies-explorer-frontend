@@ -1,0 +1,11 @@
+.moviescardlist{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(282px, max-content));
+    margin: auto;
+    gap: 17px;
+    max-width: 1140px;
+    width: 100%;
+    padding-top: 45px;
+    justify-content: center;
+    min-height: 40vh;
+}
