@@ -20,7 +20,7 @@ function Header2({ loggedIn }) {
                         </NavLink>
                     
                     <NavLink
-                            to="/saved-movies"
+                            to="/savedmovies"
                             className="header__button"
                             activeClassName="header__button_active">
                             Сохранённые фильмы

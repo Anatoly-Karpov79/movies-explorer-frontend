@@ -23,7 +23,7 @@ function App() {
       <Routes>
           <Route exact path="/" element={ <About />} />;
           <Route exact path="/movies" element={<Movies/>} />;
-          <Route exact path="/saved-movies" element={<SavedMovies/>} />;
+          <Route exact path="/savedmovies" element={<SavedMovies/>} />;
           <Route exact path="/profile" element={<Profile/>} />;
           <Route exact path="/signin" element={<Login/>} />
           <Route exact path="/signup" element={<Register/>} />;
