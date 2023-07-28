@@ -1,18 +1,16 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import './Login.css'
+import logo from '../../images/logo.png'
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLoginSubmit(e) {
+  function handleRegisterSubmit(e) {
     e.preventDefault();
-    if (!email || !password) {
-      return;
-    } else {
-      props.onLogin(password, email);
-      setEmail("");
-      setPassword("");
-    }
+
+    props.onRegister(email, password);
   }
 
   function handleEmail(e) {
@@ -24,24 +22,38 @@ const Login = (props) => {
   }
   return (
     <section className="login">
-      <h1 className="login__title">Вход</h1>
+      <Link to="/" className="login__logo">
+                        <img src={logo} alt="логотип" />
+                    </Link>
+      
+      <h2 className="login__title">Рады видеть!</h2>
       <form className="login__form">
+             <label className="login__label">E-mail</label>
         <input
           type="email"
           onChange={handleEmail}
           placeholder="Email"
           className="login__input"
         />
+        <label className="login__label">Пароль</label>
         <input
           type="password"
           onChange={handlePassword}
           placeholder="Пароль"
           className="login__input"
         />
-        <button onClick={handleLoginSubmit} className="login__button">
+        <span className="login__form-error">
+            Что-то пошло не так...
+          </span>
+        <button onClick={handleRegisterSubmit} className="login__button">
           Войти
         </button>
       </form>
+      <span className="login__subtext">Еще не зарегистрированы? <Link to="/signup" 
+      className="login__subtext login__link">
+         Регистрация
+      </Link></span>
+      
     </section>
   );
 };

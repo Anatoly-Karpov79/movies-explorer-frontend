@@ -26,7 +26,7 @@ const Register = (props) => {
                         <img src={logo} alt="логотип" />
                     </Link>
       
-      <h1 className="register__title">Добро пожаловать!</h1>
+      <h2 className="register__title">Добро пожаловать!</h2>
       <form className="register__form">
         <label className="register__label">Имя</label>
         <input type="text"
