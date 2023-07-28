@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
+import NotFound from "../NotFound/NotFound";
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/profile" element={<Profile/>} />;
           <Route exact path="/signin" element={<Login/>} />
           <Route exact path="/signup" element={<Register/>} />;
+          <Route path="*" element={<NotFound />} />
       </Routes>
       
       
