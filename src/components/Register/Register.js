@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import './Register.css'
+import logo from '../../images/logo.png'
 
 const Register = (props) => {
   const [email, setEmail] = useState("");
@@ -19,28 +21,45 @@ const Register = (props) => {
     setPassword(e.target.value);
   }
   return (
-    <section className="login">
-      <h1 className="login__title">Регистрация</h1>
-      <form className="login__form">
+    <section className="register">
+      <Link to="/" className="register__logo">
+                        <img src={logo} alt="логотип" />
+                    </Link>
+      
+      <h1 className="register__title">Добро пожаловать!</h1>
+      <form className="register__form">
+        <label className="register__label">Имя</label>
+        <input type="text"
+          onChange={handleEmail}
+          placeholder="Анатолий"
+          className="register__input"
+        />
+        <label className="register__label">E-mail</label>
         <input
           type="email"
           onChange={handleEmail}
           placeholder="Email"
-          className="login__input"
+          className="register__input"
         />
+        <label className="register__label">Пароль</label>
         <input
           type="password"
           onChange={handlePassword}
           placeholder="Пароль"
-          className="login__input"
+          className="register__input"
         />
-        <button onClick={handleRegisterSubmit} className="login__button">
+        <span className="register__form-error">
+            Что-то пошло не так...
+          </span>
+        <button onClick={handleRegisterSubmit} className="register__button">
           Зарегистрироваться
         </button>
       </form>
-      <Link to="/sign-in" className="login__subtext">
-        Уже зарегистрированы? Войти
-      </Link>
+      <span className="register__subtext">Уже зарегистрированы? <Link to="/signin" 
+      className="register__subtext register__link">
+         Войти
+      </Link></span>
+      
     </section>
   );
 };

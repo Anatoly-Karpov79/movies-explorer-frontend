@@ -6,7 +6,7 @@ import acaunt from '../../../images/acaunt.svg'
 function Header2({ loggedIn }) {
    
     return (
-        <>
+        
            
                 <header className="header" id="header">
                     <Link to="/" className="header__logo">
@@ -36,7 +36,7 @@ function Header2({ loggedIn }) {
                    
                 </header>
             
-        </>
+        
     );
 }
 
