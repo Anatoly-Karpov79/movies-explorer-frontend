@@ -23,9 +23,9 @@ const Register = (props) => {
   return (
     <section className="register">
       <Link to="/" className="register__logo">
-                        <img src={logo} alt="логотип" />
-                    </Link>
-      
+        <img src={logo} alt="логотип" />
+      </Link>
+
       <h2 className="register__title">Добро пожаловать!</h2>
       <form className="register__form">
         <label className="register__label">Имя</label>
@@ -49,17 +49,17 @@ const Register = (props) => {
           className="register__input"
         />
         <span className="register__form-error">
-            Что-то пошло не так...
-          </span>
+          Что-то пошло не так...
+        </span>
         <button onClick={handleRegisterSubmit} className="register__button">
           Зарегистрироваться
         </button>
       </form>
-      <span className="register__subtext">Уже зарегистрированы? <Link to="/signin" 
-      className="register__subtext register__link">
-         Войти
+      <span className="register__subtext">Уже зарегистрированы? <Link to="/signin"
+        className="register__subtext register__link">
+        Войти
       </Link></span>
-      
+
     </section>
   );
 };

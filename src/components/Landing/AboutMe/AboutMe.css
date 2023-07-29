@@ -7,7 +7,7 @@
 
 .aboutme__title {
     display: flex;
-    margin: 110px 0 0 70px;
+    margin: 110px 0 0 5%;
     color: #000;
 font-family: Inter;
 font-size: 22px;
@@ -20,15 +20,15 @@ letter-spacing: -0.88px;
 
 .aboutme__line {
     box-sizing: border-box;
-    margin: 0 70px 0 70px;
+    margin: 0 5% 0 5%;
     margin-top: 23px;
 }
 
 .aboutme__content {
     width: 89%;
-    display: flex;
-    flex-direction: row;
-    margin: 70px 0 0 70px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    margin: 70px 5% 0 5%;
     text-align: left;
     justify-content: space-between;
 }
@@ -74,7 +74,7 @@ line-height: 20px; /* 111.111% */
 }
 
 .aboutme__foto{
-    display: flex;
+    display: grid;
     width: 270px;
     height: 327px;
     margin-right: 0;
@@ -93,4 +93,25 @@ background: #F2F2F2;
 
 .aboutme__timeline-description{
     color: #A0A0A0;
+}
+
+@media screen and (max-width: 768px) {
+    .aboutme__foto {
+        width: 255px;
+height: 307px;
+grid-row-start: 1;
+
+            
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .aboutme__foto {
+        width: 292px;
+height: 352px;
+            
+    }
+    .aboutme__content {
+grid-template-columns: 1fr;
+}
 }

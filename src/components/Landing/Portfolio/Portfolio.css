@@ -2,13 +2,13 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding: 79px 70px 20px 70px;
+    padding: 79px 5% 20px 5%;
 
 }
 
 .portfolio__title {
     display: flex;
-    margin: 110px 0 20px 70px;
+    margin: 110px 0 20px 0;
     color: #A0A0A0;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Inter;
@@ -50,8 +50,9 @@ letter-spacing: -1.2px;
 }
 
 .portfolio__line {
-    width: 100%;
+    
     box-sizing: border-box;
     color: #E8E8E8;
+    margin: 23px 0 0 0;
    
 }

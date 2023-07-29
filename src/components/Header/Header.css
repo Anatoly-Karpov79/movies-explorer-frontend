@@ -1,12 +1,16 @@
 .header {
     width: auto;
-    padding: 0 70px;
+    padding: 0 5%;
     margin-bottom: 18px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
     align-items: center;
-    justify-content: space-between;
+    
     height: 76px;
+    
 }
+
+
 
 .header__logo {
     width: 38px;

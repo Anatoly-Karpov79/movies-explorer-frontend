@@ -7,7 +7,7 @@ import Landing from '../Landing/Landing';
 const About = () => {
     return (
         <about>
-            <Header />
+            <Header  />
             <Landing />
         </about>
 

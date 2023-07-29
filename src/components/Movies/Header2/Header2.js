@@ -8,25 +8,25 @@ function Header2({ loggedIn }) {
     return (
         
            
-                <header className="header" id="header">
-                    <Link to="/" className="header__logo">
+                <header className="header2" id="header">
+                    <Link to="/" className="header2__logo">
                         <img src={logo} alt="логотип" />
                     </Link>
                     <NavLink
                             to="/movies"
-                            className="header__button"
-                            activeClassName="header__button_active">
+                            className="header2__button"
+                            activeClassName="header2__button_active">
                             Фильмы
                         </NavLink>
                     
                     <NavLink
                             to="/savedmovies"
-                            className="header__button"
-                            activeClassName="header__button_active">
+                            className="header2__button"
+                            activeClassName="header2__button_active">
                             Сохранённые фильмы
                         </NavLink>
-                    <div className="header__container">
-                        <Link to="/profile" className="header__account-button">
+                    <div className="header2__container">
+                        <Link to="/profile" className="header2__account-button">
                            <img src={acaunt} alt="аккаунт"/>
                         </Link>
                        

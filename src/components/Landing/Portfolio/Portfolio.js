@@ -8,24 +8,27 @@ const Portfolio = () => {
         <section className="portfolio" id="portfolio">
             <h2 className="portfolio__title">Портфолио</h2>
             <div className="portfolio__container">
-                <Link to="/signup" className="portfolio__link">
+                <a href=" https://anatoly-karpov79.github.io/how-to-learn/" className="portfolio__link">
                     Статичный сайт
-                </Link>
-                <p className="portfolio__arrow">&#129149;</p>
+                </a>
+                <a href="https://anatoly-karpov79.github.io/how-to-learn/" 
+                className="portfolio__arrow portfolio__link">&#129149;</a>
                             </div>
                             <hr className="portfolio__line"></hr>
             <div className="portfolio__container">   
-                <Link to="/signin" className="portfolio__link">
+                <a href="https://anatoly-karpov79.github.io/russian-travel/"  className="portfolio__link">
                     Адаптивный сайт
-                </Link>
-                <p className="portfolio__arrow">&#129149;</p>
+                </a>
+                <a href="https://anatoly-karpov79.github.io/russian-travel/" 
+                className="portfolio__arrow portfolio__link">&#129149;</a>
                 </div>
                 <hr className="portfolio__line"></hr>
                 <div className="portfolio__container"> 
-                <Link to="/" className="portfolio__link">
+                <a href="https://anatoly-karpov79.github.io/russian-travel/"  className="portfolio__link">
                     Одностраничное приложение
-                </Link>
-                <p className="portfolio__arrow">&#129149;</p>
+                </a>
+                <a href="https://anatoly-karpov79.github.io/russian-travel/" 
+                className="portfolio__arrow portfolio__link">&#129149;</a>
             </div>
         </section>
 
