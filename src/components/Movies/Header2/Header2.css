@@ -1,6 +1,6 @@
 .header2 {
     width: auto;
-    padding: 0 70px;
+    margin: 0 5%;
     margin-bottom: 18px;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr 10fr;
@@ -49,4 +49,24 @@
     font-weight: 500;
     line-height: 16px;
     
+}
+
+.header2__menu {
+    display: none;
+    background-color: white;
+    border: none;
+    box-shadow: 0;
+    grid-column-start: 4;
+}
+
+@media screen and (max-width: 1000px) {
+    .header2__button{
+        display: none;
+    }
+    .header2__account-button{
+        display: none;
+    }
+    .header2__menu {
+        display: flex;
+    }
 }

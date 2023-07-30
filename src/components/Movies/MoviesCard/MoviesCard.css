@@ -1,5 +1,5 @@
 .moviescard {
-    width: 364px;
+    max-width: 364px;
     height: 271px;
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -41,6 +41,7 @@
 .moviescard__button:hover {
     transition: .6s linear;
     opacity: .5;
+    cursor: pointer;
 }
 
 .moviescard__duration {
@@ -57,4 +58,11 @@
     grid-row-start: 4;
     grid-column-start: 1;
     grid-column-end: 3;
+    max-width: -webkit-fill-available;
+}
+
+@media screen and (max-width: 768px) {
+    .moviescard{
+        max-width: 339px;
+    }
 }

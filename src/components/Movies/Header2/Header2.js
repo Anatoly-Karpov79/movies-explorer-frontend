@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../images/logo.png'
 import './Header2.css'
 import acaunt from '../../../images/acaunt.svg'
+import menu from '../../../images/menu.svg'
+
 function Header2({ loggedIn }) {
    
     return (
@@ -29,10 +31,13 @@ function Header2({ loggedIn }) {
                         <Link to="/profile" className="header2__account-button">
                            <img src={acaunt} alt="аккаунт"/>
                         </Link>
-                       
-                            
+                                               
                         
                     </div>
+                    <button className="header2__menu">
+                        <img src={menu} alt="menu" />
+                    
+                    </button>
                    
                 </header>
             
