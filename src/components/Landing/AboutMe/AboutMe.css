@@ -25,7 +25,7 @@ letter-spacing: -0.88px;
 }
 
 .aboutme__content {
-    width: 89%;
+    width: 92%;
     display: grid;
     grid-template-columns: 3fr 1fr;
     margin: 70px 5% 0 5%;
@@ -95,21 +95,36 @@ background: #F2F2F2;
     color: #A0A0A0;
 }
 
+@media screen and (max-width: 1100px) {
+.aboutme__content {
+    width: 90%;
+
+}
+.aboutme__info-header{
+    font-size: 40px;
+}
+}
+
 @media screen and (max-width: 768px) {
     .aboutme__foto {
         width: 255px;
 height: 307px;
-grid-row-start: 1;
-
-            
+      
     }
+    
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
+    .aboutme__foto {
+        width: 203px;
+height: 258px;
+    }
+}
+@media screen and (max-width: 420px) {
     .aboutme__foto {
         width: 292px;
 height: 352px;
-            
+      grid-row-start: 1;      
     }
     .aboutme__content {
 grid-template-columns: 1fr;
