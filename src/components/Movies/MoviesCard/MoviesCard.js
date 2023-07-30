@@ -18,7 +18,7 @@ function MoviesCard() {
                 </button>}
 
             {location.pathname === '/movies' &&
-                <button type="button" aria-label="удалить фильм" className="moviescard__button" >
+                <button type="button" aria-label="добавить в избранное" className="moviescard__button" >
                     <img className="moviescard__saved" alt='Сохранено' src={saved} />
                 </button>}
 

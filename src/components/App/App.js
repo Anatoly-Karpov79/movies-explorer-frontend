@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Header from "../Header/Header";
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Movies from '../Movies/Movies';
 import About from '../About/About';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import NotFound from "../NotFound/NotFound";
 
 

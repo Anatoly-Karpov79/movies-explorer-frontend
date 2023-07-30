@@ -14,7 +14,7 @@ const Profile = () => {
                     <input name="name" className="profile__input" id="name-input" type="text" />
                 </label>
 
-                <hr className="techs__line"></hr>
+                <hr className="profile__line"></hr>
                 <label className="profile__field">
                     E-mail
                     <input name="email" className="profile__input" id="email-input" type="text" required />
