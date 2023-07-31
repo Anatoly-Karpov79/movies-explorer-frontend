@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import './Login.css'
 import logo from '../../images/logo.png'
 
-const Login = (props) => {
-  const [email, setEmail] = useState("");
+const Login = () => {
+ /* const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function handleRegisterSubmit(e) {
@@ -19,7 +19,7 @@ const Login = (props) => {
 
   function handlePassword(e) {
     setPassword(e.target.value);
-  }
+  } */
   return (
     <section className="login">
       <Link to="/" className="login__logo">
@@ -31,21 +31,21 @@ const Login = (props) => {
              <label className="login__label">E-mail</label>
         <input
           type="email"
-          onChange={handleEmail}
+     /*     onChange={handleEmail}  */
           placeholder="Email"
           className="login__input"
         />
         <label className="login__label">Пароль</label>
         <input
           type="password"
-          onChange={handlePassword}
+      /*    onChange={handlePassword}  */
           placeholder="Пароль"
           className="login__input"
         />
         <span className="login__form-error">
             Что-то пошло не так...
           </span>
-        <button onClick={handleRegisterSubmit} className="login__button">
+        <button  className="login__button"> 
           Войти
         </button>
       </form>
