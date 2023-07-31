@@ -4,18 +4,20 @@ import Techs from "./Techs/Techs";
 import AboutMe from "./AboutMe/AboutMe";
 import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
+import Header from "./Header/Header";
 
 
 const Landing = () => {
     return (
-        <landing>
+        <div className="landing">
+            <Header />
             <Promo />
             <AboutProject />
             <Techs />
             <AboutMe />
             <Portfolio />
             <Footer />
-        </landing>
+        </div>
 
     )
 }

@@ -1,10 +1,9 @@
 import './NavTab.css';
-import { Link } from 'react-router-dom';
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const NavTab = () => {
     return (
-        <navtab className="navtab">
+        <nav className="navtab">
             <AnchorLink href="#about" className="navtab__link">
                 О проекте
             </AnchorLink>
@@ -14,7 +13,7 @@ const NavTab = () => {
             <AnchorLink href="#aboutme" className="navtab__link">
                 Студент
             </AnchorLink>
-        </navtab>
+        </nav>
 
 
     );
