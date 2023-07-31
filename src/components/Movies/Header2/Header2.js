@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../images/logo.png'
 import './Header2.css'
@@ -7,24 +7,20 @@ import menu from '../../../images/menu.svg'
 import Menu from '../../Main/Menu/Menu';
 
 function Header2() {
-    const [menuIsOpen, setMenuIsOpen] = useState (false);
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
 
-function handleClose() {
-    setMenuIsOpen(false)
-}
+    function handleClose() {
+        setMenuIsOpen(false)
+    }
 
     return (
         <header className="header2" id="header">
-            
             <Link to="/" className="header2__logo">
                 <img src={logo} alt="логотип" />
             </Link>
-            <Link
-                to="/movies"
-                className="header2__button" >
+            <Link to="/movies" className="header2__button" >
                 Фильмы
             </Link>
-
             <Link
                 to="/savedmovies"
                 className="header2__button" >
@@ -34,17 +30,12 @@ function handleClose() {
                 <Link to="/profile" className="header2__account-button" >
                     <img src={acaunt} alt="аккаунт" />
                 </Link>
-
-
             </div>
             <button className="header2__menu" onClick={setMenuIsOpen}>
                 <img src={menu} alt="menu" />
-
             </button>
-            <Menu active={menuIsOpen} setActiv={setMenuIsOpen} onClose={handleClose}/>
+            <Menu active={menuIsOpen} setActiv={setMenuIsOpen} onClose={handleClose} />
         </header>
-
-
     );
 }
 

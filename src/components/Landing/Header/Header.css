@@ -5,12 +5,8 @@
     display: grid;
     grid-template-columns: 1fr 10fr;
     align-items: center;
-    
     height: 76px;
-    
 }
-
-
 
 .header__logo {
     width: 38px;
@@ -35,7 +31,7 @@
     line-height: 16px;
     text-decoration: none;
     align-items: center;
-  justify-content: center;
+    justify-content: center;
 }
 
 .header__button-black {
@@ -49,5 +45,4 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
-    
 }

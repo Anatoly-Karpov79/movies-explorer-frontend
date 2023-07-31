@@ -12,24 +12,16 @@ function MoviesCard() {
     return (
         <div className="moviescard">
             <h2 className="moviescard__name">33 слова о дизайне</h2>
-
             {location.pathname === '/savedmovies' &&
                 <button type="button" aria-label="удалить фильм" className="moviescard__button" >
                     <img className="moviescard__saved" alt='удалить' src={delet} />
                 </button>}
-
             {location.pathname === '/movies' &&
                 <button type="button" aria-label="добавить в избранное" className="moviescard__button" >
                     <img className="moviescard__saved" alt='Сохранено' src={saved} />
                 </button>}
-
-            
             <p className="moviescard__duration">1ч 47м</p>
-            <img
-                className="moviescard__image"
-                src={movie}
-                alt="33 слова о дизайне"
-            />
+            <img className="moviescard__image" src={movie} alt="33 слова о дизайне" />
         </div>
     );
 }

@@ -5,7 +5,6 @@
     flex-direction: column;
     justify-content: center;
     margin: auto;
-
 }
 
 .register__logo {
@@ -43,7 +42,6 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    
     margin: 134px 0 16px 0;
 }
 
@@ -73,23 +71,18 @@
     margin-bottom: 6px;
 }
 
-
 .register__input:focus {
     border-bottom: 1px solid #000;
 }
 
 .register__subtext {
     color: #A0A0A0;
-text-align: center;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-
-    
-    
-    
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .register__title {
@@ -101,7 +94,6 @@ line-height: normal;
     line-height: normal;
     margin: 0 0 40px 0;
     padding-top: 40px;
-
 }
 
 .register__form-error {

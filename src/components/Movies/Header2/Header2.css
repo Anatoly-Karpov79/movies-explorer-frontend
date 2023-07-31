@@ -7,8 +7,7 @@
     align-items: center;
     height: 76px;
     justify-items: end;
-    
-}
+   }
 
 .header2__logo {
     width: 38px;
@@ -48,8 +47,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
-    
-}
+    }
 
 .header2__menu {
     display: none;

@@ -23,7 +23,6 @@ const Techs = () => {
                 <li className="techs__list-item">mongoDB</li>
             </ul>
         </section>
-
     )
 }
 

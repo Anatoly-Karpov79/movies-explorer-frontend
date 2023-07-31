@@ -2,7 +2,6 @@ import './SearchForm.css'
 
 const SearchForm = () => {
     return (
-
         <div className="searchform">
             <form className="searchform__container">
                 <div className="searchform__loupe"></div>
@@ -16,11 +15,8 @@ const SearchForm = () => {
                     <span className="checkbox__text">Короткометражки</span>
                 </div>
             </form>
-
             <hr className="search__line"></hr>
         </div>
-
-
     )
 }
 

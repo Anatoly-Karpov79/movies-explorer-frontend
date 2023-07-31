@@ -6,7 +6,6 @@ import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 import Header from "./Header/Header";
 
-
 const Landing = () => {
     return (
         <div className="landing">
@@ -18,7 +17,6 @@ const Landing = () => {
             <Portfolio />
             <Footer />
         </div>
-
     )
 }
 

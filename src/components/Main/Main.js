@@ -12,10 +12,8 @@ const Main = () => {
                 < div className="search__checkbox">
                     <label class="switch">
                         <input type="checkbox"></input>
-                            <span class="slider round"></span>
+                        <span class="slider round"></span>
                     </label>
-
-                    
                     <span className='checkbox__text'>Короткометражки</span>
                 </div>
                 <hr className="search__line"></hr>

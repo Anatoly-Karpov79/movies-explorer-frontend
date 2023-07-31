@@ -10,28 +10,24 @@ import NotFound from "../NotFound/NotFound";
 import Landing from "../Landing/Landing";
 
 
-
 function App() {
-
 
   return (
     <div className="App">
-     
-      
       <Routes>
-          <Route exact path="/" element={ <Landing />} />;
-          <Route exact path="/movies" element={<Movies />} />;
-          <Route exact path="/savedmovies" element={<SavedMovies/>} />;
-          <Route exact path="/profile" element={<Profile/>} />;
-          <Route exact path="/signin" element={<Login/>} />
-          <Route exact path="/signup" element={<Register/>} />;
-          <Route path="*" element={<NotFound />} />
-          
+        <Route exact path="/" element={<Landing />} />;
+        <Route exact path="/movies" element={<Movies />} />;
+        <Route exact path="/savedmovies" element={<SavedMovies />} />;
+        <Route exact path="/profile" element={<Profile />} />;
+        <Route exact path="/signin" element={<Login />} />
+        <Route exact path="/signup" element={<Register />} />;
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
-      
-      
-            
-      
+
+
+
+
     </div>
   );
 }

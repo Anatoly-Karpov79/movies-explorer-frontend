@@ -14,8 +14,6 @@ const NavTab = () => {
                 Студент
             </AnchorLink>
         </nav>
-
-
     );
 };
 

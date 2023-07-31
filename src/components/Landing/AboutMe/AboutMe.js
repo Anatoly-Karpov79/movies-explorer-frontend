@@ -1,6 +1,5 @@
 import './AboutMe.css'
 import myfoto from '../../../images/me.jpg'
-import { Link } from 'react-router-dom';
 
 
 const AboutMe = () => {
