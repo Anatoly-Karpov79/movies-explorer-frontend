@@ -7,7 +7,7 @@ const Profile = () => {
 <Header2 />
  <section className="profile">
             
-            <h2 className="profile__title">Привет, Виталий!</h2>
+            <h2 className="profile__title">Привет, Анатолий!</h2>
             <form className="profile__form">
                 <label className="profile__field" htmlFor="name-input">
                     Имя

@@ -6,13 +6,8 @@ import acaunt from '../../../images/acaunt.svg'
 import menu from '../../../images/menu.svg'
 import Menu from '../../Main/Menu/Menu';
 
-function Header2() {
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
-
-    function handleClose() {
-        setMenuIsOpen(false)
-    }
-
+function Header2({setActive}) {
+   
     return (
         <header className="header2" id="header">
             <Link to="/" className="header2__logo">
@@ -31,10 +26,10 @@ function Header2() {
                     <img src={acaunt} alt="аккаунт" />
                 </Link>
             </div>
-            <button className="header2__menu" onClick={setMenuIsOpen}>
+            <button className="header2__menu" onClick={setActive}>
                 <img src={menu} alt="menu" />
             </button>
-            <Menu active={menuIsOpen} setActiv={setMenuIsOpen} onClose={handleClose} />
+            
         </header>
     );
 }

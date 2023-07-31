@@ -4,11 +4,11 @@ import Footer from "../Footer/Footer";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-const Movies = () => {
+function Movies ({setActive}) {
 
     return (
         <div>
-            <Header2 />
+            <Header2 setActive={setActive} />
             <SearchForm />
             <MoviesCardList />
             <Footer />

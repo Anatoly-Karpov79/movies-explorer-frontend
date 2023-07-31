@@ -4,12 +4,14 @@
 
 .menu__active {
     display: grid;
-    grid-template-columns: auto 520px;
+    grid-template-columns: 1fr 2fr;
     z-index: 1;
-    grid-row-start: 1;
-    grid-column-end: 5;
+    
     width: 768px;
     height: 1024px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .menu__close {
