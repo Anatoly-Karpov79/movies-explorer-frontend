@@ -1,3 +1,4 @@
+import React from 'react';
 import movie from '../../../images/movie.png';
 import saved from '../../../images/saved.png';
 import delet from '../../../images/delete.png'

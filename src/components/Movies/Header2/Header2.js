@@ -1,47 +1,43 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../../images/logo.png'
 import './Header2.css'
 import acaunt from '../../../images/acaunt.svg'
 import menu from '../../../images/menu.svg'
 
-function Header2({ loggedIn }) {
-   
+function Header2() {
+
     return (
-        
-           
-                <header className="header2" id="header">
-                    <Link to="/" className="header2__logo">
-                        <img src={logo} alt="логотип" />
-                    </Link>
-                    <NavLink
-                            to="/movies"
-                            className="header2__button"
-                            activeClassName="header2__button_active">
-                            Фильмы
-                        </NavLink>
-                    
-                    <NavLink
-                            to="/savedmovies"
-                            className="header2__button"
-                            activeClassName="header2__button_active">
-                            Сохранённые фильмы
-                        </NavLink>
-                    <div className="header2__container">
-                        <Link to="/profile" className="header2__account-button">
-                           <img src={acaunt} alt="аккаунт"/>
-                        </Link>
-                                               
-                        
-                    </div>
-                    <button className="header2__menu">
-                        <img src={menu} alt="menu" />
-                    
-                    </button>
-                   
-                </header>
-            
-        
+        <header className="header2" id="header">
+            <Link to="/" className="header2__logo">
+                <img src={logo} alt="логотип" />
+            </Link>
+            <Link
+                to="/movies"
+                className="header2__button" >
+                Фильмы
+            </Link>
+
+            <Link
+                to="/savedmovies"
+                className="header2__button" >
+                Сохранённые фильмы
+            </Link>
+            <div className="header2__container">
+                <Link to="/profile" className="header2__account-button">
+                    <img src={acaunt} alt="аккаунт" />
+                </Link>
+
+
+            </div>
+            <button className="header2__menu">
+                <img src={menu} alt="menu" />
+
+            </button>
+
+        </header>
+
+
     );
 }
 

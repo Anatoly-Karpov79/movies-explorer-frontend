@@ -9,9 +9,9 @@ const SearchForm = () => {
                 <input className="searchform__input" type="text" name="search" placeholder="Фильм" required />
                 <button className="searchform__button" type="button" aria-label="поиск"></button>
                 < div className="searchform__checkbox">
-                    <label class="switch">
+                    <label className="switch">
                         <input type="checkbox"></input>
-                        <span class="slider round"></span>
+                        <span className="slider round"></span>
                     </label>
                     <span className="checkbox__text">Короткометражки</span>
                 </div>
