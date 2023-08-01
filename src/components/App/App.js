@@ -38,11 +38,7 @@ function App() {
       </Routes>
       <Menu active={menuIsOpen} setActive={handleMenu} onClose={handleClose} />
 
-
-
-
-
-    </div>
+   </div>
   );
 }
 
