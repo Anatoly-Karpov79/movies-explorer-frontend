@@ -130,3 +130,9 @@
         grid-template-columns: 1fr;
     }
 }
+@media screen and (max-width: 250px) {
+    .aboutme__foto {
+        width: 200px;
+        height: 255px;
+    }
+}
