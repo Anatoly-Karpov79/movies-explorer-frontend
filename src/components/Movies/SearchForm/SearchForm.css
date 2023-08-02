@@ -143,7 +143,7 @@ input:checked+.slider:before {
     color: #8B8B8B;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
     .searchform__loupe {
         display: none;
     }
@@ -159,5 +159,9 @@ input:checked+.slider:before {
         grid-column-start: 1;
         justify-items: center;
         margin: auto;
+    }
+
+    .searchform__button {
+        margin: 0 0 0 83px;
     }
 }
