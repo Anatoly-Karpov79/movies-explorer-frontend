@@ -77,3 +77,11 @@
     display: flex;
     margin-top: 621px;
 }
+
+@media screen and (max-width: 500px) {
+    .menu__active {
+        width: 320px;
+height: 780px;
+    }
+
+}
