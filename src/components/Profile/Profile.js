@@ -1,7 +1,7 @@
 import Header2 from "../Movies/Header2/Header2";
 import './Profile.css'
 
-const Profile = () => {
+const Profile = ({signOut}) => {
     return (
 <>
 <Header2 />
@@ -22,7 +22,7 @@ const Profile = () => {
                 <button type="submit" className="profile__button-save">
                     Редактировать
                 </button>
-                <button className="profile__logout">Выйти из аккаунта</button>
+                <button onClick={signOut} className="profile__logout">Выйти из аккаунта</button>
             </form>
         </section>
 
