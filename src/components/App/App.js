@@ -94,6 +94,19 @@ function App() {
       });
   }
 
+  function onUpdateUser(data) {
+    api
+    .changeProfile(data)
+    auth
+    .getContent()
+          .then(data => {
+            setCurrentUser(data)
+          })
+      
+      .catch((e) => { console.log(e) })
+
+  };
+
   function signOut() {
     localStorage.removeItem('userId');
     navigate("/signup");
@@ -118,15 +131,17 @@ function App() {
               <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
                 <SavedMovies setActive={handleMenu} />
               </ProtectedRoute>}
-        />
+          />
 
-<Route exact path="/profile"
+          <Route exact path="/profile"
             element={
               <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
-                <Profile signOut={signOut}/>
+                <Profile
+                  signOut={signOut}
+                  onUpdateUser={onUpdateUser} />
               </ProtectedRoute>}
-        />
-        <Route exact path="/profile" element={<Profile />} />;
+          />
+          <Route exact path="/profile" element={<Profile />} />;
           <Route exact path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route exact path="/signup" element={<Register onRegister={handleRegister} />} />;
           <Route path="*" element={<NotFound />} />
