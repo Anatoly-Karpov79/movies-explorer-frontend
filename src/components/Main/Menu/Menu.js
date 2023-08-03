@@ -6,7 +6,7 @@ function Menu({ active, onClose }) {
 
     return (
         <nav className={active ? "menu__active" : "menu"} >
-           
+           <div className="menu__cover"></div>
             <div className="menu__container">
                 <button className="menu__close" onClick={onClose} ></button>
                 <NavLink onClick={onClose} className={({ isActive }) => (isActive ? 'menu__link-active' : 'menu__link')} to="/" >Главная</NavLink>

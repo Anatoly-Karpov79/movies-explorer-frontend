@@ -19,7 +19,7 @@ const AboutMe = () => {
                     <p>Github <a href="https://github.com/Anatoly-Karpov79">https://github.com/Anatoly-Karpov79</a></p>
                 </div>
                 <div className="aboutme__foto">
-                    <img className="aboutme__foto" src={myfoto} alt="фото студента" />
+                    <img className="aboutme__picture" src={myfoto} alt="фото студента" />
                 </div>
 
             </div>
