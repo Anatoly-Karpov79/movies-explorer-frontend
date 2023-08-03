@@ -53,8 +53,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-left: 15px;
-    border-left-color: #E8E8E8;
+        border-left: #CBCBCB solid;
 }
 
 .switch {
@@ -64,6 +63,7 @@
     height: 20px;
     background-color: #2BE080;
     border-radius: 10px;
+    margin-left: 15px;
 }
 
 .switch input {
@@ -134,6 +134,7 @@ input:checked+.slider:before {
     font-weight: 400;
     line-height: 18px;
     /* 138.462% */
+    margin-right: 15px;
 }
 
 
@@ -143,7 +144,7 @@ input:checked+.slider:before {
     color: #8B8B8B;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
     .searchform__loupe {
         display: none;
     }
@@ -159,5 +160,10 @@ input:checked+.slider:before {
         grid-column-start: 1;
         justify-items: center;
         margin: auto;
+        border: none;
+    }
+
+    .searchform__button {
+        margin: 0 0 0 83px;
     }
 }
