@@ -16,23 +16,32 @@ const Portfolio = () => {
                 <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
             </a>
             <hr className="portfolio__line"></hr>
-            <a href="https://anatoly-karpov79.github.io/russian-travel/"
-                className="portfolio__container"
-                rel="noreferrer"
-                target="_blank">
-                <p className="portfolio__link">Адаптивный сайт</p>
-                <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
-            </a>
+            <div className="portfolio__container">
+                <a href="https://anatoly-karpov79.github.io/russian-travel/"
+                    className="portfolio__link"
+                    rel="noreferrer"
+                    target="_blank">
+                    Адаптивный сайт
+                </a>
+                <a href="https://anatoly-karpov79.github.io/russian-travel/"
+                    className="portfolio__arrow portfolio__link"
+                    rel="noreferrer"
+                    target="_blank">&#129149;</a>
+            </div>
             <hr className="portfolio__line"></hr>
-
-            <a href="https://anatoly-karpov79.github.io/russian-travel/"
-                className="portfolio__container"
-                rel="noreferrer"
-                target="_blank">
-                <p className="portfolio__link">Одностраничное приложение</p>
-                <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
-            </a>
-
+            <div className="portfolio__container">
+                <a href="https://anatoly-karpov79.github.io/russian-travel/"
+                    className="portfolio__link"
+                    rel="noreferrer"
+                    target="_blank">
+                    Одностраничное приложение
+                </a>
+                <a href="https://anatoly-karpov79.github.io/russian-travel/"
+                    className="portfolio__arrow portfolio__link"
+                    rel="noreferrer"
+                    target="_blank"
+                >&#129149;</a>
+            </div>
         </section>
 
     )
