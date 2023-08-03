@@ -80,6 +80,12 @@
     margin-right: 0;
 }
 
+.aboutme__picture{
+    width: 270px;
+    height: 327px;
+}
+
+
 .aboutme__timeline-info {
     height: 36;
     color: #000;
@@ -110,10 +116,18 @@
         width: 255px;
         height: 307px;
     }
+    .aboutme__picture{
+        width: 255px;
+        height: 307px;
+    }
 }
 
 @media screen and (max-width: 500px) {
     .aboutme__foto {
+        width: 203px;
+        height: 258px;
+    }
+    .aboutme__picture{
         width: 203px;
         height: 258px;
     }
@@ -125,6 +139,10 @@
         height: 352px;
         grid-row-start: 1;
     }
+    .aboutme__picture{
+        width: 292px;
+        height: 352px;
+    }
 
     .aboutme__content {
         grid-template-columns: 1fr;
@@ -134,5 +152,9 @@
     .aboutme__foto {
         width: 200px;
         height: 255px;
+    }
+    .aboutme__picture{
+        width: 200px;
+        height: 355px;
     }
 }
