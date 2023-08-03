@@ -21,7 +21,7 @@
 .portfolio__container {
     display: grid;
     grid-template-columns: 95% 5%;
-height: 85px;
+    height: 85px;
     text-decoration: none;
     margin: 0 0 0 0;
 
@@ -43,13 +43,8 @@ height: 85px;
 
 .portfolio__arrow {
     color: #000;
-    font-family: Inter;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 60px;
-    /* 200% */
-    letter-spacing: -1.2px;
+    align-self: center;
+    justify-self: center;
 }
 
 .portfolio__line {
