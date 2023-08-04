@@ -20,7 +20,7 @@ const Portfolio = () => {
                 className="portfolio__container"
                 rel="noreferrer"
                 target="_blank">
-                <p className="portfolio__link">Статичный сайт</p>
+                <p className="portfolio__link">Адаптивный сайт</p>
                 <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
             </a>
             <hr className="portfolio__line"></hr>
@@ -28,7 +28,7 @@ const Portfolio = () => {
                 className="portfolio__container"
                 rel="noreferrer"
                 target="_blank">
-                <p className="portfolio__link">Статичный сайт</p>
+                <p className="portfolio__link">Одностраничное приложение</p>
                 <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
             </a>
         </section>
