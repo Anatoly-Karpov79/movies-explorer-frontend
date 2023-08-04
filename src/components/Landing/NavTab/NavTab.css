@@ -1,0 +1,74 @@
+.navtab {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.navtab__link {
+    display: flex;
+    width: 96px;
+    height: 36px;
+    border-radius: 10px;
+    background: #E8E8E8;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    justify-content: center;
+    align-items: center;
+    transition: 1s background-color;
+    text-decoration: none;
+}
+
+.navtab__link:hover {
+    background: gray;
+    transition-delay: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    .navtab {
+        margin-top: 300px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .navtab {
+        gap: 20px;
+       
+    }
+
+    .navtab__link {
+        width: 87px;
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .navtab {
+        margin-top: 160px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navtab {
+        gap: 10px;
+    }
+
+    .navtab__link {
+        width: 82px;
+        height: 26px;
+    }
+
+    .navtab {
+        margin-top: 120px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .navtab {
+    margin-top: 80px;
+}
+}
+   

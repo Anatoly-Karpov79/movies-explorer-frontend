@@ -1,0 +1,160 @@
+.aboutme {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutme__title {
+    display: flex;
+    margin: 110px 0 0 5%;
+    color: #000;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.88px;
+}
+
+.aboutme__line {
+    box-sizing: border-box;
+    margin: 0 5% 0 5%;
+    margin-top: 23px;
+}
+
+.aboutme__content {
+    width: 92%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    margin: 70px 5% 0 5%;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.aboutme__info {
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.aboutme__info-header {
+    color: #000;
+    font-family: Inter;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 58px;
+    /* 116% */
+    letter-spacing: -2px;
+    margin: 0;
+}
+
+.aboutme__info-about {
+    color: #000;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    /* 111.111% */
+}
+
+.aboutme__info-description {
+    width: 99%;
+    color: #000;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    /* 157.143% */
+}
+
+.aboutme__foto {
+    display: grid;
+    width: 270px;
+    height: 327px;
+    margin-right: 0;
+}
+
+.aboutme__picture{
+    width: 270px;
+    height: 327px;
+}
+
+
+.aboutme__timeline-info {
+    height: 36;
+    color: #000;
+    background: #F2F2F2;
+}
+
+.aboutme__timeline-info-black {
+    background: #000;
+    color: #FFF;
+}
+
+.aboutme__timeline-description {
+    color: #A0A0A0;
+}
+
+@media screen and (max-width: 1100px) {
+    .aboutme__content {
+        width: 90%;
+    }
+
+    .aboutme__info-header {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .aboutme__foto {
+        width: 255px;
+        height: 307px;
+    }
+    .aboutme__picture{
+        width: 255px;
+        height: 307px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .aboutme__foto {
+        width: 203px;
+        height: 258px;
+    }
+    .aboutme__picture{
+        width: 203px;
+        height: 258px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .aboutme__foto {
+        width: 292px;
+        height: 352px;
+        grid-row-start: 1;
+    }
+    .aboutme__picture{
+        width: 292px;
+        height: 352px;
+    }
+
+    .aboutme__content {
+        grid-template-columns: 1fr;
+    }
+}
+@media screen and (max-width: 250px) {
+    .aboutme__foto {
+        width: 200px;
+        height: 255px;
+    }
+    .aboutme__picture{
+        width: 200px;
+        height: 355px;
+    }
+}
