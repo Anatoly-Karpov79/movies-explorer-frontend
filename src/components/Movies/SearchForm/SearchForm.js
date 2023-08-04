@@ -7,15 +7,16 @@ const SearchForm = () => {
                 <div className="searchform__loupe"></div>
                 <input className="searchform__input" type="text" name="search" placeholder="Фильм" required />
                 <button className="searchform__button" type="button" aria-label="поиск"></button>
-                < div className="searchform__checkbox">
-                    <label className="switch">
-                        <input type="checkbox"></input>
-                        <span className="slider round"></span>
+                <div className="searchform__vertline"></div>
+                <div className="searchform__checkbox">
+                    <label className="searchform__checkbox-switch">
+                        <input type="checkbox" className="searchform__checkbox-input"></input>
+                        <span className="searchform__checkbox-slider-round"></span>
                     </label>
-                    <span className="checkbox__text">Короткометражки</span>
+                    <span className="searchform__checkbox-text">Короткометражки</span>
                 </div>
             </form>
-            <hr className="search__line"></hr>
+            <hr className="searchform__line"></hr>
         </div>
     )
 }

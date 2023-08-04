@@ -4,13 +4,15 @@ import Footer from "../Footer/Footer";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-function Movies ({setActive}) {
+function Movies({ setActive }) {
 
     return (
         <div>
             <Header2 setActive={setActive} />
-            <SearchForm />
-            <MoviesCardList />
+            <main>
+                <SearchForm />
+                <MoviesCardList />
+            </main>
             <Footer />
         </div>
     )

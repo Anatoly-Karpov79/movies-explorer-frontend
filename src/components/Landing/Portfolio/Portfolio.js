@@ -1,4 +1,6 @@
 import './Portfolio.css'
+import arrow from '../../../images/arrow.svg'
+
 
 const Portfolio = () => {
 
@@ -11,7 +13,7 @@ const Portfolio = () => {
                 rel="noreferrer"
                 target="_blank">
                 <p className="portfolio__link">Статичный сайт</p>
-                <p className="portfolio__arrow portfolio__link">&#129149;</p>
+                <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
             </a>
             <hr className="portfolio__line"></hr>
             <a href="https://anatoly-karpov79.github.io/russian-travel/"
@@ -19,18 +21,16 @@ const Portfolio = () => {
                 rel="noreferrer"
                 target="_blank">
                 <p className="portfolio__link">Адаптивный сайт</p>
-                <p className="portfolio__arrow portfolio__link">&#129149;</p>
+                <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
             </a>
             <hr className="portfolio__line"></hr>
-
             <a href="https://anatoly-karpov79.github.io/russian-travel/"
                 className="portfolio__container"
                 rel="noreferrer"
                 target="_blank">
                 <p className="portfolio__link">Одностраничное приложение</p>
-                <p className="portfolio__arrow portfolio__link">&#129149;</p>
+                <img className="portfolio__arrow" src={arrow} alt="Стрелка" />
             </a>
-
         </section>
 
     )

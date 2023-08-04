@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import './Login.css'
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.svg'
 import React, { useState }  from "react";
 
 const Login = (props) => {
@@ -56,7 +56,7 @@ const Login = (props) => {
         </button>
       </form>
       <span className="login__subtext">Еще не зарегистрированы? <Link to="/signup"
-        className="login__subtext login__link">
+        className="login__link">
         Регистрация
       </Link></span>
 

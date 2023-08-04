@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import './Register.css'
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.svg'
 import { useState } from "react";
 
 const Register = (props) => {
@@ -57,7 +57,7 @@ const Register = (props) => {
         </button>
       </form>
       <span className="register__subtext">Уже зарегистрированы? <Link to="/signin"
-        className="register__subtext register__link">
+        className="register__link">
         Войти
       </Link></span>
 
