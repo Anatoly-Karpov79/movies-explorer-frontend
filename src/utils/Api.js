@@ -28,7 +28,7 @@ class Api {
       }).then(this._handleResponse);
     }
   
-    changeProfile({name, email}) {
+    changeProfile(name, email) {
      return fetch(this._baseUrl + `/users/me`, {
         method: "PATCH",
         credentials: 'include',

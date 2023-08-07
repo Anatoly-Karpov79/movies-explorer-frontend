@@ -4,14 +4,14 @@ import Footer from "../Footer/Footer";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-function Movies({ setActive }) {
+function Movies({ setActive, movies, handleSearch }) {
 
     return (
         <div>
             <Header2 setActive={setActive} />
             <main>
-                <SearchForm />
-                <MoviesCardList />
+                <SearchForm  handleSearch={handleSearch}/>
+                <MoviesCardList movies={movies}/>
             </main>
             <Footer />
         </div>

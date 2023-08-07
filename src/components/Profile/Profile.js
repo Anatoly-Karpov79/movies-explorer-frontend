@@ -15,17 +15,19 @@ const Profile = ({signOut, onUpdateUser}) => {
 
        function handleNameInput(e) {
         setName(e.target.value);
+        console.log(name)
         
       };
 
       function handleEmailInput(e) {
         setEmail(e.target.value);
+        console.log(email)
         
     };
 
     function editUser(e) {
         e.preventDefault();
-        onUpdateUser({name, email});
+        onUpdateUser(name, email);
         
       };
 
@@ -36,7 +38,7 @@ const Profile = ({signOut, onUpdateUser}) => {
 <Header2 />
  <section className="profile">
             
-            <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+            <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
             <form className="profile__form" onSubmit={editUser}>
                 <label className="profile__field" htmlFor="name-input">
                     Имя

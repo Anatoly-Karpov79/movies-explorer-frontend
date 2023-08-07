@@ -12,7 +12,7 @@ function Menu({ active, onClose }) {
                 <NavLink onClick={onClose} className={({ isActive }) => (isActive ? 'menu__link-active' : 'menu__link')} to="/" >Главная</NavLink>
                 <NavLink onClick={onClose} className={({ isActive }) => (isActive ? 'menu__link-active' : 'menu__link')} to="/movies" >Фильмы</NavLink>
                 <NavLink onClick={onClose} className={({ isActive }) => (isActive ? 'menu__link-active' : 'menu__link')} to="/savedmovies">Сохранённые фильмы</NavLink>
-                <Link to="/profile" className="menu__account-button">
+                <Link to="/profile" onClick={onClose} className="menu__account-button">
                     <img src={acaunt} alt="аккаунт" />
                 </Link>
             </div>

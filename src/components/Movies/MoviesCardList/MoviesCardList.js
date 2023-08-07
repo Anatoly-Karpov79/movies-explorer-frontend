@@ -2,28 +2,30 @@ import React from "react";
 import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList (moviescard) {
+function MoviesCardList({ movies, savedMovies }) {
 
     return (
         <section className="moviescardlist">
-             <div className="moviescontent">
-                  <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-                </div>  
-          
+            <div className="moviescontent">
+                {movies.map((movie) => {
+                    return (
+                        <MoviesCard
+                            key={movie.id}
+                            movie={movie}
+                            
+                            savedMovies={savedMovies}
+                        /* onLikeMovie={onLikeMovie}
+                         onDeleteMovie={onDeleteMovie}*/
+                        />
+                    );
+
+                })}
+
+            </div>
+
             <button className="moviescardlist__button">Ещё</button>
-        
-      </section>
+
+        </section>
     );
 }
 
