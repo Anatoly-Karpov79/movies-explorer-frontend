@@ -8,6 +8,8 @@ import { useLocation } from 'react-router-dom';
 
 function MoviesCard({movie}) {
     const location = useLocation();
+    const hours = Math.floor(movie.duration / 60);
+    const minutes = movie.duration % 60;
 
     return (
         <div className="moviescard" key={movie.id}>
@@ -20,8 +22,12 @@ function MoviesCard({movie}) {
                 <button type="button" aria-label="добавить в избранное" className="moviescard__button" >
                     <img className="moviescard__saved" alt='Сохранено' src={saved} />
                 </button>}
-            <p className="moviescard__duration">2333</p>
-            <img className="moviescard__image" src={movie} alt="33 слова о дизайне" />
+            <p className="moviescard__duration">{movie.duration > 60 ? `${hours}ч ${minutes}м` : `${movie.duration}м`}</p>
+            <a href={movie.trailerLink}  className="moviescard__image" target="_blank" rel="noopener noreferrer">
+            <img className="moviescard__image" src={location.pathname === '/movies'
+            ? `https://api.nomoreparties.co/${movie.image.url}`
+            : movie.image} alt={movie.image.name} />
+            </a>
         </div>
     );
 }
