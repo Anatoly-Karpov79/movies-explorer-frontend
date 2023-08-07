@@ -129,6 +129,48 @@ function App() {
       });
   }
 
+  const handleLikeMovie = (movie, isLiked, id) => {
+    if (isLiked) {
+      handleDeleteMovie(id);
+    } else {
+      mainApi
+        .saveMovie(movie)
+        .then((res) => {
+          setSavedMovies([...savedMovies, res]);
+          console.log(res);
+        })
+        .catch((error) => console.log(error));
+      }
+    }
+
+    const handleDeleteMovie = (id) => {
+      const searchedSavedMovies = JSON.parse(
+        localStorage.getItem('searchedSavedMovies')
+      );
+  
+      mainApi
+        .deleteMovie(id)
+        .then((res) => {
+          const updatedSavedMovies = savedMovies.filter(
+            (movie) => movie._id !== id
+          );
+          setSavedMovies(updatedSavedMovies);
+  
+          // Чтобы обновить список фильмов в searchedSavedMovies при удалении или лайке-дизлайке
+          if (searchedSavedMovies) {
+            const updatedSearchedSavedMovies = searchedSavedMovies.filter(
+              (movie) => movie._id !== id
+            );
+  
+            localStorage.setItem(
+              'searchedSavedMovies',
+              JSON.stringify(updatedSearchedSavedMovies)
+            );
+          }
+        })
+        .catch((error) => console.log(error));
+    };
+
   function handleLogin(password, email) {
     auth
       .authorize(email, password)
@@ -171,6 +213,7 @@ function App() {
                     setActive={handleMenu}
                     movies={movies}
                     savedMovies={savedMovies}
+                    onLikeMovie={handleLikeMovie}
                   />
                 </ProtectedRoute>}
             />
