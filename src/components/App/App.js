@@ -28,7 +28,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
-
+  
   function onUpdateUser(name, email) {
     mainApi
       .changeProfile(name, email)
@@ -136,11 +136,12 @@ function App() {
     if (isLiked) {
       handleDeleteMovie(id);
     } else {
+      
       mainApi
         .saveMovie(movie)
         .then((res) => {
           setSavedMovies([...savedMovies, res]);
-          console.log(savedMovies);
+          
         })
         .catch((error) => console.log(error));
     }
