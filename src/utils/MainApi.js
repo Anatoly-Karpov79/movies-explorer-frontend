@@ -41,9 +41,36 @@ class MainApi {
             credentials: 'include',
             headers: this._headers,
          }).then(this._handleResponse);
-          
-        
-      }
+          }
+
+          saveMovie(movie) {
+            return fetch(this._baseUrl + `/movies`, {
+              method: 'POST',
+              credentials: 'include',
+              body: JSON.stringify({
+                country: movie.country,
+                director: movie.director,
+                duration: movie.duration,
+                year: movie.year,
+                description: movie.description,
+                image: `https://api.nomoreparties.co/${movie.image.url}`,
+                trailerLink: movie.trailerLink,
+                thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+                movieId: movie.id,
+                nameRU: movie.nameRU,
+                nameEN: movie.nameEN
+              }),
+              headers: this._headers
+            }).then(this._handleResponse);
+          }
+
+          deleteMovie(_id) {
+            return fetch(this._baseUrl + `/movies/` + _id, {
+              method: 'DELETE',
+              credentials: 'include',
+              headers: this._headers
+            }).then(this._handleResponse);
+          }
 }
 
 

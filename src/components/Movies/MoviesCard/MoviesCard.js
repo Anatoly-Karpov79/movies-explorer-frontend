@@ -1,12 +1,11 @@
 import React from 'react';
-import movie from '../../../images/movie.png';
-import saved from '../../../images/saved.svg';
+
 import delet from '../../../images/delete.svg'
 
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, savedMovies, onLikeMovie }) {
+function MoviesCard({ movie, savedMovies, onLikeMovie, onDeleteMovie }) {
     const location = useLocation();
     const hours = Math.floor(movie.duration / 60);
     const minutes = movie.duration % 60;
@@ -19,18 +18,24 @@ function MoviesCard({ movie, savedMovies, onLikeMovie }) {
     ? savedMovies.some((i) => i.movieId === movie.id)
     : false;
 
+    const cardLikeButtonClassName = `moviescard__button ${
+        isLiked && "moviescard__button_liked"
+      }`;
+
     return (
         <div className="moviescard" key={movie.id}>
             <h2 className="moviescard__name">{movie.nameRU}</h2>
+
             {location.pathname === '/savedmovies' &&
-                <button type="button" aria-label="удалить фильм" className="moviescard__button" >
+                <button type="button" onClick={() => onDeleteMovie(movie._id)} aria-label="удалить фильм" className="moviescard__button" >
                     <img className="moviescard__saved" alt='удалить' src={delet} />
                 </button>}
+                
             {location.pathname === '/movies' &&
                 <button type="button"
-                onClick={() => onLikeMovie(movie, isLiked, savedMovie?._id)}
+                onClick={() => onLikeMovie(movie, isLiked, savedMovie?.id)}
                     aria-label="добавить в избранное"
-                    className={`moviescard__button ${isLiked ? ' moviescard__button_liked' : ''}`} >
+                    className={cardLikeButtonClassName} >
                         
                 </button>}
             <p className="moviescard__duration">{movie.duration > 60 ? `${hours}ч ${minutes}м` : `${movie.duration}м`}</p>

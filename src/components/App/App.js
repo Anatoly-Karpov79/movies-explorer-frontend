@@ -25,10 +25,9 @@ function App() {
   const navigate = useNavigate();
   const [checkToken, setCheckToken] = useState(false);
   const location = useLocation();
-
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
 
   function onUpdateUser(name, email) {
     mainApi
@@ -59,11 +58,18 @@ function App() {
         .getUserInfo()
         .then((res) => {
           setCurrentUser(res);
-          console.log(res)
-        })
+                  })
+
         .catch((err) => {
           console.log(err);
         });
+        mainApi
+        .getSavedMovies()
+        .then((data) => {
+          setSavedMovies(data);
+          localStorage.setItem('savedMovies', JSON.stringify(data));
+        })
+        .catch((error) => console.log(error));
     }
   }, [loggedIn]);
 
@@ -89,17 +95,14 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      
       if (localStorage.getItem('movies')) {
-        
         setMovies(JSON.parse(localStorage.getItem('movies')));
-        console.log(localStorage.getItem('movies'))
-      } else {
+              } else {
         moviesApi
           .getMovies()
-          console.log("Получение фильмов")
+        
           .then((movies) => {
-            console.log(movies)
+            
             localStorage.setItem('movies', JSON.stringify(movies));
             setMovies(movies);
 
@@ -137,46 +140,46 @@ function App() {
         .saveMovie(movie)
         .then((res) => {
           setSavedMovies([...savedMovies, res]);
-          console.log(res);
+          console.log(savedMovies);
         })
         .catch((error) => console.log(error));
-      }
     }
+  }
 
-    const handleDeleteMovie = (id) => {
-      const searchedSavedMovies = JSON.parse(
-        localStorage.getItem('searchedSavedMovies')
-      );
-  
-      mainApi
-        .deleteMovie(id)
-        .then((res) => {
-          const updatedSavedMovies = savedMovies.filter(
-            (movie) => movie._id !== id
+  const handleDeleteMovie = (id) => {
+    const savedMovies = JSON.parse(
+      localStorage.getItem('savedMovies') );
+        
+
+    mainApi
+      .deleteMovie(id)
+      
+      .then((res) => {
+        const updatedSavedMovies = savedMovies.filter(
+          (movie) => movie._id !== id        );
+          console.log(res)
+        setSavedMovies(updatedSavedMovies);
+console.log(updatedSavedMovies)
+
+        if (savedMovies) {
+          const updatedSearchedSavedMovies = savedMovies.filter(
+            (movie) => movie.id !== id
           );
-          setSavedMovies(updatedSavedMovies);
-  
-          // Чтобы обновить список фильмов в searchedSavedMovies при удалении или лайке-дизлайке
-          if (searchedSavedMovies) {
-            const updatedSearchedSavedMovies = searchedSavedMovies.filter(
-              (movie) => movie._id !== id
-            );
-  
-            localStorage.setItem(
-              'searchedSavedMovies',
-              JSON.stringify(updatedSearchedSavedMovies)
-            );
-          }
-        })
-        .catch((error) => console.log(error));
-    };
+
+          localStorage.setItem(
+            'savedMovies',
+            JSON.stringify(updatedSearchedSavedMovies)
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   function handleLogin(password, email) {
     auth
       .authorize(email, password)
       .then((res) => {
-        console.log(res)
-        setLoggedIn(true);
+               setLoggedIn(true);
         setCurrentUser(res);
         console.log(currentUser);
         localStorage.setItem('userId', res._id);
@@ -187,11 +190,22 @@ function App() {
 
       });
   }
+  const handleSearch = (query, isShort) => {
+    setIsLoading(true);
+  
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+   /* const filtered = searchFilter(savedMovies, query, isShort);
 
+    
+    setMovies(filtered); */
+    setIsLoading(false);
+  };
 
 
   function signOut() {
     localStorage.removeItem('userId');
+    localStorage.removeItem('savedMovies');
+    localStorage.removeItem('movies');
     navigate("/signup");
     setLoggedIn(false);
   }
@@ -199,9 +213,7 @@ function App() {
   return (
 
     <div className="App">
-      {isLoading ? (
-        <Preloader />
-      ) : (
+     
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>
             <Route exact path="/" element={<Landing />} />;
@@ -221,7 +233,11 @@ function App() {
             <Route exact path="/savedmovies"
               element={
                 <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
-                  <SavedMovies setActive={handleMenu} />
+                  <SavedMovies 
+                  setActive={handleMenu}
+                  savedMovies={savedMovies}
+                  onDeleteMovie={handleDeleteMovie} 
+                  />
                 </ProtectedRoute>}
             />
 
@@ -241,7 +257,7 @@ function App() {
           </Routes>
           <Menu active={menuIsOpen} setActive={handleMenu} onClose={handleClose} />
         </CurrentUserContext.Provider >
-      )}
+      
     </div>
 
 

@@ -47,11 +47,16 @@
     margin: 20px 0 0 20px;
     border-radius: 34px;
     background-image: url(../../../images/saved-black.svg);
-        border: none;
+      /*  border: none;*/
 }
  
 
 .moviescard__button:hover {
+    transition: .6s linear;
+    opacity: .5;
+    cursor: pointer;
+}
+.moviescard__button_liked:hover {
     transition: .6s linear;
     opacity: .5;
     cursor: pointer;

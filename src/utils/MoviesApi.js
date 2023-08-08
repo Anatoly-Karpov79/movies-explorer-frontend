@@ -12,11 +12,12 @@ class MoviesApi {
         return Promise.reject(`Ошибка: ${res.status}`);
     };
 
-    getMovies(res) {
+    getMovies() {
         return fetch(this._baseUrl, {
+            method: "GET",
             headers: this._headers
-        }).then (console.log(res)
-        (this._handleResponse));
+        })
+        .then(this._handleResponse);
         
     }
 }

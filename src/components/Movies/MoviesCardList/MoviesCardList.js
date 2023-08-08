@@ -2,7 +2,7 @@ import React from "react";
 import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ movies, savedMovies, onLikeMovie }) {
+function MoviesCardList({ movies, savedMovies, onLikeMovie, onDeleteMovie }) {
 
     return (
         <section className="moviescardlist">
@@ -14,7 +14,8 @@ function MoviesCardList({ movies, savedMovies, onLikeMovie }) {
                             movie={movie}
                             onLikeMovie={onLikeMovie}
                             savedMovies={savedMovies}
-                        /* onLikeMovie={onLikeMovie}
+                            onDeleteMovie={onDeleteMovie}
+                        /* 
                          onDeleteMovie={onDeleteMovie}*/
                         />
                     );

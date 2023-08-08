@@ -11,7 +11,8 @@ function Movies({ setActive, movies, handleSearch, onLikeMovie }) {
             <Header2 setActive={setActive} />
             <main>
                 <SearchForm  handleSearch={handleSearch}/>
-                <MoviesCardList movies={movies}  onLikeMovie={onLikeMovie}/>
+                <MoviesCardList movies={movies}
+                  onLikeMovie={onLikeMovie}/>
             </main>
             <Footer />
         </div>
