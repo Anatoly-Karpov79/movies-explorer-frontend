@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import './Profile.css'
 import { CurrentUserContext } from '../../context/CurrentUserContext'
 
-const Profile = ({signOut, onUpdateUser}) => {
+const Profile = ({signOut, onUpdateUser, setActive}) => {
     const currentUser = useContext(CurrentUserContext);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -35,7 +35,7 @@ const Profile = ({signOut, onUpdateUser}) => {
 
 
 <>
-<Header2 />
+<Header2 setActive={setActive} />
  <section className="profile">
             
             <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>

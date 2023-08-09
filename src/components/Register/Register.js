@@ -4,14 +4,19 @@ import logo from '../../images/logo.svg'
 import { useState } from "react";
 
 const Register = (props) => {
+  const [name, setName] = useState("")
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
  
    function handleRegisterSubmit(e) {
      e.preventDefault();
  
-     props.onRegister(email, password);
+     props.onRegister(name, email, password);
    }
+   function handleName(e) {
+    setName(e.target.value);
+  }
+
  
    function handleEmail(e) {
      setEmail(e.target.value);
@@ -31,7 +36,7 @@ const Register = (props) => {
       <form className="register__form">
         <label className="register__label">Имя</label>
         <input type="text"
-                onChange={handleEmail} 
+                onChange={handleName} 
           placeholder="Анатолий"
           className="register__input"
         />

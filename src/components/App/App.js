@@ -115,14 +115,15 @@ function App() {
     }
   }, [loggedIn]);
 
-  useEffect(() => {
+ /* useEffect(() => {
     loggedIn &&
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies, loggedIn]);
+      console.log("Что-то добавили")
+  }, [savedMovies, loggedIn]); */
 
-  function handleRegister(email, password) {
+  function handleRegister(name, email, password) {
     auth
-      .register(email, password)
+      .register(name, email, password)
       .then((res) => {
 
         setTimeout(navigate, 3000, "/signin");
@@ -191,9 +192,11 @@ console.log(updatedSavedMovies)
 
       });
   }
-  const handleSearch = (query, isShort) => {
-    setIsLoading(true);
   
+
+  const handleSearch = (inputValue) => {
+    setIsLoading(true);
+    const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
     const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
    /* const filtered = searchFilter(savedMovies, query, isShort);
 
@@ -227,6 +230,7 @@ console.log(updatedSavedMovies)
                     movies={movies}
                     savedMovies={savedMovies}
                     onLikeMovie={handleLikeMovie}
+                    handleSearch={handleSearch}
                   />
                 </ProtectedRoute>}
             />
