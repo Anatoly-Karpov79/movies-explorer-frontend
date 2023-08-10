@@ -115,6 +115,8 @@ function App() {
     }
   }, [loggedIn]);
 
+  const handleMoveis = (movies) => setMovies(movies);
+
  /* useEffect(() => {
     loggedIn &&
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
@@ -192,12 +194,37 @@ console.log(updatedSavedMovies)
 
       });
   }
+
+  
+  const handleChangeFilter = () => {
+    const resultsearch = [];
+    movies.filter((movie) => {
+      if (movie.duration <= 40) {
+        resultsearch.push(movie);
+      }
+    });
+
+    setMovies(resultsearch);
+  }
   
 
   const handleSearch = (inputValue) => {
     setIsLoading(true);
     const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
     const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+
+    const resultsearch = [];
+      
+      movies.map((movie) => {
+        let t = movie.nameRU.toLowerCase();
+        if (t.indexOf(inputValue.toLowerCase()) > 0) {
+          resultsearch.push(movie);
+        }
+    });
+
+
+    setMovies(resultsearch)
+
    /* const filtered = searchFilter(savedMovies, query, isShort);
 
     
@@ -231,6 +258,8 @@ console.log(updatedSavedMovies)
                     savedMovies={savedMovies}
                     onLikeMovie={handleLikeMovie}
                     handleSearch={handleSearch}
+                    handleChangeFilter={handleChangeFilter}
+
                   />
                 </ProtectedRoute>}
             />

@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
 import './SearchForm.css'
 
-const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSearch }) => {
+const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSearch, handleChangeFilter}) => {
     const [inputValue, setInputValue] = useState("");
+    const [checkBox, setCheckBox] = useState(false);
+
+    useEffect(() => {
+        if (checkBox === true) {
+            handleChangeFilter();
+        }
+    }, [checkBox])
+    
 
     const handleInput = (evt) => {
         setInputValue(evt.target.value);
@@ -35,7 +43,9 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
                 <div className="searchform__vertline"></div>
                 <div className="searchform__checkbox">
                     <label className="searchform__checkbox-switch">
-                        <input type="checkbox" className="searchform__checkbox-input"></input>
+                        <input type="checkbox" className="searchform__checkbox-input"
+                         checked={checkBox}
+                         onChange={(evt) => setCheckBox(!checkBox)} />
                         <span className="searchform__checkbox-slider-round"></span>
                     </label>
                     <span className="searchform__checkbox-text">Короткометражки</span>
