@@ -2,28 +2,54 @@ import { useEffect, useState } from 'react';
 import './SearchForm.css'
 
 const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSearch, handleChangeFilter}) => {
-    const [inputValue, setInputValue] = useState("");
-    const [checkBox, setCheckBox] = useState(false);
+    const [searchText, setSearchText] = useState('');
+ /*   const [error, setError] = useState(''); */
+    const isChecked = JSON.parse(localStorage.getItem('filterCheckBox'));
+    const [isShortFilmChecked, setIsShortFilmChecked] = useState(isChecked);
 
     useEffect(() => {
-        if (checkBox === true) {
-            handleChangeFilter();
+        if (searchQuery.searchText) {
+          setSearchText(searchQuery.searchText);
+          console.log(searchQuery.searchText)
         }
-    }, [checkBox])
+      }, [searchQuery.searchText]);
+
+      const handleChange = (e) => {
+        setSearchText(e.target.value);
+      };
+
+      const checkFilterBox = () => {
+        if (searchText !== '') {
+          setIsShortFilmChecked(!isShortFilmChecked);
+    
+          onFilter({
+            searchText: searchText,
+            isShortFilmChecked: !isShortFilmChecked
+          });
+        } else {
+          setIsShortFilmChecked(!isShortFilmChecked);
+    
+          onFilter({
+            searchText: searchQuery.searchText,
+            isShortFilmChecked: !isShortFilmChecked
+          });
+        }
+      };
     
 
-    const handleInput = (evt) => {
-        setInputValue(evt.target.value);
-    };
+      const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        if (!searchText) {
+       /*   setError('Нужно ввести ключевое слово'); */
+          return;
+        } else {
+          onFilter({ searchText, isShortFilmChecked });
+        }
+      };
+    
 
-
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-
-        localStorage.setItem("query", inputValue);
-        handleSearch(inputValue);
-    };
-
+    
     return (
         <div className="searchform">
             <form className="searchform__container" onSubmit={handleSubmit}>
@@ -33,8 +59,8 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
                     type="text"
                     name="search"
                     placeholder="Фильм"
-                    value={inputValue}
-                    onChange={handleInput}
+                    value={searchText || ''}
+                    onChange={handleChange}
                     required />
                 <button className="searchform__button"
                     type="submit"
@@ -44,8 +70,8 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
                 <div className="searchform__checkbox">
                     <label className="searchform__checkbox-switch">
                         <input type="checkbox" className="searchform__checkbox-input"
-                         checked={checkBox}
-                         onChange={(evt) => setCheckBox(!checkBox)} />
+                         onCheck={checkFilterBox}
+                         isChecked={searchQuery.isShortFilmChecked} />
                         <span className="searchform__checkbox-slider-round"></span>
                     </label>
                     <span className="searchform__checkbox-text">Короткометражки</span>

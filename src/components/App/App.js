@@ -27,7 +27,8 @@ function App() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
+  const [savedMovies, setSavedMovies] = useState([]);
+ 
   
   function onUpdateUser(name, email) {
     mainApi
@@ -95,8 +96,8 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      if (localStorage.getItem('searchedMovies')) {
-        setMovies(JSON.parse(localStorage.getItem('searchedMovies')));
+      if (localStorage.getItem('movies')) {
+        setMovies(JSON.parse(localStorage.getItem('movies')));
               } else {
         moviesApi
           .getMovies()
@@ -104,7 +105,8 @@ function App() {
           .then((movies) => {
             
             localStorage.setItem('movies', JSON.stringify(movies));
-          /*  setMovies(movies); */
+            setMovies(movies);
+          
 
           })
           .catch((error) => {
@@ -115,13 +117,13 @@ function App() {
     }
   }, [loggedIn]);
 
-  const handleMoveis = (movies) => setMovies(movies);
+ 
 
- /* useEffect(() => {
+  useEffect(() => {
     loggedIn &&
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
       console.log("Что-то добавили")
-  }, [savedMovies, loggedIn]); */
+  }, [savedMovies, loggedIn]); 
 
   function handleRegister(name, email, password) {
     auth
@@ -152,7 +154,7 @@ function App() {
 
   const handleDeleteMovie = (id) => {
     const savedMovies = JSON.parse(
-      localStorage.getItem('savedMovies') );
+      localStorage.getItem('searchedSavedMovies') );
         
 
     mainApi
@@ -163,7 +165,7 @@ function App() {
           (movie) => movie._id !== id        );
           console.log(res)
         setSavedMovies(updatedSavedMovies);
-console.log(updatedSavedMovies)
+
 
         if (savedMovies) {
           const updatedSearchedSavedMovies = savedMovies.filter(
@@ -171,7 +173,7 @@ console.log(updatedSavedMovies)
           );
 
           localStorage.setItem(
-            'savedMovies',
+            'searchedSavedMovies',
             JSON.stringify(updatedSearchedSavedMovies)
           );
         }
@@ -202,16 +204,19 @@ console.log(updatedSavedMovies)
       if (movie.duration <= 40) {
         resultsearch.push(movie);
       }
+      else {
+        setMovies()
+      }
     });
 
     setMovies(resultsearch);
   }
   
 
-  const handleSearch = (inputValue) => {
+ /* const handleSearch = (inputValue) => {
     setIsLoading(true);
     const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-   /* const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));*/
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 const allMovies = (JSON.parse(localStorage.getItem('movies')));
     const resultsearch = [];
       
@@ -220,19 +225,20 @@ const allMovies = (JSON.parse(localStorage.getItem('movies')));
         if (t.indexOf(inputValue.toLowerCase()) > 0) {
           resultsearch.push(movie);
           localStorage.setItem('searchedMovies', JSON.stringify([...searchedMovies, movie]));
+          setSearchedMovies(resultsearch)
           console.log(localStorage.getItem('searchedMovies'))
         }
     });
 
 
-    setMovies(resultsearch)
+    setMovies(resultsearch)*/
 
    /* const filtered = searchFilter(savedMovies, query, isShort);
 
     
-    setMovies(filtered); */
+    setMovies(filtered); 
     setIsLoading(false);
-  };
+  };*/
 
 
   function signOut() {
@@ -260,7 +266,7 @@ const allMovies = (JSON.parse(localStorage.getItem('movies')));
                     movies={movies}
                     savedMovies={savedMovies}
                     onLikeMovie={handleLikeMovie}
-                    handleSearch={handleSearch}
+                    
                     handleChangeFilter={handleChangeFilter}
 
                   />
