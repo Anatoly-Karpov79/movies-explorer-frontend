@@ -6,6 +6,8 @@ import React, { useState }  from "react";
 const Login = (props) => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
+   const [isValid, setIsValid] = useState(false);
+
  
    function handleLoginSubmit(e) {
     e.preventDefault();
@@ -20,10 +22,12 @@ const Login = (props) => {
 
   function handleEmail(e) {
     setEmail(e.target.value);
+    setIsValid(e.target.closest('form').checkValidity());
   }
 
   function handlePassword(e) {
     setPassword(e.target.value);
+    setIsValid(e.target.closest('form').checkValidity());
   }
 
   return (
@@ -51,7 +55,8 @@ const Login = (props) => {
         <span className="login__form-error">
           Что-то пошло не так...
         </span>
-        <button onClick={handleLoginSubmit} className="login__button">
+        <button onClick={handleLoginSubmit} disabled={!isValid} className={`login__button ${
+         !isValid ? "login__button_disabled" : " "}`} >
           Войти
         </button>
       </form>

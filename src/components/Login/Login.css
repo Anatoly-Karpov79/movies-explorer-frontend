@@ -46,6 +46,10 @@
     border: #000;
 }
 
+.login__button_disabled{
+    background: #c0bdbd;
+}
+
 .login__button:hover {
     cursor: pointer;
     opacity: 0.7;

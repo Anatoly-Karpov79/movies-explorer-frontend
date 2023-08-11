@@ -10,7 +10,6 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
     useEffect(() => {
         if (searchQuery.searchText) {
           setSearchText(searchQuery.searchText);
-          console.log(searchQuery.searchText)
         }
       }, [searchQuery.searchText]);
 
@@ -21,7 +20,6 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
       const checkFilterBox = () => {
         if (searchText !== '') {
           setIsShortFilmChecked(!isShortFilmChecked);
-    console.log(isShortFilmChecked)
           onFilter({
             searchText: searchText,
             isShortFilmChecked: !isShortFilmChecked

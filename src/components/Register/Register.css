@@ -46,6 +46,10 @@
     border: #000;
 }
 
+.register__button_disabled {
+    background: #a8a4a4;
+}
+
 .register__button:hover {
     cursor: pointer;
     opacity: 0.7;
