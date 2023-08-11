@@ -10,8 +10,6 @@ function MoviesCard({ movie, savedMovies, onLikeMovie, onDeleteMovie }) {
     const hours = Math.floor(movie.duration / 60);
     const minutes = movie.duration % 60;
    
-
-
     const savedMovie = savedMovies
     ? savedMovies.find((item) => item.movieId === movie.id)
     : '';
@@ -34,10 +32,10 @@ function MoviesCard({ movie, savedMovies, onLikeMovie, onDeleteMovie }) {
                 
             {location.pathname === '/movies' &&
                 <button type="button"
-                onClick={() => onLikeMovie(movie, isLiked, savedMovie?.id)}
+                onClick={() => onLikeMovie(movie, isLiked, savedMovie?._id)}
                     aria-label="добавить в избранное"
                     className={`moviescard__button ${
-                        isLiked === true ? 'moviescard__button_liked' : ''
+                        isLiked ? 'moviescard__button_liked' : ''
                       }`} >
                         
                 </button>}

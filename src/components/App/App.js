@@ -28,6 +28,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isLiked, setIsLiked] = useState()
  
   
   function onUpdateUser(name, email) {
@@ -139,23 +140,25 @@ function App() {
 
   const handleLikeMovie = (movie, isLiked, id) => {
     if (isLiked) {
+          console.log(id)
       handleDeleteMovie(id);
-    } else {
       
-      mainApi
+      
+    } else {
+       mainApi
         .saveMovie(movie)
         .then((res) => {
           setSavedMovies([...savedMovies, res]);
-          
+          console.log(res)
         })
         .catch((error) => console.log(error));
     }
   }
 
   const handleDeleteMovie = (id) => {
-    const savedMovies = JSON.parse(
+    const searchedSavedMovies  = JSON.parse(
       localStorage.getItem('searchedSavedMovies') );
-        
+        console.log(savedMovies)
 
     mainApi
       .deleteMovie(id)
@@ -163,12 +166,12 @@ function App() {
       .then((res) => {
         const updatedSavedMovies = savedMovies.filter(
           (movie) => movie._id !== id        );
-          console.log(res)
+          console.log(updatedSavedMovies)
         setSavedMovies(updatedSavedMovies);
 
 
-        if (savedMovies) {
-          const updatedSearchedSavedMovies = savedMovies.filter(
+        if (searchedSavedMovies) {
+          const updatedSearchedSavedMovies = searchedSavedMovies.filter(
             (movie) => movie.id !== id
           );
 
@@ -198,50 +201,7 @@ function App() {
   }
 
   
-  const handleChangeFilter = () => {
-    const resultsearch = [];
-    movies.filter((movie) => {
-      if (movie.duration <= 40) {
-        resultsearch.push(movie);
-      }
-      else {
-        setMovies()
-      }
-    });
-
-    setMovies(resultsearch);
-  }
-  
-
- /* const handleSearch = (inputValue) => {
-    setIsLoading(true);
-    const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-const allMovies = (JSON.parse(localStorage.getItem('movies')));
-    const resultsearch = [];
-      
-    allMovies.map((movie) => {
-        let t = movie.nameRU.toLowerCase();
-        if (t.indexOf(inputValue.toLowerCase()) > 0) {
-          resultsearch.push(movie);
-          localStorage.setItem('searchedMovies', JSON.stringify([...searchedMovies, movie]));
-          setSearchedMovies(resultsearch)
-          console.log(localStorage.getItem('searchedMovies'))
-        }
-    });
-
-
-    setMovies(resultsearch)*/
-
-   /* const filtered = searchFilter(savedMovies, query, isShort);
-
-    
-    setMovies(filtered); 
-    setIsLoading(false);
-  };*/
-
-
-  function signOut() {
+   function signOut() {
     localStorage.removeItem('userId');
     localStorage.removeItem('savedMovies');
     localStorage.removeItem('movies');
@@ -256,7 +216,8 @@ const allMovies = (JSON.parse(localStorage.getItem('movies')));
      
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>
-            <Route exact path="/" element={<Landing />} />;
+            <Route exact path="/" element={<Landing loggedIn={loggedIn}
+             />} />;
 
             <Route exact path="/movies"
               element={
@@ -266,9 +227,8 @@ const allMovies = (JSON.parse(localStorage.getItem('movies')));
                     movies={movies}
                     savedMovies={savedMovies}
                     onLikeMovie={handleLikeMovie}
+                    loggedIn={loggedIn}
                     
-                    handleChangeFilter={handleChangeFilter}
-
                   />
                 </ProtectedRoute>}
             />
@@ -279,7 +239,8 @@ const allMovies = (JSON.parse(localStorage.getItem('movies')));
                   <SavedMovies 
                   setActive={handleMenu}
                   savedMovies={savedMovies}
-                  onDeleteMovie={handleDeleteMovie} 
+                  onDeleteMovie={handleDeleteMovie}
+                  loggedIn={loggedIn} 
                   />
                 </ProtectedRoute>}
             />

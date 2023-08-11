@@ -6,18 +6,18 @@ import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 import Header from "./Header/Header";
 
-const Landing = () => {
+const Landing = ({ loggedIn }) => {
     return (
         <div className="landing">
-            <Header />
+            <Header loggedIn={loggedIn} />
             <main>
-             <Promo />
-            <AboutProject />
-            <Techs />
-            <AboutMe />
-            <Portfolio />   
+                <Promo />
+                <AboutProject />
+                <Techs />
+                <AboutMe />
+                <Portfolio />
             </main>
-            
+
             <Footer />
         </div>
     )

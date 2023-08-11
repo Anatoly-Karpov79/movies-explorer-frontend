@@ -1,19 +1,64 @@
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
-import Header2 from "../Movies/Header2/Header2";
+import Header from "../Landing/Header/Header";
 import Footer from "../Footer/Footer";
+import { useState, useEffect } from "react";
 
+function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
 
-function SavedMovies({ setActive, handleSearch, savedMovies, onDeleteMovie }) {
+    const [filteredMovies, setFilteredMovies] = useState([]);
+  const searchedMovies = localStorage.getItem('searchedSavedMovies');
+  const queries = localStorage.getItem('searchQuerySavedMovies');
+  const [searchQuery, setSearchQuery] = useState([]);
 
-    
+  useEffect(() => {
+    if (searchedMovies) {
+      setFilteredMovies(JSON.parse(searchedMovies));
+    } else {
+      setFilteredMovies(savedMovies);
+    }
+  }, [searchedMovies, savedMovies, searchQuery]);
+
+  useEffect(() => {
+    if (queries) {
+      setSearchQuery(JSON.parse(queries));
+    } else {
+      setSearchQuery({ ...queries, searchText: '' });
+    }
+  }, [queries, savedMovies]);
+
+  const filterMovies = (query) => {
+    localStorage.setItem('searchQuerySavedMovies', JSON.stringify(query));
+
+    let filtered = [];
+    if (query.isShortFilmChecked) {
+      filtered = savedMovies.filter((m) => {
+        return (
+          m.duration <= 40 &&
+          m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase())
+        );
+      });
+      setFilteredMovies(filtered);
+      localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+    } else if (!query.isShortFilmChecked) {
+      filtered = savedMovies.filter((m) => {
+        return m.nameRU
+          .toLowerCase()
+          .trim()
+          .includes(query.searchText.toLowerCase());
+      });
+      setFilteredMovies(filtered);
+      localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+    }
+  };
 
     return (
         <div className='savedmovies'>
-            <Header2 setActive={setActive} />
+            <Header setActive={setActive} loggedIn={loggedIn} />
             <main>
-                <SearchForm handleSearch={handleSearch}/>
-                <MoviesCardList movies={savedMovies}
+                <SearchForm onFilter={filterMovies}
+        searchQuery={searchQuery}/>
+                <MoviesCardList movies={filteredMovies}
                   
                   onDeleteMovie={onDeleteMovie}/>
             </main>
