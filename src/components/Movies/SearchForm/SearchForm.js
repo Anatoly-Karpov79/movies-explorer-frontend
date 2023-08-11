@@ -21,7 +21,7 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
       const checkFilterBox = () => {
         if (searchText !== '') {
           setIsShortFilmChecked(!isShortFilmChecked);
-    
+    console.log(isShortFilmChecked)
           onFilter({
             searchText: searchText,
             isShortFilmChecked: !isShortFilmChecked
@@ -70,7 +70,7 @@ const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSear
                 <div className="searchform__checkbox">
                     <label className="searchform__checkbox-switch">
                         <input type="checkbox" className="searchform__checkbox-input"
-                         onCheck={checkFilterBox}
+                         onChange={checkFilterBox}
                          isChecked={searchQuery.isShortFilmChecked} />
                         <span className="searchform__checkbox-slider-round"></span>
                     </label>
