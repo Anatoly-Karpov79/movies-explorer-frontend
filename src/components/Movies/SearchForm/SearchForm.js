@@ -5,8 +5,8 @@ import { useLocation } from 'react-router-dom';
 const SearchForm = ({ onFilter, searchQuery}) => {
     const [searchText, setSearchText] = useState('');
  /*   const [error, setError] = useState(''); */
-    const isChecked = JSON.parse(localStorage.getItem('filterCheckBox'));
-    const [isShortFilmChecked, setIsShortFilmChecked] = useState(isChecked);
+   
+    const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
 
 
 

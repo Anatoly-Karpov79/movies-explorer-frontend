@@ -33,3 +33,7 @@ align-self: center;
 margin: 50px 0 80px 0;
 border: #F9F9F9;
 }
+
+.moviescardlist__button_hidden{
+    display: none;
+}

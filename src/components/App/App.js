@@ -137,7 +137,6 @@ function App() {
         .saveMovie(movie)
         .then((res) => {
           setSavedMovies([...savedMovies, res]);
-          console.log(res)
         })
         .catch((error) => console.log(error));
     }
