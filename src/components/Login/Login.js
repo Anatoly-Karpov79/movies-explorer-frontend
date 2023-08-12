@@ -44,6 +44,7 @@ const Login = (props) => {
            onChange={handleEmail} 
           placeholder="Email"
           className="login__input"
+          required
         />
         <label className="login__label">Пароль</label>
         <input
@@ -51,9 +52,10 @@ const Login = (props) => {
           onChange={handlePassword}  
           placeholder="Пароль"
           className="login__input"
+          required
         />
         <span className="login__form-error">
-          Что-то пошло не так...
+        {}
         </span>
         <button onClick={handleLoginSubmit} disabled={!isValid} className={`login__button ${
          !isValid ? "login__button_disabled" : " "}`} >
