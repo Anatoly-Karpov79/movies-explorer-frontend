@@ -19,16 +19,16 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
     }
   }, [searchedMovies, savedMovies]);
 
-/*  useEffect(() => {
+  useEffect(() => {
     if (queries) {
       setSearchQuery(JSON.parse(queries));
     } else {
       setSearchQuery({ ...queries, searchText: '' });
     }
-  }, [queries, savedMovies]);*/
+  }, [queries, savedMovies]);
 
   const filterMovies = (query) => {
-    localStorage.setItem('searchQuerySavedMovies', JSON.stringify(query));
+    localStorage.setItem('searchedSavedMovies', JSON.stringify(query));
 
     let filtered = [];
     if (query.isShortFilmChecked) {
@@ -49,6 +49,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
       });
       setFilteredMovies(filtered);
       localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+      console.log(filteredMovies)
     }
   };
 
