@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import './SearchForm.css'
+import { useLocation } from 'react-router-dom';
 
-const SearchForm = ({ onFilter, searchQuery, onResetInput, apiErrors, handleSearch, handleChangeFilter}) => {
+const SearchForm = ({ onFilter, searchQuery}) => {
     const [searchText, setSearchText] = useState('');
  /*   const [error, setError] = useState(''); */
     const isChecked = JSON.parse(localStorage.getItem('filterCheckBox'));
     const [isShortFilmChecked, setIsShortFilmChecked] = useState(isChecked);
 
+
+
     useEffect(() => {
         if (searchQuery.searchText) {
           setSearchText(searchQuery.searchText);
         }
-      }, [searchQuery.searchText]);
+      }, [searchQuery.searchText]); 
 
       const handleChange = (e) => {
         setSearchText(e.target.value);

@@ -85,6 +85,10 @@
   background-color: white;
   cursor: pointer;
 }
+.profile__button-save_disabled{
+  color: #adabab;
+  
+}
 
 .profile__logout {
   margin-top: 16px;

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
 
-    const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const searchedMovies = localStorage.getItem('searchedSavedMovies');
   const queries = localStorage.getItem('searchQuerySavedMovies');
   const [searchQuery, setSearchQuery] = useState([]);
@@ -17,15 +17,15 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
     } else {
       setFilteredMovies(savedMovies);
     }
-  }, [searchedMovies, savedMovies, searchQuery]);
+  }, [searchedMovies, savedMovies]);
 
-  useEffect(() => {
+/*  useEffect(() => {
     if (queries) {
       setSearchQuery(JSON.parse(queries));
     } else {
       setSearchQuery({ ...queries, searchText: '' });
     }
-  }, [queries, savedMovies]);
+  }, [queries, savedMovies]);*/
 
   const filterMovies = (query) => {
     localStorage.setItem('searchQuerySavedMovies', JSON.stringify(query));
@@ -52,21 +52,20 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
     }
   };
 
-    return (
-        <div className='savedmovies'>
-            <Header setActive={setActive} loggedIn={loggedIn} />
-            <main>
-                <SearchForm onFilter={filterMovies}
-        searchQuery={searchQuery}/>
-                <MoviesCardList movies={filteredMovies}
-                  
-                  onDeleteMovie={onDeleteMovie}/>
-            </main>
-            <Footer />
-            {/* <Preloader /> */}
+  return (
+    <div className='savedmovies'>
+      <Header setActive={setActive} loggedIn={loggedIn} />
+      <main>
+        <SearchForm onFilter={filterMovies}
+          searchQuery={searchQuery} />
+        <MoviesCardList movies={filteredMovies}
+          onDeleteMovie={onDeleteMovie} />
+      </main>
+      <Footer />
+      
 
-        </div>
-    )
+    </div>
+  )
 
 }
 

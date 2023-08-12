@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import { useState, useEffect } from "react";
+import Preloader from "../Preloader/Preloader";
 
 function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
 
@@ -22,7 +23,6 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
     useEffect(() => {
         if (queries) {
             setSearchQuery(JSON.parse(queries));
-            console.log(searchQuery)
         }
     }, [queries]);
 
@@ -30,7 +30,6 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
         if (!filteredMovies.length) {
             setIsLoading(true);
         }
-
 
         setTimeout(
             () => {
@@ -70,20 +69,30 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
 
 
     return (
-        <div>
-            <Header setActive={setActive} loggedIn={loggedIn} />
-            <main>
-                <SearchForm searchQuery={searchQuery}
-                    onFilter={filterMovies}
+        <>   {isLoading ? (
+            <Preloader />
+        ) : (
+            <div>
 
-                />
-                <MoviesCardList
-                    movies={filteredMovies}
-                    savedMovies={savedMovies}
-                    onLikeMovie={onLikeMovie} />
-            </main>
-            <Footer />
-        </div>
+                <Header setActive={setActive} loggedIn={loggedIn} />
+                <main>
+
+                    <SearchForm searchQuery={searchQuery}
+                        onFilter={filterMovies}
+
+                    />
+                    <MoviesCardList
+                        movies={filteredMovies}
+                        savedMovies={savedMovies}
+                        onLikeMovie={onLikeMovie} />
+
+                </main>
+                <Footer />
+
+
+            </div>
+        )}
+        </>
     )
 }
 

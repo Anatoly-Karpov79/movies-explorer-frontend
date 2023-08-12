@@ -12,28 +12,20 @@ const Register = (props) => {
   function handleRegisterSubmit(e) {
     e.preventDefault();
     props.onRegister(name, email, password);
-  
-    console.log(isValid)
-  }
+   }
+
   function handleName(e) {
     setName(e.target.value);
     setIsValid(e.target.closest('form').checkValidity());
-    
-    
   }
-
-
   function handleEmail(e) {
     setEmail(e.target.value);
     setIsValid(e.target.closest('form').checkValidity());
-    
   }
 
   function handlePassword(e) {
-    
     setPassword(e.target.value);
     setIsValid(e.target.closest('form').checkValidity());
-
   }
 
   return (
@@ -72,7 +64,7 @@ const Register = (props) => {
           maxLength="10"
         />
         <span className="register__form-error">
-          Что-то пошло не так...
+          {}
         </span>
         <button type="button"  disabled={!isValid} onClick={handleRegisterSubmit} className={`register__button ${
          !isValid ? "register__button_disabled" : " "}`} >

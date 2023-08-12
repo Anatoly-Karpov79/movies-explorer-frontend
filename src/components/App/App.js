@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import { Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Movies from "../Movies/Movies";
@@ -28,8 +28,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  
-  
+
+
   function onUpdateUser(name, email) {
     mainApi
       .changeProfile(name, email)
@@ -38,19 +38,14 @@ function App() {
       name: name,
       email: email
     })
-    console.log(name, email)
-
   };
 
   function handleClose() {
     setMenuIsOpen(false);
-    
   }
   function handleMenu() {
-       setMenuIsOpen(true);
-
+    setMenuIsOpen(true);
   }
-
 
   useEffect(() => {
     if (loggedIn) {
@@ -58,12 +53,11 @@ function App() {
         .getUserInfo()
         .then((res) => {
           setCurrentUser(res);
-                  })
-
+        })
         .catch((err) => {
           console.log(err);
         });
-        mainApi
+      mainApi
         .getSavedMovies()
         .then((data) => {
           setSavedMovies(data);
@@ -87,21 +81,25 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+          setIsLoading(false);
         });
+    } else {
+      setIsLoading(false);
     }
+
   }, []);
 
   useEffect(() => {
     if (loggedIn) {
       if (localStorage.getItem('movies')) {
         setMovies(JSON.parse(localStorage.getItem('movies')));
-              } else {
+      } else {
         moviesApi
           .getMovies()
-                 .then((movies) => {
-                localStorage.setItem('movies', JSON.stringify(movies));
+          .then((movies) => {
+            localStorage.setItem('movies', JSON.stringify(movies));
             setMovies(movies);
-                  })
+          })
           .catch((error) => {
             console.log(error);
           });
@@ -109,16 +107,22 @@ function App() {
     }
   }, [loggedIn]);
 
-   useEffect(() => {
+  useEffect(() => {
     loggedIn &&
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies, loggedIn]); 
+  }, [savedMovies, loggedIn]);
 
   function handleRegister(name, email, password) {
     auth
       .register(name, email, password)
       .then((res) => {
-        setTimeout(navigate, 3000, "/signin");
+        setLoggedIn(true);
+        setCurrentUser(res);
+        console.log(currentUser);
+        localStorage.setItem('userId', res._id);
+        navigate("/movies", { replace: true });
+
+
       })
       .catch((err) => {
       });
@@ -127,9 +131,9 @@ function App() {
   const handleLikeMovie = (movie, isLiked, id) => {
     if (isLiked) {
       handleDeleteMovie(id);
-      
+
     } else {
-       mainApi
+      mainApi
         .saveMovie(movie)
         .then((res) => {
           setSavedMovies([...savedMovies, res]);
@@ -140,20 +144,20 @@ function App() {
   }
 
   const handleDeleteMovie = (id) => {
-    const searchedSavedMovies  = JSON.parse(
-      localStorage.getItem('searchedSavedMovies') );
+    const searchedSavedMovies = JSON.parse(
+      localStorage.getItem('searchedSavedMovies'));
     mainApi
       .deleteMovie(id)
       .then((res) => {
         const updatedSavedMovies = savedMovies.filter(
-          (movie) => movie._id !== id        );
+          (movie) => movie._id !== id);
         setSavedMovies(updatedSavedMovies);
 
         if (searchedSavedMovies) {
           const updatedSearchedSavedMovies = searchedSavedMovies.filter(
             (movie) => movie.id !== id
           );
-          localStorage.setItem(           'searchedSavedMovies',
+          localStorage.setItem('searchedSavedMovies',
             JSON.stringify(updatedSearchedSavedMovies)
           );
         }
@@ -165,7 +169,7 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-               setLoggedIn(true);
+        setLoggedIn(true);
         setCurrentUser(res);
         console.log(currentUser);
         localStorage.setItem('userId', res._id);
@@ -176,8 +180,8 @@ function App() {
 
       });
   }
-  
-   function signOut() {
+
+  function signOut() {
     localStorage.clear();
     navigate("/signup");
     setLoggedIn(false);
@@ -186,11 +190,16 @@ function App() {
   return (
 
     <div className="App">
-    
+      {isLoading ? (
+        <Preloader />
+      ) : (
         <CurrentUserContext.Provider value={currentUser}>
+
+
+
           <Routes>
             <Route exact path="/" element={<Landing loggedIn={loggedIn}
-             />} />;
+            />} />;
 
             <Route exact path="/movies"
               element={
@@ -201,7 +210,7 @@ function App() {
                     savedMovies={savedMovies}
                     onLikeMovie={handleLikeMovie}
                     loggedIn={loggedIn}
-                    
+
                   />
                 </ProtectedRoute>}
             />
@@ -209,11 +218,11 @@ function App() {
             <Route exact path="/savedmovies"
               element={
                 <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
-                  <SavedMovies 
-                  setActive={handleMenu}
-                  savedMovies={savedMovies}
-                  onDeleteMovie={handleDeleteMovie}
-                  loggedIn={loggedIn} 
+                  <SavedMovies
+                    setActive={handleMenu}
+                    savedMovies={savedMovies}
+                    onDeleteMovie={handleDeleteMovie}
+                    loggedIn={loggedIn}
                   />
                 </ProtectedRoute>}
             />
@@ -222,7 +231,7 @@ function App() {
               element={
                 <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
                   <Profile
-
+                    loggedIn={loggedIn}
                     signOut={signOut}
                     onUpdateUser={onUpdateUser} />
                 </ProtectedRoute>}
@@ -234,7 +243,7 @@ function App() {
           </Routes>
           <Menu active={menuIsOpen} setActive={handleMenu} onClose={handleClose} />
         </CurrentUserContext.Provider >
-      
+      )}
     </div>
 
 
