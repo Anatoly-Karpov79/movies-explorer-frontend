@@ -60,7 +60,7 @@ const Register = (props) => {
           placeholder="Пароль"
           className="register__input"
           required
-          minLength="2"
+          minLength="4"
           maxLength="10"
         />
         <span className="register__form-error">
