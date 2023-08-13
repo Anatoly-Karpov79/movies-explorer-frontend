@@ -17,6 +17,7 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
     useEffect(() => {
         if (searchedMovies) {
             setFilteredMovies(JSON.parse(searchedMovies));
+            console.log(searchedMovies)
         }
     }, [searchedMovies]);
 
@@ -45,12 +46,10 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                                 .includes(query.searchText.toLowerCase())
                         );
                     });
-
                     setFilteredMovies(filtered);
-                    console.log(filtered)
-
                     localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-                    console.log(searchedMovies)
+                    console.log(filtered)
+                    console.log(localStorage.getItem('searchedMovies'))
 
                 } else if (!query.isShortFilmChecked) {
                     filtered = movies.filter((m) => {
@@ -61,13 +60,12 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                     });
 
                     setFilteredMovies(filtered);
-                    console.log(filtered)
                     localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-                    console.log(searchedMovies)
                 }
                 setIsLoading(false);
             },
             filteredMovies.length ? 0 : 300
+            
         );
     };
 

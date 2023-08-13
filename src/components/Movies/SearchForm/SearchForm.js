@@ -4,7 +4,7 @@ import './SearchForm.css'
 const SearchForm = ({ onFilter, searchQuery }) => {
   const [searchText, setSearchText] = useState('');
 
-  const [isShortFilmChecked, setIsShortFilmChecked] = useState("true");
+  const [isShortFilmChecked, setIsShortFilmChecked] = useState("");
 
   useEffect(() => {
     if (searchQuery.searchText) {
@@ -26,11 +26,11 @@ const SearchForm = ({ onFilter, searchQuery }) => {
         isShortFilmChecked: !isShortFilmChecked
       });
     } else {
-      setIsShortFilmChecked(isShortFilmChecked);
+      setIsShortFilmChecked(!isShortFilmChecked);
 
       onFilter({
         searchText: searchQuery.searchText,
-        isShortFilmChecked: isShortFilmChecked
+        isShortFilmChecked: !isShortFilmChecked
       });
     }
   };
@@ -63,7 +63,8 @@ const SearchForm = ({ onFilter, searchQuery }) => {
             <input type="checkbox"
               className="searchform__checkbox-input"
               onChange={checkFilterBox}
-              checked={searchQuery.isShortFilmChecked || ''} />
+              checked={searchQuery.isShortFilmChecked || ''} 
+      />
             <span className="searchform__checkbox-slider-round"></span>
           </label>
           <span className="searchform__checkbox-text">Короткометражки</span>

@@ -7,6 +7,7 @@ import { REGEXP_NAME } from '../../utils/Constance'
 
 
 const Register = (props) => {
+
   const {
     register,
     formState: { errors, isValid },

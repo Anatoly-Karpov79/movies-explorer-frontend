@@ -173,6 +173,7 @@ function App() {
         const updatedSavedMovies = savedMovies.filter(
           (movie) => movie._id !== id);
         setSavedMovies(updatedSavedMovies);
+        console.log(updatedSavedMovies)
 
         if (searchedSavedMovies) {
           const updatedSearchedSavedMovies = searchedSavedMovies.filter(
@@ -180,7 +181,8 @@ function App() {
           );
           localStorage.setItem('searchedSavedMovies',
             JSON.stringify(updatedSearchedSavedMovies)
-          );
+            
+          ); console.log(updatedSearchedSavedMovies)
         }
       })
       .catch((error) => console.log(error));

@@ -12,12 +12,11 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   const [searchQuery, setSearchQuery] = useState([]);
 
   useEffect(() => {
-    console.log(searchedMovies)
-    if (searchedMovies) {
+    console.log(savedMovies)
+    if (savedMovies) {
       setFilteredMovies(JSON.parse(searchedMovies));
-    } else {
-      setFilteredMovies(savedMovies);
-    }
+      console.log(queries)
+    } 
   }, [searchedMovies, savedMovies]);
 
   useEffect(() => {
@@ -40,6 +39,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
         );
       });
       setFilteredMovies(filtered);
+      console.log(filtered)
       localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
     } else if (!query.isShortFilmChecked) {
       filtered = savedMovies.filter((m) => {
@@ -49,6 +49,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
           .includes(query.searchText.toLowerCase());
       });
       setFilteredMovies(filtered);
+      console.log(filtered)
       localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
       console.log(filteredMovies)
     }
@@ -60,7 +61,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
       <main>
         <SearchForm onFilter={filterMovies}
           searchQuery={searchQuery} />
-        <MoviesCardList movies={filteredMovies}
+        <MoviesCardList movies={savedMovies}
           onDeleteMovie={onDeleteMovie} />
       </main>
       <Footer />
