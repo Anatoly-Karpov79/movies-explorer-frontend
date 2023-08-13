@@ -6,10 +6,10 @@ import Portfolio from "./Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 import Header from "./Header/Header";
 
-const Landing = ({ loggedIn }) => {
+const Landing = ({ loggedIn, setActive }) => {
     return (
         <div className="landing">
-            <Header loggedIn={loggedIn} />
+            <Header loggedIn={loggedIn} setActive={setActive}/>
             <main>
                 <Promo />
                 <AboutProject />

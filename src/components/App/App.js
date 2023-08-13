@@ -33,23 +33,15 @@ function App() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });
 
-  function onUpdateUser(name, email) {
-    mainApi
-      .changeProfile(name, email)
-    setCurrentUser({
-      ...currentUser,
-      name: name,
-      email: email
-    })
-  };
+  function handleMenu() {
+    setMenuIsOpen(true);
+  }
 
   function handleClose() {
     setMenuIsOpen(false);
     setShowTooltip(false);
   }
-  function handleMenu() {
-    setMenuIsOpen(true);
-  }
+
 
   useEffect(() => {
     if (loggedIn) {
@@ -131,18 +123,43 @@ function App() {
         });
         setLoggedIn(true);
         setCurrentUser(res);
-        console.log(currentUser);
         localStorage.setItem('userId', res._id);
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
         setTimeout(setShowTooltip, 1000, true);
+        console.log(err)
         chooseInfoTooltip({
           image: error,
           text: "Что-то пошло не так! Попробуйте еще раз!",
         });
       });
   }
+
+  function onUpdateUser(name, email) {
+    mainApi
+      .changeProfile(name, email)
+      .then(() => {
+        setTimeout(setShowTooltip, 1000, true);
+        chooseInfoTooltip({
+          image: success,
+          text: "Профиль успешно обновлен",
+        });
+        setCurrentUser({
+          ...currentUser,
+          name: name,
+          email: email
+        })
+      })
+      .catch((err) => {
+        setTimeout(setShowTooltip, 1000, true);
+        console.log(err)
+        chooseInfoTooltip({
+          image: error,
+          text: "Что-то пошло не так! Попробуйте еще раз!",
+        });
+      });
+  };
 
   const handleLikeMovie = (movie, isLiked, id) => {
     if (isLiked) {
@@ -193,6 +210,7 @@ function App() {
       })
       .catch((err) => {
         setShowTooltip(true);
+        console.log(err)
         chooseInfoTooltip({
           image: error,
           text: "Что-то пошло не так! Попробуйте еще раз!",
@@ -217,7 +235,9 @@ function App() {
 
 
           <Routes>
-            <Route exact path="/" element={<Landing loggedIn={loggedIn}
+            <Route exact path="/" element={<Landing
+              setActive={handleMenu}
+              loggedIn={loggedIn}
             />} />;
 
             <Route exact path="/movies"
@@ -252,7 +272,8 @@ function App() {
                   <Profile
                     loggedIn={loggedIn}
                     signOut={signOut}
-                    onUpdateUser={onUpdateUser} />
+                    onUpdateUser={onUpdateUser}
+                    setActive={handleMenu} />
                 </ProtectedRoute>}
             />
             <Route exact path="/profile" element={<Profile />} />;
