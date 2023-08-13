@@ -215,7 +215,7 @@ function App() {
 
   function signOut() {
     localStorage.clear();
-    navigate("/signup");
+    navigate("/");
     setLoggedIn(false);
   }
 
