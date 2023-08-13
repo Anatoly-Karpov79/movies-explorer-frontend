@@ -103,7 +103,8 @@ function App() {
     setInfo({ image: info.image, text: info.text });
   }
 
-  function handleRegister(name, email, password) {
+  function handleRegister(data) {
+    const {name, email, password} = data;
     auth
       .register(name, email, password)
       .then((res) => {
@@ -112,7 +113,7 @@ function App() {
           image: success,
           text: "Вы успешно зарегистрировались",
         });
-        handleLogin(password, email)
+        handleLogin(data)
       })
       .catch((err) => {
         setTimeout(setShowTooltip, 1000, true);

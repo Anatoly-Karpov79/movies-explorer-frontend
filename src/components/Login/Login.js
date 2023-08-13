@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import './Login.css'
 import logo from '../../images/logo.svg'
-import React, { useState }  from "react";
+import React  from "react";
 import { useForm } from "react-hook-form";
 import { REGEXP_EMAIL } from '../../utils/Constance'
 
@@ -51,7 +51,10 @@ const Login = (props) => {
           {...register("password", {
             
             required: "Это поле обязазательно для заполнения",
-            minLength: 3,
+            minLength: {
+              value: 3,
+              message: "Имя должно быть не меньше трех символов",
+            },
           })}
         />
         <span className="login__form-error">

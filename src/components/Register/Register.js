@@ -1,31 +1,22 @@
 import { Link } from "react-router-dom";
 import './Register.css'
 import logo from '../../images/logo.svg'
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { REGEXP_EMAIL } from '../../utils/Constance'
+import { REGEXP_NAME } from '../../utils/Constance'
+
 
 const Register = (props) => {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isValid, setIsValid] = useState(false);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({
+    mode: "all",
+  })
 
-  function handleRegisterSubmit(e) {
-    e.preventDefault();
-    props.onRegister(name, email, password);
-   }
-
-  function handleName(e) {
-    setName(e.target.value);
-    setIsValid(e.target.closest('form').checkValidity());
-  }
-  function handleEmail(e) {
-    setEmail(e.target.value);
-    setIsValid(e.target.closest('form').checkValidity());
-  }
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-    setIsValid(e.target.closest('form').checkValidity());
+  function handleRegisterSubmit(data) {
+    props.onRegister(data);
   }
 
   return (
@@ -35,39 +26,64 @@ const Register = (props) => {
       </Link>
 
       <h2 className="register__title">Добро пожаловать!</h2>
-      <form className="register__form">
+      <form className="register__form" onSubmit={handleSubmit(handleRegisterSubmit)}>
         <label className="register__label">Имя</label>
         <input type="text"
-          onChange={handleName}
-          placeholder="Анатолий"
+          placeholder="Имя"
           className="register__input"
-          minLength="2"
-          maxLength="30"
-          required
+          {...register("name", {
+            required: "Это поле обязазательно для заполнения",
+            minLength: {
+              value: 2,
+              message: "Имя должно быть не меньше двух букв",
+            },
+            maxLength: {
+              value: 30,
+              message: "Имя должно быть не более чем 30 букв",
+            },
+            pattern: {
+              value: REGEXP_NAME,
+              message: "Поле может содержать буквы, тире или пробелы",
+            },
+          }
+          )}
         />
+        <span className="register__form-error">
+          {errors.name ? errors.name.message : ""} 
+        </span>
         <label className="register__label">E-mail</label>
         <input
           type="email"
-          onChange={handleEmail}
           placeholder="Email"
           className="register__input"
-          required
+          {...register("email", {
+            required: "Это поле обязазательно для заполнения",
+            pattern: {
+              value: REGEXP_EMAIL,
+              message: "Здесь должен быть корректный e-mail",
+            },
+          })}
         />
+        <span className="register__form-error">
+        {errors.email ? errors.email.message : ""}
+        </span>
         <label className="register__label">Пароль</label>
         <input
           type="password"
-          onChange={handlePassword}
           placeholder="Пароль"
           className="register__input"
-          required
-          minLength="4"
-          maxLength="10"
+          {...register("password", {
+            required: "Это поле обязазательно для заполнения",
+            minLength: {
+              value: 3,
+              message: "Пароль должен быть не меньше трех символов",
+            },
+          })}
         />
         <span className="register__form-error">
-          {}
+        {errors.password ? errors.password.message : ""}
         </span>
-        <button type="button"  disabled={!isValid} onClick={handleRegisterSubmit} className={`register__button ${
-         !isValid ? "register__button_disabled" : " "}`} >
+        <button onClick={handleSubmit} disabled={!isValid}  className={`register__button ${!isValid ? "register__button_disabled" : " "}`} >
           Зарегистрироваться
         </button>
       </form>
