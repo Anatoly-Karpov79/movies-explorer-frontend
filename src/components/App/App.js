@@ -15,7 +15,9 @@ import { CurrentUserContext } from '../../context/CurrentUserContext'
 import ProtectedRoute from "../ProtectedRoute";
 import * as auth from "../../utils/auth";
 import Preloader from "../Preloader/Preloader";
-
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import error from '../../images/error.svg';
+import success from '../../images/success.svg';
 
 function App() {
 
@@ -28,7 +30,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [info, setInfo] = useState({ image: "", text: "" });
 
   function onUpdateUser(name, email) {
     mainApi
@@ -42,6 +45,7 @@ function App() {
 
   function handleClose() {
     setMenuIsOpen(false);
+    setShowTooltip(false);
   }
   function handleMenu() {
     setMenuIsOpen(true);
@@ -112,19 +116,31 @@ function App() {
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
   }, [savedMovies, loggedIn]);
 
+  function chooseInfoTooltip(info) {
+    setInfo({ image: info.image, text: info.text });
+  }
+
   function handleRegister(name, email, password) {
     auth
       .register(name, email, password)
       .then((res) => {
+        setTimeout(setShowTooltip, 1000, true);
+        chooseInfoTooltip({
+          image: success,
+          text: "Вы успешно зарегистрировались",
+        });
         setLoggedIn(true);
         setCurrentUser(res);
         console.log(currentUser);
         localStorage.setItem('userId', res._id);
         navigate("/movies", { replace: true });
-
-
       })
       .catch((err) => {
+        setTimeout(setShowTooltip, 1000, true);
+        chooseInfoTooltip({
+          image: error,
+          text: "Что-то пошло не так! Попробуйте еще раз!",
+        });
       });
   }
 
@@ -176,7 +192,11 @@ function App() {
 
       })
       .catch((err) => {
-
+        setShowTooltip(true);
+        chooseInfoTooltip({
+          image: error,
+          text: "Что-то пошло не так! Попробуйте еще раз!",
+        });
       });
   }
 
@@ -241,6 +261,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Menu active={menuIsOpen} setActive={handleMenu} onClose={handleClose} />
+          <InfoTooltip isOpen={showTooltip} onClose={handleClose} info={info} />
         </CurrentUserContext.Provider >
       )}
     </div>
