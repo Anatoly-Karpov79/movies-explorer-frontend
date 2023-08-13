@@ -105,7 +105,7 @@ function App() {
   useEffect(() => {
     loggedIn &&
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies, loggedIn]);
+  }, [savedMovies, loggedIn]); 
 
   function chooseInfoTooltip(info) {
     setInfo({ image: info.image, text: info.text });
@@ -120,10 +120,7 @@ function App() {
           image: success,
           text: "Вы успешно зарегистрировались",
         });
-        setLoggedIn(true);
-        setCurrentUser(res);
-        localStorage.setItem('userId', res._id);
-        navigate("/movies", { replace: true });
+        handleLogin(password, email)
       })
       .catch((err) => {
         setTimeout(setShowTooltip, 1000, true);

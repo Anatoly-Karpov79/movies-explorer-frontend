@@ -3,7 +3,7 @@ import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useState, useEffect } from "react";
 
-function MoviesCardList({ movies, savedMovies, onLikeMovie, onDeleteMovie, filteredMovies }) {
+function MoviesCardList({ movies, savedMovies, onLikeMovie, onDeleteMovie }) {
     const [moviesToPage, setMoviesToPage] = useState(12);
   const [moviesAdd, setMoviesAdd] = useState(3);
   const [buttonHiden, setButtonHiden] = useState(true)

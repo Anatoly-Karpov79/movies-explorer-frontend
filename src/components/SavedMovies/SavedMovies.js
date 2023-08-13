@@ -12,6 +12,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   const [searchQuery, setSearchQuery] = useState([]);
 
   useEffect(() => {
+    console.log(searchedMovies)
     if (searchedMovies) {
       setFilteredMovies(JSON.parse(searchedMovies));
     } else {
