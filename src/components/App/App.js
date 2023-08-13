@@ -67,7 +67,6 @@ function App() {
     const jwt = localStorage.getItem('userId');
     if (jwt) {
       setCheckToken(true);
-      console.log(jwt)
       auth
         .getContent(jwt)
         .then(() => {
@@ -83,7 +82,7 @@ function App() {
       setIsLoading(false);
     }
 
-  }, []);
+  }, [location.pathname, navigate]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -203,7 +202,6 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
-        console.log(currentUser);
         localStorage.setItem('userId', res._id);
         navigate("/movies", { replace: true });
 

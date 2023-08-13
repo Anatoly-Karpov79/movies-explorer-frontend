@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
 import './SearchForm.css'
-import { useLocation } from 'react-router-dom';
 
 const SearchForm = ({ onFilter, searchQuery}) => {
     const [searchText, setSearchText] = useState('');
- /*   const [error, setError] = useState(''); */
-   
     const [isShortFilmChecked, setIsShortFilmChecked] = useState(false);
-
-
 
     useEffect(() => {
         if (searchQuery.searchText) {
@@ -40,15 +35,8 @@ const SearchForm = ({ onFilter, searchQuery}) => {
 
       const handleSubmit = (e) => {
         e.preventDefault();
-    
-        if (!searchText) {
-       /*   setError('Нужно ввести ключевое слово'); */
-          return;
-        } else {
-          onFilter({ searchText, isShortFilmChecked });
-        }
+        onFilter({ searchText, isShortFilmChecked });
       };
-    
 
     
     return (
