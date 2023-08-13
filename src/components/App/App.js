@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Movies from "../Movies/Movies";
@@ -67,20 +67,12 @@ function App() {
     const jwt = localStorage.getItem('userId');
     if (jwt) {
       setCheckToken(true);
-      auth
-        .getContent(jwt)
-        .then(() => {
-          setLoggedIn(true);
+      setLoggedIn(true);
           navigate(location.pathname);
           setIsLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoading(false);
-    }
+      } else {
+        setIsLoading(false);
+      }
 
   }, [location.pathname, navigate]);
 
@@ -272,8 +264,16 @@ function App() {
                 </ProtectedRoute>}
             />
             <Route exact path="/profile" element={<Profile />} />;
+            {
+          !loggedIn ?
             <Route exact path="/signin" element={<Login onLogin={handleLogin} />} />
-            <Route exact path="/signup" element={<Register onRegister={handleRegister} />} />;
+            : <Route path="/signin" element={<Navigate to="/"  replace="true" />} />
+        } 
+         {
+          !loggedIn ?
+            <Route exact path="/signup" element={<Register onRegister={handleRegister} />} />
+            : <Route path="/signup" element={<Navigate to="/"  replace="true" />} />
+         }
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Menu active={menuIsOpen} setActive={handleMenu} onClose={handleClose} />
