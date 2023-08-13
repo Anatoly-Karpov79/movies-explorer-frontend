@@ -2,34 +2,23 @@ import { Link } from "react-router-dom";
 import './Login.css'
 import logo from '../../images/logo.svg'
 import React, { useState }  from "react";
+import { useForm } from "react-hook-form";
+import { REGEXP_EMAIL } from '../../utils/Constance'
 
 const Login = (props) => {
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
-   const [isValid, setIsValid] = useState(false);
+   const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({
+    mode: "all",
+  })
 
  
-   function handleLoginSubmit(e) {
-    e.preventDefault();
-    if (!email || !password) {
-      return;
-    } else {
-      props.onLogin(password, email);
-      setEmail("");
-      setPassword("");
+   function handleLoginSubmit(data) {
+    props.onLogin(data)
     }
-  }
-
-  function handleEmail(e) {
-    setEmail(e.target.value);
-    setIsValid(e.target.closest('form').checkValidity());
-  }
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-    setIsValid(e.target.closest('form').checkValidity());
-  }
-
+  
   return (
     <section className="login">
       <Link to="/" className="login__logo">
@@ -37,27 +26,38 @@ const Login = (props) => {
       </Link>
 
       <h2 className="login__title">Рады видеть!</h2>
-      <form className="login__form">
+      <form className="login__form" onSubmit={handleSubmit(handleLoginSubmit)}>
         <label className="login__label">E-mail</label>
         <input
           type="email"
-           onChange={handleEmail} 
           placeholder="Email"
           className="login__input"
-          required
+          {...register("email", {
+            required: "Это поле обязазательно для заполнения",
+            pattern: {
+              value: REGEXP_EMAIL,
+              message: "Здесь должен быть корректный e-mail",
+            },
+          })}
         />
+        <span className="login__form-error">
+        {errors.email ? errors.email.message : ""}
+        </span>
         <label className="login__label">Пароль</label>
         <input
           type="password"
-          onChange={handlePassword}  
           placeholder="Пароль"
           className="login__input"
-          required
+          {...register("password", {
+            
+            required: "Это поле обязазательно для заполнения",
+            minLength: 3,
+          })}
         />
         <span className="login__form-error">
-        {}
+        {errors.password ? errors.password.message : ""}
         </span>
-        <button onClick={handleLoginSubmit} disabled={!isValid} className={`login__button ${
+        <button onClick={handleSubmit} disabled={!isValid} className={`login__button ${
          !isValid ? "login__button_disabled" : " "}`} >
           Войти
         </button>

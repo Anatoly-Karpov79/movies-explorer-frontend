@@ -185,7 +185,8 @@ function App() {
       .catch((error) => console.log(error));
   };
 
-  function handleLogin(password, email) {
+  function handleLogin(data) {
+    const {email, password} = data;
     auth
       .authorize(email, password)
       .then((res) => {
@@ -196,9 +197,9 @@ function App() {
 
       })
       .catch((err) => {
-        setShowTooltip(true);
         console.log(err)
-        chooseInfoTooltip({
+        setShowTooltip(true);
+                chooseInfoTooltip({
           image: error,
           text: "Что-то пошло не так! Попробуйте еще раз!",
         });
