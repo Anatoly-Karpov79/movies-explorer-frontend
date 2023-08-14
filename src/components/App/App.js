@@ -167,6 +167,7 @@ function App() {
   const handleDeleteMovie = (id) => {
     const searchedSavedMovies = JSON.parse(
       localStorage.getItem('searchedSavedMovies'));
+      console.log(id)
     mainApi
       .deleteMovie(id)
       .then((res) => {

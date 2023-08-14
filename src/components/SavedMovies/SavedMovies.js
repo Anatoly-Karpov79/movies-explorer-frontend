@@ -14,8 +14,8 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   useEffect(() => {
     console.log(savedMovies)
     if (savedMovies) {
-      setFilteredMovies(JSON.parse(searchedMovies));
-      console.log(queries)
+      setFilteredMovies(savedMovies);
+      console.log(filteredMovies)
     } 
   }, [searchedMovies, savedMovies]);
 
@@ -61,7 +61,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
       <main>
         <SearchForm onFilter={filterMovies}
           searchQuery={searchQuery} />
-        <MoviesCardList movies={savedMovies}
+        <MoviesCardList movies={filteredMovies}
           onDeleteMovie={onDeleteMovie} />
       </main>
       <Footer />

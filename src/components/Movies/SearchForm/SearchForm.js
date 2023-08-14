@@ -4,7 +4,7 @@ import './SearchForm.css'
 const SearchForm = ({ onFilter, searchQuery }) => {
   const [searchText, setSearchText] = useState('');
 
-  const [isShortFilmChecked, setIsShortFilmChecked] = useState("");
+  const [isShortFilmChecked, setIsShortFilmChecked] = useState("false");
 
   useEffect(() => {
     if (searchQuery.searchText) {
