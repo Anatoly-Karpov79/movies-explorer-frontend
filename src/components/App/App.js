@@ -126,7 +126,7 @@ function App() {
   }
 
   function onUpdateUser(data) {
-    const {name, email} = data
+    const { name, email } = data
     mainApi
       .changeProfile(name, email)
       .then(() => {
@@ -176,11 +176,12 @@ function App() {
         setSavedMovies(updatedSavedMovies);
         if (searchedSavedMovies) {
           const updatedSearchedSavedMovies = searchedSavedMovies.filter(
-            (movie) => movie.id !== id
+            (movie) => movie._id !== id
           );
           localStorage.setItem('searchedSavedMovies',
             JSON.stringify(updatedSearchedSavedMovies)
-          );
+
+          ); console.log(searchedSavedMovies)
         }
       })
       .catch((error) => console.log(error));

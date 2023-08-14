@@ -4,7 +4,7 @@ import './SearchForm.css'
 const SearchForm = ({ onFilter, searchQuery }) => {
   const [searchText, setSearchText] = useState('');
 
-  const [isShortFilmChecked, setIsShortFilmChecked] = useState("false");
+  const [isShortFilmChecked, setIsShortFilmChecked] = useState("");
 
   useEffect(() => {
     if (searchQuery.searchText) {
@@ -63,7 +63,7 @@ const SearchForm = ({ onFilter, searchQuery }) => {
             <input type="checkbox"
               className="searchform__checkbox-input"
               onChange={checkFilterBox}
-              checked={searchQuery.isShortFilmChecked || ''} 
+              checked={searchQuery.isShortFilmChecked} 
       />
             <span className="searchform__checkbox-slider-round"></span>
           </label>

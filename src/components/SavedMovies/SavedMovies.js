@@ -3,6 +3,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import Header from "../Landing/Header/Header";
 import Footer from "../Footer/Footer";
 import { useState, useEffect } from "react";
+import Preloader from "../Preloader/Preloader";
 
 function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
 
@@ -10,12 +11,13 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   const searchedMovies = localStorage.getItem('searchedSavedMovies');
   const queries = localStorage.getItem('searchQuerySavedMovies');
   const [searchQuery, setSearchQuery] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (savedMovies) {
+    
       setFilteredMovies(savedMovies);
-    }
-  }, [searchedMovies, savedMovies]);
+    
+  }, [ savedMovies, ]);
 
   useEffect(() => {
     if (queries) {
@@ -26,41 +28,62 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   }, [queries, savedMovies]);
 
   const filterMovies = (query) => {
-    localStorage.setItem('searchedSavedMovies', JSON.stringify(query));
-
-    let filtered = [];
-    if (query.isShortFilmChecked) {
-      filtered = savedMovies.filter((m) => {
-        return (
-          m.duration <= 40 &&
-          m.nameRU.toLowerCase().trim().includes(query.searchText.toLowerCase())
-        );
-      });
-      setFilteredMovies(filtered);
-      localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
-    } else if (!query.isShortFilmChecked) {
-      filtered = savedMovies.filter((m) => {
-        return m.nameRU
-          .toLowerCase()
-          .trim()
-          .includes(query.searchText.toLowerCase());
-      });
-      setFilteredMovies(filtered);
-      localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+    if (!filteredMovies.length) {
+      setIsLoading(true);
     }
+    setTimeout(
+      () => {
+        let filtered = [];
+        localStorage.setItem('searchedSavedMovies', JSON.stringify(query));
+        if (query.isShortFilmChecked) {
+          filtered = savedMovies.filter((m) => {
+            return (
+              m.duration <= 40 &&
+              m.nameRU
+                .toLowerCase()
+                .trim()
+                .includes(query.searchText.toLowerCase())
+            );
+          });
+          setFilteredMovies(filtered);
+         localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+        } else if (!query.isShortFilmChecked) {
+          filtered = savedMovies.filter((m) => {
+            return m.nameRU
+              .toLowerCase()
+              .trim()
+              .includes(query.searchText.toLowerCase());
+          });
+          setFilteredMovies(filtered);
+          console.log(filtered)
+          localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+        }
+        setIsLoading(false);
+      },
+      filteredMovies.length ? 0 : 300
+    );
   };
 
+ 
+
   return (
-    <div className='savedmovies'>
-      <Header setActive={setActive} loggedIn={loggedIn} />
-      <main>
-        <SearchForm onFilter={filterMovies}
-          searchQuery={searchQuery} />
-        <MoviesCardList movies={filteredMovies}
-          onDeleteMovie={onDeleteMovie} />
-      </main>
-      <Footer />
-    </div>
+    <> {isLoading ? (
+      <Preloader />
+    ) : (
+
+      <div className='savedmovies'>
+        <Header setActive={setActive} loggedIn={loggedIn} />
+        <main>
+          <SearchForm onFilter={filterMovies}
+          
+            searchQuery={searchQuery} />
+          <MoviesCardList movies={filteredMovies}
+            onDeleteMovie={onDeleteMovie} />
+        </main>
+        <Footer />
+      </div>
+    )}
+    </>
   )
 }
 
