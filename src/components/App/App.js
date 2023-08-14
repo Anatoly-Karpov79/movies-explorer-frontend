@@ -68,11 +68,11 @@ function App() {
     if (jwt) {
       setCheckToken(true);
       setLoggedIn(true);
-          navigate(location.pathname);
-          setIsLoading(false);
-      } else {
-        setIsLoading(false);
-      }
+      navigate(location.pathname);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
 
   }, [location.pathname, navigate]);
 
@@ -97,14 +97,14 @@ function App() {
   useEffect(() => {
     loggedIn &&
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies, loggedIn]); 
+  }, [savedMovies, loggedIn]);
 
   function chooseInfoTooltip(info) {
     setInfo({ image: info.image, text: info.text });
   }
 
   function handleRegister(data) {
-    const {name, email, password} = data;
+    const { name, email, password } = data;
     auth
       .register(name, email, password)
       .then((res) => {
@@ -167,30 +167,26 @@ function App() {
   const handleDeleteMovie = (id) => {
     const searchedSavedMovies = JSON.parse(
       localStorage.getItem('searchedSavedMovies'));
-      console.log(id)
     mainApi
       .deleteMovie(id)
       .then((res) => {
         const updatedSavedMovies = savedMovies.filter(
           (movie) => movie._id !== id);
         setSavedMovies(updatedSavedMovies);
-        console.log(updatedSavedMovies)
-
         if (searchedSavedMovies) {
           const updatedSearchedSavedMovies = searchedSavedMovies.filter(
             (movie) => movie.id !== id
           );
           localStorage.setItem('searchedSavedMovies',
             JSON.stringify(updatedSearchedSavedMovies)
-            
-          ); console.log(updatedSearchedSavedMovies)
+          );
         }
       })
       .catch((error) => console.log(error));
   };
 
   function handleLogin(data) {
-    const {email, password} = data;
+    const { email, password } = data;
     auth
       .authorize(email, password)
       .then((res) => {
@@ -198,12 +194,11 @@ function App() {
         setCurrentUser(res);
         localStorage.setItem('userId', res._id);
         navigate("/movies", { replace: true });
-
       })
       .catch((err) => {
         console.log(err)
         setShowTooltip(true);
-                chooseInfoTooltip({
+        chooseInfoTooltip({
           image: error,
           text: "Что-то пошло не так! Попробуйте еще раз!",
         });
@@ -217,15 +212,11 @@ function App() {
   }
 
   return (
-
     <div className="App">
       {isLoading ? (
         <Preloader />
       ) : (
         <CurrentUserContext.Provider value={currentUser}>
-
-
-
           <Routes>
             <Route exact path="/" element={<Landing
               setActive={handleMenu}
@@ -234,21 +225,22 @@ function App() {
 
             <Route exact path="/movies"
               element={
-                <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
+                <ProtectedRoute loggedIn={loggedIn}
+                  checkToken={checkToken}>
                   <Movies
                     setActive={handleMenu}
                     movies={movies}
                     savedMovies={savedMovies}
                     onLikeMovie={handleLikeMovie}
                     loggedIn={loggedIn}
-
                   />
                 </ProtectedRoute>}
             />
 
             <Route exact path="/savedmovies"
               element={
-                <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
+                <ProtectedRoute loggedIn={loggedIn}
+                  checkToken={checkToken}>
                   <SavedMovies
                     setActive={handleMenu}
                     savedMovies={savedMovies}
@@ -260,7 +252,8 @@ function App() {
 
             <Route exact path="/profile"
               element={
-                <ProtectedRoute loggedIn={loggedIn} checkToken={checkToken}>
+                <ProtectedRoute loggedIn={loggedIn}
+                  checkToken={checkToken}>
                   <Profile
                     loggedIn={loggedIn}
                     signOut={signOut}
@@ -270,19 +263,30 @@ function App() {
             />
             <Route exact path="/profile" element={<Profile />} />;
             {
-          !loggedIn ?
-            <Route exact path="/signin" element={<Login onLogin={handleLogin} />} />
-            : <Route path="/signin" element={<Navigate to="/"  replace="true" />} />
-        } 
-         {
-          !loggedIn ?
-            <Route exact path="/signup" element={<Register onRegister={handleRegister} />} />
-            : <Route path="/signup" element={<Navigate to="/"  replace="true" />} />
-         }
+              !loggedIn ?
+                <Route exact path="/signin"
+                  element={<Login onLogin={handleLogin} />} />
+                : <Route path="/signin" element={
+                  <Navigate to="/" replace="true" />} />
+            }
+            {
+              !loggedIn ?
+                <Route exact path="/signup" element={
+                  <Register onRegister={handleRegister} />} />
+                : <Route path="/signup" element={
+                  <Navigate to="/" replace="true" />} />
+            }
+
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Menu active={menuIsOpen} setActive={handleMenu} onClose={handleClose} />
-          <InfoTooltip isOpen={showTooltip} onClose={handleClose} info={info} />
+
+          <Menu active={menuIsOpen}
+            setActive={handleMenu}
+            onClose={handleClose} />
+
+          <InfoTooltip isOpen={showTooltip}
+            onClose={handleClose}
+            info={info} />
         </CurrentUserContext.Provider >
       )}
     </div>

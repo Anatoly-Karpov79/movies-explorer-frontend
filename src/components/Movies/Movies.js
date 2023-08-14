@@ -17,7 +17,6 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
     useEffect(() => {
         if (searchedMovies) {
             setFilteredMovies(JSON.parse(searchedMovies));
-            console.log(searchedMovies)
         }
     }, [searchedMovies]);
 
@@ -35,7 +34,6 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
             () => {
                 let filtered = [];
                 localStorage.setItem('searchQueryMovies', JSON.stringify(query));
-
                 if (query.isShortFilmChecked) {
                     filtered = movies.filter((m) => {
                         return (
@@ -48,9 +46,6 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                     });
                     setFilteredMovies(filtered);
                     localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-                    console.log(filtered)
-                    console.log(localStorage.getItem('searchedMovies'))
-
                 } else if (!query.isShortFilmChecked) {
                     filtered = movies.filter((m) => {
                         return m.nameRU
@@ -58,7 +53,6 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                             .trim()
                             .includes(query.searchText.toLowerCase());
                     });
-
                     setFilteredMovies(filtered);
                     localStorage.setItem('searchedMovies', JSON.stringify(filtered));
                 }

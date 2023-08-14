@@ -12,11 +12,9 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   const [searchQuery, setSearchQuery] = useState([]);
 
   useEffect(() => {
-    console.log(savedMovies)
     if (savedMovies) {
       setFilteredMovies(savedMovies);
-      console.log(filteredMovies)
-    } 
+    }
   }, [searchedMovies, savedMovies]);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
         );
       });
       setFilteredMovies(filtered);
-      console.log(filtered)
       localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
     } else if (!query.isShortFilmChecked) {
       filtered = savedMovies.filter((m) => {
@@ -49,9 +46,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
           .includes(query.searchText.toLowerCase());
       });
       setFilteredMovies(filtered);
-      console.log(filtered)
       localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
-      console.log(filteredMovies)
     }
   };
 
@@ -65,11 +60,8 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
           onDeleteMovie={onDeleteMovie} />
       </main>
       <Footer />
-      
-
     </div>
   )
-
 }
 
 export default SavedMovies;
