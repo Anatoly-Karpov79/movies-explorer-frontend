@@ -125,7 +125,8 @@ function App() {
       });
   }
 
-  function onUpdateUser(name, email) {
+  function onUpdateUser(data) {
+    const {name, email} = data
     mainApi
       .changeProfile(name, email)
       .then(() => {

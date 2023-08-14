@@ -103,3 +103,14 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.profile__form-error{
+  display: flex;
+    color: #FF4062;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    justify-content: end;
+}
