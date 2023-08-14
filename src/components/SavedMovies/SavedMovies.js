@@ -12,12 +12,13 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
   const queries = localStorage.getItem('searchQuerySavedMovies');
   const [searchQuery, setSearchQuery] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSpanActive, setIsSpanActive] = useState(false);
 
   useEffect(() => {
-    
-      setFilteredMovies(savedMovies);
-    
-  }, [ savedMovies, ]);
+
+    setFilteredMovies(savedMovies);
+
+  }, [savedMovies,]);
 
   useEffect(() => {
     if (queries) {
@@ -45,8 +46,13 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
                 .includes(query.searchText.toLowerCase())
             );
           });
+          if (filtered.length === 0) {
+            setIsSpanActive(true)
+          } else {
+            setIsSpanActive(false)
+          }
           setFilteredMovies(filtered);
-         localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
+          localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
         } else if (!query.isShortFilmChecked) {
           filtered = savedMovies.filter((m) => {
             return m.nameRU
@@ -54,8 +60,12 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
               .trim()
               .includes(query.searchText.toLowerCase());
           });
+          if (filtered.length === 0) {
+            setIsSpanActive(true)
+          } else {
+            setIsSpanActive(false)
+          }
           setFilteredMovies(filtered);
-          console.log(filtered)
           localStorage.setItem('searchedSavedMovies', JSON.stringify(filtered));
         }
         setIsLoading(false);
@@ -64,7 +74,7 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
     );
   };
 
- 
+
 
   return (
     <> {isLoading ? (
@@ -75,8 +85,13 @@ function SavedMovies({ setActive, loggedIn, savedMovies, onDeleteMovie }) {
         <Header setActive={setActive} loggedIn={loggedIn} />
         <main>
           <SearchForm onFilter={filterMovies}
-          
+
             searchQuery={searchQuery} />
+          <span className={`searchform__span ${isSpanActive ? "searchform__span_active" : ""
+            }`}>
+            Ничего не найдено
+          </span>
+
           <MoviesCardList movies={filteredMovies}
             onDeleteMovie={onDeleteMovie} />
         </main>

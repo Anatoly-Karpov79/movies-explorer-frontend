@@ -3,7 +3,6 @@ import './SearchForm.css'
 
 const SearchForm = ({ onFilter, searchQuery }) => {
   const [searchText, setSearchText] = useState('');
-
   const [isShortFilmChecked, setIsShortFilmChecked] = useState("");
 
   useEffect(() => {
@@ -38,6 +37,7 @@ const SearchForm = ({ onFilter, searchQuery }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onFilter({ searchText, isShortFilmChecked });
+    
   };
 
 
@@ -70,6 +70,7 @@ const SearchForm = ({ onFilter, searchQuery }) => {
           <span className="searchform__checkbox-text">Короткометражки</span>
         </div>
       </form>
+      
       <hr className="searchform__line"></hr>
     </div>
   )

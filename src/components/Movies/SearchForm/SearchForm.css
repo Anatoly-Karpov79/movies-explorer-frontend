@@ -147,6 +147,15 @@ input:checked+.searchform__checkbox-slider-round:before {
     margin-right: 15px;
 }
 
+.searchform__span {
+    display: none;
+}
+
+.searchform__span_active {
+    display: flex;
+    margin: 10px 0 0 5%;
+}
+
 
 .searchform__line {
     box-sizing: border-box;

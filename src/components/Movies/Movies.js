@@ -13,6 +13,8 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
     const queries = localStorage.getItem('searchQueryMovies');
     const [searchQuery, setSearchQuery] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSpanActive, setIsSpanActive] = useState(false);
+
 
     useEffect(() => {
         if (searchedMovies) {
@@ -44,6 +46,12 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                                 .includes(query.searchText.toLowerCase())
                         );
                     });
+                    if (filtered.length === 0) {
+                        setIsSpanActive(true)
+                    } else {
+                        setIsSpanActive(false)
+                    }
+
                     setFilteredMovies(filtered);
                     localStorage.setItem('searchedMovies', JSON.stringify(filtered));
                 } else if (!query.isShortFilmChecked) {
@@ -53,13 +61,18 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                             .trim()
                             .includes(query.searchText.toLowerCase());
                     });
+                    if (filtered.length === 0) {
+                        setIsSpanActive(true)
+                    } else {
+                        setIsSpanActive(false)
+                    }
                     setFilteredMovies(filtered);
                     localStorage.setItem('searchedMovies', JSON.stringify(filtered));
                 }
                 setIsLoading(false);
             },
             filteredMovies.length ? 0 : 300
-            
+
         );
     };
 
@@ -78,6 +91,11 @@ function Movies({ setActive, movies, savedMovies, loggedIn, onLikeMovie }) {
                         onFilter={filterMovies}
 
                     />
+                    <span className={`searchform__span ${isSpanActive ? "searchform__span_active" : ""
+                        }`}>
+                        Ничего не найдено
+                    </span>
+
                     <MoviesCardList
                         movies={filteredMovies}
                         savedMovies={savedMovies}
