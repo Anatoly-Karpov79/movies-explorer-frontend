@@ -1,5 +1,5 @@
 import Header from "../Landing/Header/Header"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import './Profile.css'
 import { CurrentUserContext } from '../../context/CurrentUserContext'
 import { useForm } from "react-hook-form";
@@ -8,14 +8,28 @@ import { REGEXP_NAME } from '../../utils/Constance'
 
 const Profile = ({ signOut, onUpdateUser, setActive, loggedIn }) => {
     const currentUser = useContext(CurrentUserContext);
+    const [isCurrentUserData, setIsCurrentUserData] = useState(true);
     const {
         register,
         formState: { errors, isValid },
         handleSubmit,
         setValue,
+        watch,
     } = useForm({
         mode: "all",
     })
+
+    useEffect(() => {
+        const name = watch("name");
+        const email = watch("email");
+        if (currentUser.name !== name || currentUser.email !== email) {
+            setIsCurrentUserData(false);
+        } else {
+            setIsCurrentUserData(true);
+            console.log("Для сохранения необходимо изменить данные")
+        }
+    }, [currentUser, watch()]);
+
 
     useEffect(() => {
         setValue("name", currentUser.name);
@@ -77,8 +91,8 @@ const Profile = ({ signOut, onUpdateUser, setActive, loggedIn }) => {
                     </span>
                     <button type="submit"
                         onClick={handleSubmit}
-                        disabled={!isValid}
-                        className={`profile__button-save ${!isValid ? "profile__button-save_disabled" : " "}`}>
+                        disabled={!isValid || isCurrentUserData}
+                        className={`profile__button-save ${!isValid || isCurrentUserData ? "profile__button-save_disabled" : " "}`}>
                         Редактировать
                     </button>
                     <button onClick={signOut} className="profile__logout">Выйти из аккаунта</button>
