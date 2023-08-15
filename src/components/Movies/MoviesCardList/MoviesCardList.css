@@ -1,0 +1,39 @@
+.moviescontent {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(282px, max-content));
+    margin: 0 5% 0 5%;
+    gap: 24px;
+    box-sizing: border-box;
+    padding-top: 45px;
+    justify-content: center;
+    min-height: 40vh;
+}
+
+.moviescardlist{
+    display: flex;
+    flex-direction: column;
+}
+.moviescardlist__button{
+    width: 320px;
+height: 36px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+border-radius: 6px;
+background: #F9F9F9;
+color: #000;
+text-align: center;
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+align-items: center;
+align-self: center;
+margin: 50px 0 80px 0;
+border: #F9F9F9;
+}
+
+.moviescardlist__button_hidden{
+    display: none;
+}

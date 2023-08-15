@@ -1,0 +1,120 @@
+.header {
+    width: auto;
+    padding: 0 5%;
+    margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    align-items: center;
+    height: 76px;
+}
+
+.header__logo {
+    width: 38px;
+    height: 38px;
+}
+
+.header__button-container {
+    margin-left: auto;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header__button {
+    display: flex;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__button-black {
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+    background: #000;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.header2 {
+    width: auto;
+    margin: 0 5%;
+    margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 10fr;
+    align-items: center;
+    height: 76px;
+    justify-items: end;
+   }
+
+.header2__logo {
+    width: 38px;
+    height: 38px;
+    justify-self: left;
+}
+
+.header2__button-container {
+    margin-left: auto;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header2__button {
+    display: flex;
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    align-items: center;
+  justify-content: center;
+}
+
+.header2__button-black {
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+    background: #000;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    }
+
+.header2__menu {
+    display: none;
+    background-color: white;
+    border: none;
+    box-shadow: 0;
+    grid-column-start: 4;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .header2__button{
+        display: none;
+    }
+    .header2__account-button{
+        display: none;
+    }
+    .header2__menu {
+        display: flex;
+    }
+}
