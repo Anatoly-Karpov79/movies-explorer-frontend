@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../Landing/Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "./SearchForm/SearchForm";
-import CategoriesList from "./MoviesCardList/MoviesCardList";
+import CategoriesList from "./CategoryCardList/CategoryCardList";
 import { useState, useEffect } from "react";
 import Preloader from "../Preloader/Preloader";
 import { categoriesApi } from "../../utils/CategoriesApi";
@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 
 
 
-function Categories({ props, setActive, categories, savedMovies, loggedIn, onCreateCategory }) {
+function Categories({ props, setActive, categories, onCategoryClick, savedMovies, loggedIn, onCreateCategory }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const searchedMovies = localStorage.getItem('searchedMovies');
@@ -30,12 +30,9 @@ function Categories({ props, setActive, categories, savedMovies, loggedIn, onCre
         watch,
     } = useForm({
         mode: "all",
-    })
+    });
+    const form = document.getElementById('newCategory');
 
-    console.log("Категории")
-
-        
-      
     // useEffect(() => {
     //     if (searchedMovies) {
     //         setFilteredMovies(JSON.parse(searchedMovies));
@@ -48,62 +45,10 @@ function Categories({ props, setActive, categories, savedMovies, loggedIn, onCre
         }
     }, [queries]);
 
-    
-
-    const filterMovies = (query) => {
-        if (!filteredMovies.length) {
-            setIsLoading(true);
-        }
-        setTimeout(
-            () => {
-                let filtered = [];
-                localStorage.setItem('searchQueryMovies', JSON.stringify(query));
-                if (query.isShortFilmChecked) {
-                    filtered = categories.filter((m) => {
-                        return (
-
-                            m.name
-                                .toLowerCase()
-                                .trim()
-                                .includes(query.searchText.toLowerCase())
-                        );
-                    });
-                    if (filtered.length === 0) {
-                        setIsSpanActive(true)
-                    } else {
-                        setIsSpanActive(false)
-                    }
-
-                    setFilteredMovies(filtered);
-                    localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-                } else if (!query.isShortFilmChecked) {
-                    filtered = categories.filter((m) => {
-                        return m.nameRU
-                            .toLowerCase()
-                            .trim()
-                            .includes(query.searchText.toLowerCase());
-                    });
-                    if (filtered.length === 0) {
-                        setIsSpanActive(true)
-                    } else {
-                        setIsSpanActive(false)
-                    }
-                    setFilteredMovies(filtered);
-                    localStorage.setItem('searchedMovies', JSON.stringify(filtered));
-                }
-                setIsLoading(false);
-            },
-            filteredMovies.length ? 0 : 300
-
-        );
-    };
-
     function createCategory(data) {
-   
-        // Передаём значения управляемых компонентов во внешний обработчик
         onCreateCategory(data);
-        console.log("Я здесь", data)
-      }
+        form.reset()
+    }
 
 
     return (
@@ -114,37 +59,36 @@ function Categories({ props, setActive, categories, savedMovies, loggedIn, onCre
 
                 <Header setActive={setActive} loggedIn={loggedIn} />
                 <main>
-
-                    <SearchForm searchQuery={searchQuery}
-                        onFilter={filterMovies}
-
-                    />
+                    {/*  */}
                     <span className={`searchform__span ${isSpanActive ? "searchform__span_active" : ""
                         }`}>
                         Ничего не найдено
                     </span>
-                    <form className="register__form" onSubmit={handleSubmit(createCategory)}>
-        <label className="register__label">Имя</label>
-        <input type="text"
-          placeholder="Имя"
-          className="register__input"
-          {...register("name", {
-            
-            required: "Это поле обязазательно для заполнения",
-            minLength: {
-              value: 3,
-              message: "Имя должно быть не меньше трех символов",
-            },
-          })}
-        />
-        <button   className="button" onClick={handleSubmit}>
-        Создать категорию
-        </button>
-      </form>
-                    
+                    <form id="newCategory" className="register__form" onSubmit={handleSubmit(createCategory)}>
+                        <label className="register__label">Новая категория</label>
+                        <input type="text"
+                        id="register__form"
+                            placeholder="Название новой категории"
+                            className="register__input"
+                            {...register("name", {
+                                required: "Это поле обязазательно для заполнения",
+                                minLength: {
+                                    value: 3,
+                                    message: "Имя должно быть не меньше трех символов",
+                                },
+                            })}
+                        />
+                        <span className="login__form-error">
+                            {errors.name ? errors.name.message : ""}
+                        </span>
+                        <button className="button" onClick={handleSubmit}>
+                            Создать категорию
+                        </button>
+                    </form>
+
                     <CategoriesList
                         categories={categories}
-
+                        onCategoryClick={onCategoryClick}
                     />
 
                 </main>
@@ -158,3 +102,56 @@ function Categories({ props, setActive, categories, savedMovies, loggedIn, onCre
 }
 
 export default Categories;
+
+                    // <SearchForm searchQuery={searchQuery}
+                    //     onFilter={filterMovies}
+                    // />
+
+
+  // const filterMovies = (query) => {
+    //     if (!filteredMovies.length) {
+    //         setIsLoading(true);
+    //     }
+    //     setTimeout(
+    //         () => {
+    //             let filtered = [];
+    //             localStorage.setItem('searchQueryMovies', JSON.stringify(query));
+    //             if (query.isShortFilmChecked) {
+    //                 filtered = categories.filter((m) => {
+    //                     return (
+
+    //                         m.name
+    //                             .toLowerCase()
+    //                             .trim()
+    //                             .includes(query.searchText.toLowerCase())
+    //                     );
+    //                 });
+    //                 if (filtered.length === 0) {
+    //                     setIsSpanActive(true)
+    //                 } else {
+    //                     setIsSpanActive(false)
+    //                 }
+
+    //                 setFilteredMovies(filtered);
+    //                 localStorage.setItem('searchedMovies', JSON.stringify(filtered));
+    //             } else if (!query.isShortFilmChecked) {
+    //                 filtered = categories.filter((m) => {
+    //                     return m.nameRU
+    //                         .toLowerCase()
+    //                         .trim()
+    //                         .includes(query.searchText.toLowerCase());
+    //                 });
+    //                 if (filtered.length === 0) {
+    //                     setIsSpanActive(true)
+    //                 } else {
+    //                     setIsSpanActive(false)
+    //                 }
+    //                 setFilteredMovies(filtered);
+    //                 localStorage.setItem('searchedMovies', JSON.stringify(filtered));
+    //             }
+    //             setIsLoading(false);
+    //         },
+    //         filteredMovies.length ? 0 : 300
+
+    //     );
+    // };

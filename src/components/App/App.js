@@ -5,6 +5,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Categories from "../Movies/Categories";
 import Profile from '../Profile/Profile';
+import Category from "../Movies/Category/Category";
 import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from "../NotFound/NotFound";
 import Landing from "../Landing/Landing";
@@ -33,6 +34,8 @@ function App() {
   const [savedCategories, setSavedCategories] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });
+  const [selectedCategory, setSelectedCategory] = useState({});
+
 
   function handleMenu() {
     setMenuIsOpen(true);
@@ -43,7 +46,11 @@ function App() {
     setShowTooltip(false);
   }
 
-
+  function handleCategoryClick(category) {
+    setSelectedCategory(category);
+console.log(category.name)
+     navigate('/categories/'+ category.name)
+  }
   useEffect(() => {
     if (loggedIn) {
       mainApi
@@ -87,7 +94,6 @@ function App() {
           .then((categories) => {
             localStorage.setItem('savedCategories', JSON.stringify(categories));
             setCategories(categories);
-            console.log(categories)
           })
           .catch((error) => {
             console.log(error);
@@ -166,12 +172,13 @@ function App() {
           .then((categories) => {
             localStorage.setItem('savedCategories', JSON.stringify(categories));
             setCategories(categories);
-            console.log(categories)
           })
       .then(() => {
-        // localStorage.setItem('savedCategories', JSON.stringify(categories));
-        // setCategories(categories);
-        // console.log(categories)
+        setTimeout(setShowTooltip, 1000, true);
+        chooseInfoTooltip({
+          image: success,
+          text: "Категория успешно создана",
+        });
       })
       .catch((err) => {
 
@@ -225,6 +232,17 @@ function App() {
                     categories={categories}
                     onCreateCategory={createNewCategory}
                     loggedIn={loggedIn}
+                    onCategoryClick={handleCategoryClick}
+                  />
+                </ProtectedRoute>}
+            />
+
+<Route exact path="/categories/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}
+                  checkToken={checkToken}>
+                  <Category
+                    category={selectedCategory}
                   />
                 </ProtectedRoute>}
             />

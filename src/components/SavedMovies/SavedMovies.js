@@ -1,5 +1,5 @@
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import MoviesCardList from "../Movies/CategoryCardList/CategoryCardList";
 import Header from "../Landing/Header/Header";
 import Footer from "../Footer/Footer";
 import { useState, useEffect } from "react";

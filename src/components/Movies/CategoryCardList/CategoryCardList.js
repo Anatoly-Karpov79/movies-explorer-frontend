@@ -1,9 +1,9 @@
 import React from "react";
-import './MoviesCardList.css'
-import MoviesCard from '../MoviesCard/MoviesCard';
+import './CategoryCardList.css'
+import CategoryCard from "../CategoryCard/CategoryCard";
 import { useState, useEffect } from "react";
 
-function CategoriesList({ categories, savedCategories, onLikeMovie, onDeleteMovie }) {
+function CategoriesList({ categories, savedCategories, onCategoryClick, onLikeMovie, onDeleteMovie }) {
     const [moviesToPage, setMoviesToPage] = useState(12);
   const [moviesAdd, setMoviesAdd] = useState(3);
   const [buttonHiden, setButtonHiden] = useState(true)
@@ -44,17 +44,17 @@ function CategoriesList({ categories, savedCategories, onLikeMovie, onDeleteMovi
         const handleClickButton = () => {
             setMoviesToPage(moviesToPage + moviesAdd);
           };
-          console.log(categories)
+          
     return (
         <section className="moviescardlist">
             <div className="moviescontent">
                 {categories.slice(0, moviesToPage).map((category) => {
                     return (
-                        <MoviesCard
+                        <CategoryCard
                             key={category.id || category.categoryId}
                             category={category}
                             savedCategories={savedCategories}
-                            
+                            onCategoryClick={onCategoryClick}
                         />
                     );
                 })}

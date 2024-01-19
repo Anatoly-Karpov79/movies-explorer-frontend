@@ -22,8 +22,7 @@ class CategoriesApi {
         
     };
 
-    createCategory(name, res) {
-        console.log(name)
+    createCategory(name) {
         return fetch(this._baseUrl, {
             method: "POST",
             headers: this._headers,
