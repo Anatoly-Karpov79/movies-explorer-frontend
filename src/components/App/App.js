@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
-import Movies from "../Movies/Movies";
+import Categories from "../Movies/Categories";
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from "../NotFound/NotFound";
@@ -11,6 +11,7 @@ import Landing from "../Landing/Landing";
 import Menu from "../Main/Menu/Menu";
 import { mainApi } from "../../utils/MainApi";
 import { moviesApi } from '../../utils/MoviesApi';
+import { categoriesApi } from "../../utils/CategoriesApi";
 import { CurrentUserContext } from '../../context/CurrentUserContext'
 import ProtectedRoute from "../ProtectedRoute";
 import * as auth from "../../utils/auth";
@@ -28,8 +29,8 @@ function App() {
   const [checkToken, setCheckToken] = useState(false);
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [savedCategories, setSavedCategories] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });
 
@@ -53,11 +54,11 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-      mainApi
-        .getSavedMovies()
+      categoriesApi
+        .getCategories()
         .then((data) => {
-          setSavedMovies(data);
-          localStorage.setItem('savedMovies', JSON.stringify(data));
+          setCategories(data);
+          localStorage.setItem('savedCategories', JSON.stringify(data));
         })
         .catch((error) => console.log(error));
     }
@@ -78,14 +79,15 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      if (localStorage.getItem('movies')) {
-        setMovies(JSON.parse(localStorage.getItem('movies')));
+      if (localStorage.getItem('categories')) {
+        setCategories(JSON.parse(localStorage.getItem('savedCategories')));
       } else {
-        moviesApi
-          .getMovies()
-          .then((movies) => {
-            localStorage.setItem('movies', JSON.stringify(movies));
-            setMovies(movies);
+        categoriesApi
+          .getCategories()
+          .then((categories) => {
+            localStorage.setItem('savedCategories', JSON.stringify(categories));
+            setCategories(categories);
+            console.log(categories)
           })
           .catch((error) => {
             console.log(error);
@@ -96,8 +98,8 @@ function App() {
 
   useEffect(() => {
     loggedIn &&
-      localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies, loggedIn]);
+      localStorage.setItem('savedCategories', JSON.stringify(savedCategories));
+  }, [savedCategories, loggedIn]);
 
   function chooseInfoTooltip(info) {
     setInfo({ image: info.image, text: info.text });
@@ -107,12 +109,14 @@ function App() {
     const { name, email, password } = data;
     auth
       .register(name, email, password)
-      .then((res) => {
+
+      .then(() => {
         setTimeout(setShowTooltip, 1000, true);
         chooseInfoTooltip({
           image: success,
           text: "Вы успешно зарегистрировались",
         });
+        // 
         handleLogin(data)
       })
       .catch((err) => {
@@ -122,6 +126,7 @@ function App() {
           image: error,
           text: "Что-то пошло не так! Попробуйте еще раз!",
         });
+        console.log(data)
       });
   }
 
@@ -151,41 +156,27 @@ function App() {
       });
   };
 
-  const handleLikeMovie = (movie, isLiked, id) => {
-    if (isLiked) {
-      handleDeleteMovie(id);
 
-    } else {
-      mainApi
-        .saveMovie(movie)
-        .then((res) => {
-          setSavedMovies([...savedMovies, res]);
-        })
-        .catch((error) => console.log(error));
-    }
-  }
-
-  const handleDeleteMovie = (id) => {
-    const searchedSavedMovies = JSON.parse(
-      localStorage.getItem('searchedSavedMovies'));
-    mainApi
-      .deleteMovie(id)
-      .then((res) => {
-        const updatedSavedMovies = savedMovies.filter(
-          (movie) => movie._id !== id);
-        setSavedMovies(updatedSavedMovies);
-        if (searchedSavedMovies) {
-          const updatedSearchedSavedMovies = searchedSavedMovies.filter(
-            (movie) => movie._id !== id
-          );
-          localStorage.setItem('searchedSavedMovies',
-            JSON.stringify(updatedSearchedSavedMovies)
-
-          ); console.log(searchedSavedMovies)
-        }
+  function createNewCategory(data) {
+    const { name } = data
+    categoriesApi
+      .createCategory(name)
+      categoriesApi
+          .getCategories()
+          .then((categories) => {
+            localStorage.setItem('savedCategories', JSON.stringify(categories));
+            setCategories(categories);
+            console.log(categories)
+          })
+      .then(() => {
+        // localStorage.setItem('savedCategories', JSON.stringify(categories));
+        // setCategories(categories);
+        // console.log(categories)
       })
-      .catch((error) => console.log(error));
-  };
+      .catch((err) => {
+
+      });
+  }
 
   function handleLogin(data) {
     const { email, password } = data;
@@ -195,7 +186,7 @@ function App() {
         setLoggedIn(true);
         setCurrentUser(res);
         localStorage.setItem('userId', res._id);
-        navigate("/movies", { replace: true });
+        // handleButtonClick
       })
       .catch((err) => {
         console.log(err)
@@ -225,32 +216,19 @@ function App() {
               loggedIn={loggedIn}
             />} />;
 
-            <Route exact path="/movies"
+            <Route exact path="/categories"
               element={
                 <ProtectedRoute loggedIn={loggedIn}
                   checkToken={checkToken}>
-                  <Movies
+                  <Categories
                     setActive={handleMenu}
-                    movies={movies}
-                    savedMovies={savedMovies}
-                    onLikeMovie={handleLikeMovie}
+                    categories={categories}
+                    onCreateCategory={createNewCategory}
                     loggedIn={loggedIn}
                   />
                 </ProtectedRoute>}
             />
 
-            <Route exact path="/savedmovies"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}
-                  checkToken={checkToken}>
-                  <SavedMovies
-                    setActive={handleMenu}
-                    savedMovies={savedMovies}
-                    onDeleteMovie={handleDeleteMovie}
-                    loggedIn={loggedIn}
-                  />
-                </ProtectedRoute>}
-            />
 
             <Route exact path="/profile"
               element={
@@ -263,6 +241,8 @@ function App() {
                     setActive={handleMenu} />
                 </ProtectedRoute>}
             />
+
+
             <Route exact path="/profile" element={<Profile />} />;
             {
               !loggedIn ?
@@ -298,3 +278,54 @@ function App() {
 }
 
 export default App;
+
+{/* 
+            <Route exact path="/savedmovies"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}
+                  checkToken={checkToken}>
+                  <SavedMovies
+                    setActive={handleMenu}
+                    savedMovies={savedMovies}
+                    onDeleteMovie={handleDeleteMovie}
+                    loggedIn={loggedIn}
+                  />
+                </ProtectedRoute>}
+             /> */}
+
+
+ // const handleLikeMovie = (movie, isLiked, id) => {
+  //   if (isLiked) {
+  //     handleDeleteMovie(id);
+
+  //   } else {
+  //     mainApi
+  //       .saveMovie(movie)
+  //       .then((res) => {
+  //         setSavedMovies([...savedMovies, res]);
+  //       })
+  //       .catch((error) => console.log(error));
+  //   }
+  // }
+
+  // const handleDeleteMovie = (id) => {
+  //   const searchedSavedMovies = JSON.parse(
+  //     localStorage.getItem('searchedSavedMovies'));
+  //   mainApi
+  //     .deleteMovie(id)
+  //     .then((res) => {
+  //       const updatedSavedMovies = savedMovies.filter(
+  //         (movie) => movie._id !== id);
+  //       setSavedMovies(updatedSavedMovies);
+  //       if (searchedSavedMovies) {
+  //         const updatedSearchedSavedMovies = searchedSavedMovies.filter(
+  //           (movie) => movie._id !== id
+  //         );
+  //         localStorage.setItem('searchedSavedMovies',
+  //           JSON.stringify(updatedSearchedSavedMovies)
+
+  //         ); console.log(searchedSavedMovies)
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // };

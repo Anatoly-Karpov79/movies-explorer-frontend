@@ -3,13 +3,15 @@ import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useState, useEffect } from "react";
 
-function MoviesCardList({ movies, savedMovies, onLikeMovie, onDeleteMovie }) {
+function CategoriesList({ categories, savedCategories, onLikeMovie, onDeleteMovie }) {
     const [moviesToPage, setMoviesToPage] = useState(12);
   const [moviesAdd, setMoviesAdd] = useState(3);
   const [buttonHiden, setButtonHiden] = useState(true)
 
     const checkWindowWidth = () => {
         const screenWidth = window.screen.width;
+
+        
     
         if (screenWidth >= 1000) {
             setMoviesToPage(12);
@@ -25,35 +27,34 @@ function MoviesCardList({ movies, savedMovies, onLikeMovie, onDeleteMovie }) {
 
       useEffect(() => {
         checkWindowWidth();
-      }, [movies]);
+      }, [categories]);
 
       window.onresize = (event) => {
         setTimeout(checkWindowWidth, 10);
       };
 
       useEffect(() => {
-        if (movies.length <= moviesToPage) {
+        if (categories.length <= moviesToPage) {
             setButtonHiden(true)
 
             } else {
                 setButtonHiden(false) };
-        }, [movies, moviesToPage]);
+        }, [categories, moviesToPage]);
     
         const handleClickButton = () => {
             setMoviesToPage(moviesToPage + moviesAdd);
           };
-
+          console.log(categories)
     return (
         <section className="moviescardlist">
             <div className="moviescontent">
-                {movies.slice(0, moviesToPage).map((movie) => {
+                {categories.slice(0, moviesToPage).map((category) => {
                     return (
                         <MoviesCard
-                            key={movie.id || movie.movieId}
-                            movie={movie}
-                            onLikeMovie={onLikeMovie}
-                            savedMovies={savedMovies}
-                            onDeleteMovie={onDeleteMovie}
+                            key={category.id || category.categoryId}
+                            category={category}
+                            savedCategories={savedCategories}
+                            
                         />
                     );
                 })}
@@ -68,4 +69,4 @@ function MoviesCardList({ movies, savedMovies, onLikeMovie, onDeleteMovie }) {
     );
 }
 
-export default MoviesCardList;
+export default CategoriesList;

@@ -21,12 +21,12 @@ class Api {
       }).then(this._handleResponse);
     }
   
-    getInitialCards() {
-      return fetch(this._baseUrl + "/cards", {
-        credentials: 'include',
-        headers: this._headers,
-      }).then(this._handleResponse);
-    }
+    // getInitialCards() {
+    //   return fetch(this._baseUrl + "/cards", {
+    //     credentials: 'include',
+    //     headers: this._headers,
+    //   }).then(this._handleResponse);
+    // }
   
     changeProfile(name, email) {
      return fetch(this._baseUrl + `/users/me`, {
@@ -96,7 +96,7 @@ class Api {
   
   export const api = new Api({
         
-    baseUrl: `https://api.karp.movies-explorer.nomoredomains.work`,
+    baseUrl: `http://127.0.0.1:27017`,
     
     headers: {
       

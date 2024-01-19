@@ -30,8 +30,8 @@ function Header({ loggedIn, setActive}) {
             <Link to="/" className="header2__logo">
                 <img src={logo} alt="логотип" />
             </Link>
-            <Link to="/movies" className="header2__button" >
-                Фильмы
+            <Link to="/categories" className="header2__button" >
+                Категории
             </Link>
             <Link
                 to="/savedmovies"

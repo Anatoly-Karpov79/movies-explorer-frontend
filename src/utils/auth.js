@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.karp.movies-explorer.nomoredomains.work";
+export const BASE_URL = "http://localhost:5000";
 
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
@@ -8,12 +8,13 @@ export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
-
+      
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, password }),
-  }).then((res) => checkResponse(res));
+    body: JSON.stringify({name, email, password} ),
+    // console.log(name, email, password)
+  }).then((res) => console.log(res)) ;
 };
 
 export const authorize = (email, password) => {
