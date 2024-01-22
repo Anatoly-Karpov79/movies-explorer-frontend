@@ -18,23 +18,40 @@ class CategoriesApi {
             headers: this._headers,
             credentials: 'include',
         })
-        .then(this._handleResponse);
-        
+            .then(this._handleResponse);
+
     };
 
     createCategory(name) {
+        console.log(name)
         return fetch(this._baseUrl, {
             method: "POST",
             headers: this._headers,
             credentials: 'include',
             body: JSON.stringify({
                 name: `${name}`,
-                
-              } ), 
-        }) 
-        .then(this._handleResponse);
-        
-        
+
+            }),
+        })
+            .then(this._handleResponse);
+
+
+    };
+
+    createSubCategory(name) {
+        return fetch(this._baseUrl + `id`, {
+            method: "PATCH",
+            headers: this._headers,
+            credentials: 'include',
+            body: JSON.stringify({
+                subcategories: {
+                    name: `${name}`,
+                },
+            }),
+        })
+            .then(this._handleResponse);
+
+
     }
 }
 

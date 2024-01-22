@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 
 
 
-function Categories({ props, setActive, categories, onCategoryClick, savedMovies, loggedIn, onCreateCategory }) {
+function Categories({ props, setActive, currentUser, categories, onCategoryClick, savedMovies, loggedIn, onCreateCategory }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const searchedMovies = localStorage.getItem('searchedMovies');

@@ -1,16 +1,18 @@
 import React from "react";
-import './CategoryCardList.css'
-import CategoryCard from "../CategoryCard/CategoryCard";
+import './SubCategoriesList.css'
+import SubCategoryCard from "../SubCategoryCard/SubCategoryCard";
 import { useState, useEffect } from "react";
 
-function CategoriesList({ categories, savedCategories, onCategoryClick, onLikeMovie, onDeleteMovie }) {
+function SubCategoriesList({ subCategories, savedSubCategories, onCategoryClick, onLikeMovie, onDeleteMovie }) {
     const [moviesToPage, setMoviesToPage] = useState(12);
   const [moviesAdd, setMoviesAdd] = useState(3);
   const [buttonHiden, setButtonHiden] = useState(true)
 
     const checkWindowWidth = () => {
         const screenWidth = window.screen.width;
+
         
+    
         if (screenWidth >= 1000) {
             setMoviesToPage(12);
             setMoviesAdd(3);
@@ -25,19 +27,19 @@ function CategoriesList({ categories, savedCategories, onCategoryClick, onLikeMo
 
       useEffect(() => {
         checkWindowWidth();
-      }, [categories]);
+      }, [subCategories]);
 
       window.onresize = (event) => {
         setTimeout(checkWindowWidth, 10);
       };
 
       useEffect(() => {
-        if (categories.length <= moviesToPage) {
+        if (subCategories.length <= moviesToPage) {
             setButtonHiden(true)
 
             } else {
                 setButtonHiden(false) };
-        }, [categories, moviesToPage]);
+        }, [subCategories, moviesToPage]);
     
         const handleClickButton = () => {
             setMoviesToPage(moviesToPage + moviesAdd);
@@ -46,12 +48,12 @@ function CategoriesList({ categories, savedCategories, onCategoryClick, onLikeMo
     return (
         <section className="moviescardlist">
             <div className="moviescontent">
-                {categories.slice(0, moviesToPage).map((category) => {
+                {subCategories.slice(0, moviesToPage).map((subCategory) => {
                     return (
-                        <CategoryCard
-                            key={category.id || category.categoryId}
-                            category={category}
-                            savedCategories={savedCategories}
+                        <SubCategoryCard
+                            key={subCategory.id || subCategory.subCategoryId}
+                            subCategory={subCategory}
+                            savedSubCategories={savedSubCategories}
                             onCategoryClick={onCategoryClick}
                         />
                     );
@@ -67,4 +69,4 @@ function CategoriesList({ categories, savedCategories, onCategoryClick, onLikeMo
     );
 }
 
-export default CategoriesList;
+export default SubCategoriesList;

@@ -3,23 +3,23 @@ import { useState } from "react";
 
 import delet from '../../../images/delete.svg'
 
-import './CategoryCard.css';
+import './SubCategoryCard.css';
 //import { useLocation } from 'react-router-dom';
 
 
-function CategoryCard({ category, savedCategories, onCategoryClick, onLikeMovie, onDeleteMovie }) {
+function SubCategoryCard({ subCategory, savedSubCategories, onSubCategoryClick, onLikeMovie, onDeleteMovie }) {
  //   const location = useLocation();
     // const hours = Math.floor(movie.duration / 60);
     // const minutes = movie.duration % 60;
   //  const [categoryId, setCategoryId] = useState("")
    
-    const savedCategory = savedCategories
-    ? savedCategories.find((item) => item.categoryId === category.id)
+    const savedSubCategory = savedSubCategories
+    ? savedSubCategories.find((item) => item.subCategoryId === subCategory.id)
     : '';
 
     function handleClick() {
-        onCategoryClick(category);
-              console.log("нажали", category)
+        onSubCategoryClick(subCategory);
+              console.log("нажали", subCategory)
     }
     // const isLiked = savedMovies
     // ? savedMovies.some((i) => i.movieId === movie.id)
@@ -30,8 +30,8 @@ function CategoryCard({ category, savedCategories, onCategoryClick, onLikeMovie,
      
     return (
       
-        <div className="moviescard" key={category.id} onClick={handleClick}>
-            <h2 className="moviescard__name">{category.name}</h2>
+        <div className="moviescard" key={subCategory.id} onClick={handleClick}>
+            <h2 className="moviescard__name">{subCategory.name}</h2>
 
             {/* {location.pathname === '/savedmovies' &&
                 <button type="button" onClick={() => onDeleteMovie(movie._id)} aria-label="удалить фильм" className="moviescard__button" >
@@ -57,4 +57,4 @@ function CategoryCard({ category, savedCategories, onCategoryClick, onLikeMovie,
 );
 }
 
-export default CategoryCard;
+export default SubCategoryCard;
