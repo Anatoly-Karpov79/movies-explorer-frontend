@@ -57,7 +57,7 @@ function Category({category, loggedIn, onCreateSubCategory, onSubCategoryClick})
         <div>
             <Header loggedIn={loggedIn}/>
             <main>
-                    
+            <h1>Это category.js</h1>
                     <form id="newCategory" className="register__form" onSubmit={handleSubmit(createSubCategory)}>
                         <label className="register__label">Новая категория</label>
                         <input type="text"
@@ -80,10 +80,10 @@ function Category({category, loggedIn, onCreateSubCategory, onSubCategoryClick})
                         </button>
                     </form>
 
-                     <SubCategoriesList
+                     {/* <SubCategoriesList
                         subcategories={subCategories}
                        // onSubCategoryClick={onSubCategoryClick}
-                    /> 
+                    />  */}
 
                 </main>
  <section className="category">

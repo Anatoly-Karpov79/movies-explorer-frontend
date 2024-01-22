@@ -1,23 +1,27 @@
 import React from "react";
-import Header from "../Landing/Header/Header";
-import Footer from "../Footer/Footer";
-import SearchForm from "./SearchForm/SearchForm";
-import CategoriesList from "./CategoryCardList/CategoryCardList";
+import Header from "../../Landing/Header/Header";
+import Footer from "../../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
+import SubCategoriesList from "../SubCategoriesList/SubCategoriesList";
 import { useState, useEffect } from "react";
-import Preloader from "../Preloader/Preloader";
-import { categoriesApi } from "../../utils/CategoriesApi";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import error from '../../images/error.svg';
-import success from '../../images/success.svg';
+import Preloader from "../../Preloader/Preloader";
+import { categoriesApi } from "../../../utils/CategoriesApi"; 
+import { subCategoriesApi } from "../../../utils/SubCategoriesApi";
+
+import InfoTooltip from "../../InfoTooltip/InfoTooltip";
+// import error from '../../../images/error.svg';
+// import success from '../../images/success.svg';
 import { useForm } from "react-hook-form";
 
 
 
-function Categories({ props, setActive, currentUser, categories, onCategoryClick, savedMovies, loggedIn, onCreateCategory }) {
+function SubCategories({ loggedIn, category, props, setActive, currentUser, onSubCategoryClick, savedMovies, onCreateSubCategory }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const searchedMovies = localStorage.getItem('searchedMovies');
-    const queries = localStorage.getItem('categories');
+    const [subCategories, setSubCategories] = useState([]);
+
+    const queries = localStorage.getItem('subCategories');
     const [searchQuery, setSearchQuery] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isSpanActive, setIsSpanActive] = useState(false);
@@ -31,13 +35,18 @@ function Categories({ props, setActive, currentUser, categories, onCategoryClick
     } = useForm({
         mode: "all",
     });
-    const form = document.getElementById('newCategory');
+    const form = document.getElementById('newSubCategory');
+    const categoryId = category._id
 
-    // useEffect(() => {
-    //     if (searchedMovies) {
-    //         setFilteredMovies(JSON.parse(searchedMovies));
+
+    
+    //  useEffect(() => {
+    //     if (subCategories) {
+    //         setFilteredMovies(JSON.parse(subCategories));
     //     }
-    // }, [searchedMovies]);
+    // }, [subCategories]);
+
+
 
     useEffect(() => {
         if (queries) {
@@ -45,8 +54,9 @@ function Categories({ props, setActive, currentUser, categories, onCategoryClick
         }
     }, [queries]);
 
-    function createCategory(data) {
-        onCreateCategory(data);
+    function createSubCategory(data, category) {
+        console.log(data, categoryId)
+        onCreateSubCategory(data, categoryId);
         form.reset()
     }
 
@@ -56,18 +66,17 @@ function Categories({ props, setActive, currentUser, categories, onCategoryClick
             <Preloader />
         ) : (
             <div>
-
+ <h1>Это subCategories.js</h1>
                 <Header setActive={setActive} loggedIn={loggedIn} />
                 <main>
-
-                    <h1>Это categories.js</h1>
+                <h2 className="moviescard__name">{category.name}</h2>
                     {/*  */}
                     <span className={`searchform__span ${isSpanActive ? "searchform__span_active" : ""
                         }`}>
                         Ничего не найдено
                     </span>
-                    <form id="newCategory" className="register__form" onSubmit={handleSubmit(createCategory)}>
-                        <label className="register__label">Новая категория</label>
+                    <form id="newSubCategory" className="register__form" onSubmit={handleSubmit(createSubCategory)}>
+                        <label className="register__label">Новая подкатегория</label>
                         <input type="text"
                         id="register__form"
                             placeholder="Название новой категории"
@@ -84,13 +93,16 @@ function Categories({ props, setActive, currentUser, categories, onCategoryClick
                             {errors.name ? errors.name.message : ""}
                         </span>
                         <button className="button" onClick={handleSubmit}>
-                            Создать категорию
+                            Создать подкатегорию
                         </button>
                     </form>
 
-                    <CategoriesList
-                        categories={categories}
-                        onCategoryClick={onCategoryClick}
+                    <SubCategoriesList
+                    loggedIn={loggedIn}
+                    category={category.name}
+                    categoryId={category._id}
+                        subCategories={subCategories}
+                        onSubCategoryClick={onSubCategoryClick}
                     />
 
                 </main>
@@ -103,7 +115,7 @@ function Categories({ props, setActive, currentUser, categories, onCategoryClick
     )
 }
 
-export default Categories;
+export default SubCategories;
 
                     // <SearchForm searchQuery={searchQuery}
                     //     onFilter={filterMovies}

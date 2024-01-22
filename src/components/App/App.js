@@ -6,6 +6,7 @@ import Register from '../Register/Register';
 import Categories from "../Movies/Categories";
 import Profile from '../Profile/Profile';
 import Category from "../Movies/Category/Category";
+import SubCategories from "../Movies/SubCategories/Subcategories";
 import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from "../NotFound/NotFound";
 import Landing from "../Landing/Landing";
@@ -33,6 +34,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
+
   const [categoryId, setCategoryId] = useState("")
   const [savedCategories, setSavedCategories] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -51,11 +53,11 @@ function App() {
 
   function handleCategoryClick(category) {
     setSelectedCategory(category);
-    setCategoryId('65abeedb015223d1d2998f37')
+    
     
 console.log(category._id)
 
-console.log(categoryId)
+console.log(category)
 
      navigate('/categories/'+ category._id)
   }
@@ -116,6 +118,7 @@ console.log(categoryId)
       localStorage.setItem('savedCategories', JSON.stringify(savedCategories));
   }, [savedCategories, loggedIn]);
 
+  
   function chooseInfoTooltip(info) {
     setInfo({ image: info.image, text: info.text });
   }
@@ -195,18 +198,17 @@ console.log(categoryId)
       });
   }
 
-  function createNewSubCategory(data) {
-    console.log(categoryId)
-    const { name } = data
-    
-    categoriesApi
-      .createSubCategory(name)
-      // categoriesApi
-      //     // .getSubCategories()
-      //     .then((categories) => {
-      //       localStorage.setItem('savedSubCategories', JSON.stringify(categories));
-      //       setSubCategories(subCategories);
-      //     })
+  function createNewSubCategory(data, categoryId) {
+    console.log("Нажали createNewSubCategory в App.js", categoryId, data)
+     const { name } = data
+      subCategoriesApi
+      .createSubCategory(name, categoryId)
+    subCategoriesApi
+          .getSubCategories(categoryId)
+          .then((subCategories) => {
+            localStorage.setItem('savedSubCategories', JSON.stringify(subCategories));
+            setSubCategories(subCategories);
+          })
       .then(() => {
         setTimeout(setShowTooltip, 1000, true);
         chooseInfoTooltip({
@@ -275,7 +277,8 @@ console.log(categoryId)
               element={
                 <ProtectedRoute loggedIn={loggedIn}
                   checkToken={checkToken}>
-                  <Category
+                  <SubCategories
+                  loggedIn={loggedIn}
                     category={selectedCategory}
                     onCreateSubCategory={createNewSubCategory}
                   />

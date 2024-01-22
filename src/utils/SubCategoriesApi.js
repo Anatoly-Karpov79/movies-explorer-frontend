@@ -12,10 +12,11 @@ class SubCategoriesApi {
         return Promise.reject(`Ошибка: ${res.status}`);
     };
 
-    getSubCategories({location}) {
-        const path = location.pathname
-        console.log(path)
-        return fetch(this._baseUrl + path, {
+    getSubCategories(categoryId) {
+        console.log(categoryId)
+        // const path = location.pathname
+        // console.log(path)
+        return fetch(this._baseUrl  + categoryId, {
             method: "GET",
             headers: this._headers,
             credentials: 'include',
@@ -24,26 +25,26 @@ class SubCategoriesApi {
         
     };
 
-//     createSubCategory(name, _id) {
-//         console.log(name, _id)
-//         return fetch(this._baseUrl + _id, {
-//             method: "POST",
-//             headers: this._headers,
-//             credentials: 'include',
-//             body: JSON.stringify({
-//                 name: `${name}`,
+     createSubCategory(name, categoryId) {
+        console.log(name, categoryId)
+        return fetch(this._baseUrl + categoryId, {
+            method: "POST",
+            headers: this._headers,
+            credentials: 'include',
+            body: JSON.stringify({
+                name: `${name}`,
                 
-//               } ), 
-//         }) 
-//         .then(this._handleResponse);
+              } ), 
+        }) 
+        .then(this._handleResponse);
         
         
-//     }
+    }
  }
 
 
 export const subCategoriesApi = new SubCategoriesApi({
-    baseUrl: 'http://localhost:5000',
+    baseUrl: 'http://localhost:5000/categories/',
     headers: {
         'Content-Type': 'application/json'
     }

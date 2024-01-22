@@ -1,12 +1,16 @@
 import React from "react";
 import './SubCategoriesList.css'
 import SubCategoryCard from "../SubCategoryCard/SubCategoryCard";
+import { subCategoriesApi } from "../../../utils/SubCategoriesApi";
 import { useState, useEffect } from "react";
 
-function SubCategoriesList({ subCategories, savedSubCategories, onCategoryClick, onLikeMovie, onDeleteMovie }) {
+function SubCategoriesList({ loggedIn, category, categoryId, savedSubCategories, onCategoryClick  }) {
     const [moviesToPage, setMoviesToPage] = useState(12);
   const [moviesAdd, setMoviesAdd] = useState(3);
   const [buttonHiden, setButtonHiden] = useState(true)
+
+  const [subCategories, setSubCategories] = useState([]);
+
 
     const checkWindowWidth = () => {
         const screenWidth = window.screen.width;
@@ -44,18 +48,47 @@ function SubCategoriesList({ subCategories, savedSubCategories, onCategoryClick,
         const handleClickButton = () => {
             setMoviesToPage(moviesToPage + moviesAdd);
           };
+
+
+          useEffect(() => {
+            if (loggedIn) {
+              if (localStorage.getItem('subCategories')) {
+                console.log("Есть подкатегории ")
+                setSubCategories(JSON.parse(localStorage.getItem('savedSubCategories')));
+              } else {
+                console.log("Нет подкатегории ", categoryId)
+                subCategoriesApi
+                  .getSubCategories(categoryId)
+                  .then((subCategories) => {
+                    localStorage.setItem('savedSubCategories', JSON.stringify(subCategories));
+                    setSubCategories(subCategories);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }
+            }
+          }, [loggedIn]);
+
+        
           
     return (
         <section className="moviescardlist">
+            <h1>Это subCategoriesList {category} {categoryId}</h1>
             <div className="moviescontent">
                 {subCategories.slice(0, moviesToPage).map((subCategory) => {
                     return (
+                     <div>
+                        
                         <SubCategoryCard
+                        loggedIn={loggedIn}
                             key={subCategory.id || subCategory.subCategoryId}
                             subCategory={subCategory}
                             savedSubCategories={savedSubCategories}
                             onCategoryClick={onCategoryClick}
                         />
+                     </div>
+                          
                     );
                 })}
             </div>
