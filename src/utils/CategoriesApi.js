@@ -2,8 +2,8 @@ class CategoriesApi {
     constructor({ headers, baseUrl }) {
         this._headers = headers
         this._baseUrl = baseUrl
-
     }
+
     _handleResponse = (res) => {
         if (res.ok) {
             return res.json();
@@ -19,7 +19,6 @@ class CategoriesApi {
             credentials: 'include',
         })
             .then(this._handleResponse);
-
     };
 
     createCategory(name) {
@@ -30,12 +29,9 @@ class CategoriesApi {
             credentials: 'include',
             body: JSON.stringify({
                 name: `${name}`,
-
             }),
         })
             .then(this._handleResponse);
-
-
     };
 
     createSubCategory(name) {
@@ -50,11 +46,8 @@ class CategoriesApi {
             }),
         })
             .then(this._handleResponse);
-
-
     }
 }
-
 
 export const categoriesApi = new CategoriesApi({
     baseUrl: 'http://localhost:5000/categories',

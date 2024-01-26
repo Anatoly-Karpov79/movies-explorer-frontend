@@ -34,8 +34,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-
-  const [categoryId, setCategoryId] = useState("")
   const [savedCategories, setSavedCategories] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });

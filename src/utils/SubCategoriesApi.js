@@ -2,8 +2,6 @@ class SubCategoriesApi {
     constructor({ headers, baseUrl, categoryId }) {
         this._headers = headers
         this._baseUrl = baseUrl
-        // const categoryId = localStorage.getItem('selectedCategoryId')
-
 
     }
     _handleResponse = (res) => {
@@ -22,7 +20,6 @@ class SubCategoriesApi {
             credentials: 'include',
         })
         .then(this._handleResponse);
-        
     };
 
      createSubCategory(name) {
@@ -34,15 +31,11 @@ class SubCategoriesApi {
             credentials: 'include',
             body: JSON.stringify({
                 name: `${name}`,
-                
               } ), 
         }) 
         .then(this._handleResponse);
-        
-        
     }
  }
-
 
 export const subCategoriesApi = new SubCategoriesApi({
     baseUrl: 'http://localhost:5000/categories/',

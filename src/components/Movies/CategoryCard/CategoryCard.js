@@ -7,30 +7,17 @@ import './CategoryCard.css';
 //import { useLocation } from 'react-router-dom';
 
 
-function CategoryCard({ category, savedCategories, onCategoryClick, onLikeMovie, onDeleteMovie }) {
- //   const location = useLocation();
-    // const hours = Math.floor(movie.duration / 60);
-    // const minutes = movie.duration % 60;
-  //  const [categoryId, setCategoryId] = useState("")
-   
+function CategoryCard({ category, savedCategories, onCategoryClick }) {
     const savedCategory = savedCategories
-    ? savedCategories.find((item) => item.categoryId === category.id)
+    ? savedCategories.find((item) => item.categoryId === category._id)
     : '';
 
     function handleClick() {
         onCategoryClick(category);
-              console.log("нажали", category)
     }
-    // const isLiked = savedMovies
-    // ? savedMovies.some((i) => i.movieId === movie.id)
-    // : false; 
 
-    
-      
-     
     return (
-      
-        <div className="moviescard" key={category.id} onClick={handleClick}>
+        <div className="moviescard" key={category._id} onClick={handleClick}>
             <h2 className="moviescard__name">{category.name}</h2>
 
             {/* {location.pathname === '/savedmovies' &&

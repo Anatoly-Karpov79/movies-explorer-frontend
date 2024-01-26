@@ -8,28 +8,15 @@ import './SubCategoryCard.css';
 
 
 function SubCategoryCard({ subCategory, savedSubCategories, onSubCategoryClick, onLikeMovie, onDeleteMovie }) {
- //   const location = useLocation();
-    // const hours = Math.floor(movie.duration / 60);
-    // const minutes = movie.duration % 60;
-  //  const [categoryId, setCategoryId] = useState("")
-   
     const savedSubCategory = savedSubCategories
     ? savedSubCategories.find((item) => item.subCategoryId === subCategory.id)
     : '';
 
     function handleClick() {
         onSubCategoryClick(subCategory);
-              console.log("нажали", subCategory)
     }
-    // const isLiked = savedMovies
-    // ? savedMovies.some((i) => i.movieId === movie.id)
-    // : false; 
-
-    
-      
      
     return (
-      
         <div className="moviescard" key={subCategory.id} onClick={handleClick}>
             <h2 className="moviescard__name">{subCategory.name}</h2>
 

@@ -20,14 +20,10 @@ function SubCategoriesList({ loggedIn, savedSubCategories, onCategoryClick }) {
       setCategoryName(localStorage.getItem('selectedCategoryName'));
       setCategoryId(localStorage.getItem('selectedCategoryId'))
     }
-  }
-    , [category]);
-    console.log(categoryId)
+  }, [category]);
 
   const checkWindowWidth = () => {
     const screenWidth = window.screen.width;
-
-
 
     if (screenWidth >= 1000) {
       setMoviesToPage(12);
@@ -62,11 +58,9 @@ function SubCategoriesList({ loggedIn, savedSubCategories, onCategoryClick }) {
     setMoviesToPage(moviesToPage + moviesAdd);
   };
 
-
   useEffect(() => {
     if (loggedIn) {
       if (localStorage.getItem('subCategories')) {
-        console.log("Есть подкатегории ")
         setSubCategories(JSON.parse(localStorage.getItem('savedSubCategories')));
       } else {
        subCategoriesApi       
@@ -74,7 +68,6 @@ function SubCategoriesList({ loggedIn, savedSubCategories, onCategoryClick }) {
           .then((subCategories) => {
             localStorage.setItem('savedSubCategories', JSON.stringify(subCategories));
             setSubCategories(subCategories);
-            console.log(subCategories)
           })
           .catch((error) => {
             console.log(error);
@@ -83,11 +76,9 @@ function SubCategoriesList({ loggedIn, savedSubCategories, onCategoryClick }) {
     }
   }, [loggedIn]);
 
-
-
   return (
     <section className="moviescardlist">
-      <h1>Это subCategoriesList {categoryName}</h1>
+      <h1> {categoryName}</h1>
       <div className="moviescontent">
         {subCategories.slice(0, moviesToPage).map((subCategory) => {
           return (
@@ -95,13 +86,12 @@ function SubCategoriesList({ loggedIn, savedSubCategories, onCategoryClick }) {
 
               <SubCategoryCard
                 loggedIn={loggedIn}
-                key={subCategory.id || subCategory.subCategoryId}
+                key={subCategory._id || subCategory.subCategoryId}
                 subCategory={subCategory}
                 savedSubCategories={savedSubCategories}
                 onCategoryClick={onCategoryClick}
               />
             </div>
-
           );
         })}
       </div>
