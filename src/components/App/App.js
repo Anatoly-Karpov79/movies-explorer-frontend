@@ -39,7 +39,9 @@ function App() {
   const [savedCategories, setSavedCategories] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
   const [info, setInfo] = useState({ image: "", text: "" });
-  const [selectedCategory, setSelectedCategory] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedCategoryName, setSelectedCategoryName] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState([]);
 
 
   function handleMenu() {
@@ -52,14 +54,11 @@ function App() {
   }
 
   function handleCategoryClick(category) {
-    setSelectedCategory(category);
-    
-    
-console.log(category._id)
-
-console.log(category)
-
-     navigate('/categories/'+ category._id)
+    setSelectedCategoryName(category);
+    localStorage.setItem('selectedCategory', JSON.stringify(category));
+    localStorage.setItem('selectedCategoryName', (JSON.parse(localStorage.getItem ('selectedCategory')).name));
+    localStorage.setItem('selectedCategoryId', (JSON.parse(localStorage.getItem ('selectedCategory'))._id));
+    navigate('/categories/'+ category._id)
   }
 
   useEffect(() => {
@@ -199,7 +198,7 @@ console.log(category)
   }
 
   function createNewSubCategory(data, categoryId) {
-    console.log("Нажали createNewSubCategory в App.js", categoryId, data)
+    // console.log("Нажали createNewSubCategory в App.js", categoryId, data)
      const { name } = data
       subCategoriesApi
       .createSubCategory(name, categoryId)

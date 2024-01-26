@@ -1,7 +1,9 @@
 class SubCategoriesApi {
-    constructor({ headers, baseUrl }) {
+    constructor({ headers, baseUrl, categoryId }) {
         this._headers = headers
         this._baseUrl = baseUrl
+        // const categoryId = localStorage.getItem('selectedCategoryId')
+
 
     }
     _handleResponse = (res) => {
@@ -12,10 +14,8 @@ class SubCategoriesApi {
         return Promise.reject(`Ошибка: ${res.status}`);
     };
 
-    getSubCategories(categoryId) {
-        console.log(categoryId)
-        // const path = location.pathname
-        // console.log(path)
+    getSubCategories() {
+        const categoryId = localStorage.getItem('selectedCategoryId')
         return fetch(this._baseUrl  + categoryId, {
             method: "GET",
             headers: this._headers,
@@ -25,7 +25,8 @@ class SubCategoriesApi {
         
     };
 
-     createSubCategory(name, categoryId) {
+     createSubCategory(name) {
+        const categoryId = localStorage.getItem('selectedCategoryId')
         console.log(name, categoryId)
         return fetch(this._baseUrl + categoryId, {
             method: "POST",
