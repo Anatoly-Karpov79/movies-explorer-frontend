@@ -3,22 +3,24 @@ import { useState } from "react";
 
 import delet from '../../../images/delete.svg'
 
-import './SubCategoryCard.css';
+// import './SubCategoryCard.css';
 //import { useLocation } from 'react-router-dom';
 
 
-function SubCategoryCard({ subCategory, savedSubCategories, onSubCategoryClick, onLikeMovie, onDeleteMovie }) {
-    const savedSubCategory = savedSubCategories
-    ? savedSubCategories.find((item) => item.subCategoryId === subCategory.id)
+function ProductCard({ product, subCategory, savedProducts, onSubCategoryClick, onLikeMovie, onDeleteMovie }) {
+    const savedProduct = savedProducts
+    ? savedProducts.find((item) => item.productId === product.id)
     : '';
 
-     function handleClick() {
+   function handleClick() {
         onSubCategoryClick(subCategory);
     }
      
     return (
-        <div className="moviescard" key={subCategory.id} onClick={handleClick}>
-            <h2 className="moviescard__name">{subCategory.name}</h2>
+        <div className="moviescard" key={product.id} onClick={handleClick}>
+            <h2 className="moviescard__name">{product.name}</h2>
+            <h2 className="moviescard__name">{product.cost} рублей</h2>
+
 
             {/* {location.pathname === '/savedmovies' &&
                 <button type="button" onClick={() => onDeleteMovie(movie._id)} aria-label="удалить фильм" className="moviescard__button" >
@@ -44,4 +46,4 @@ function SubCategoryCard({ subCategory, savedSubCategories, onSubCategoryClick, 
 );
 }
 
-export default SubCategoryCard;
+export default ProductCard;

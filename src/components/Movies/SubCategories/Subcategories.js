@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 
 
 
-function SubCategories({ loggedIn, category, props, setActive, currentUser, onSubCategoryClick, savedMovies, onCreateSubCategory }) {
+function SubCategories({ loggedIn, category, product, props, setActive, onCreateProduct, onSubCategoryClick, savedMovies, onCreateSubCategory }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const searchedMovies = localStorage.getItem('searchedMovies');
@@ -38,30 +38,20 @@ function SubCategories({ loggedIn, category, props, setActive, currentUser, onSu
     const form = document.getElementById('newSubCategory');
     const categoryId = category._id
 
-
-    
-    //  useEffect(() => {
-    //     if (subCategories) {
-    //         setFilteredMovies(JSON.parse(subCategories));
-    //     }
-    // }, [subCategories]);
-
-
-
     useEffect(() => {
         if (queries) {
             setSearchQuery(JSON.parse(queries));
         }
     }, [queries]);
 
-    function createSubCategory(data, category) {
+    function createSubCategory(data) {
         console.log(data, categoryId)
         onCreateSubCategory(data, categoryId);
         form.reset()
     }
 
-
-    return (
+    
+        return (
         <>   {isLoading ? (
             <Preloader />
         ) : (
@@ -78,7 +68,7 @@ function SubCategories({ loggedIn, category, props, setActive, currentUser, onSu
                     <form id="newSubCategory" className="register__form" onSubmit={handleSubmit(createSubCategory)}>
                         <label className="register__label">Новая подкатегория</label>
                         <input type="text"
-                        id="register__form"
+                        id="subCategory__form"
                             placeholder="Название новой категории"
                             className="register__input"
                             {...register("name", {
@@ -96,14 +86,19 @@ function SubCategories({ loggedIn, category, props, setActive, currentUser, onSu
                             Создать подкатегорию
                         </button>
                     </form>
+                   
 
                     <SubCategoriesList
+                    
                     loggedIn={loggedIn}
                     category={category.name}
                     categoryId={category._id}
+                    product={product}
+                   
                         subCategories={subCategories}
                         onSubCategoryClick={onSubCategoryClick}
                     />
+
 
                 </main>
                 <Footer />

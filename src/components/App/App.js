@@ -8,11 +8,12 @@ import Profile from '../Profile/Profile';
 import Category from "../Movies/Category/Category";
 import SubCategories from "../Movies/SubCategories/Subcategories";
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Products from "../Movies/Products/Products";
 import NotFound from "../NotFound/NotFound";
 import Landing from "../Landing/Landing";
 import Menu from "../Main/Menu/Menu";
 import { mainApi } from "../../utils/MainApi";
-import { moviesApi } from '../../utils/MoviesApi';
+import { productApi } from "../../utils/ProductApi";
 import { categoriesApi } from "../../utils/CategoriesApi";
 import { subCategoriesApi } from "../../utils/SubCategoriesApi";
 import { CurrentUserContext } from '../../context/CurrentUserContext'
@@ -40,6 +41,9 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedCategoryName, setSelectedCategoryName] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState([]);
+  const [selectedSubCategory, setSelectedSubCategory] = useState([]);
+  const [selectedSubCategoryName, setSelectedSubCategoryName] = useState([]);
+  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState([]);
 
 
   function handleMenu() {
@@ -57,6 +61,14 @@ function App() {
     localStorage.setItem('selectedCategoryName', (JSON.parse(localStorage.getItem ('selectedCategory')).name));
     localStorage.setItem('selectedCategoryId', (JSON.parse(localStorage.getItem ('selectedCategory'))._id));
     navigate('/categories/'+ category._id)
+  }
+
+  function handleSubCategoryClick(subCategory) {
+    setSelectedSubCategoryName(subCategory);
+    localStorage.setItem('selectedSubCategory', JSON.stringify(subCategory));
+    localStorage.setItem('selectedSubCategoryName', (JSON.parse(localStorage.getItem ('selectedSubCategory')).name));
+    localStorage.setItem('selectedSubCategoryId', (JSON.parse(localStorage.getItem ('selectedSubCategory'))._id));
+    navigate('/categories/products/'+ subCategory._id)
   }
 
   useEffect(() => {
@@ -195,13 +207,13 @@ function App() {
       });
   }
 
-  function createNewSubCategory(data, categoryId) {
-    // console.log("Нажали createNewSubCategory в App.js", categoryId, data)
+  function createNewSubCategory(data) {
+   
      const { name } = data
       subCategoriesApi
-      .createSubCategory(name, categoryId)
+      .createSubCategory(name)
     subCategoriesApi
-          .getSubCategories(categoryId)
+          .getSubCategories()
           .then((subCategories) => {
             localStorage.setItem('savedSubCategories', JSON.stringify(subCategories));
             setSubCategories(subCategories);
@@ -217,6 +229,28 @@ function App() {
 
       });
   }
+
+  function createProduct(name, cost) {
+   console.log(name, cost)
+     productApi
+     .createProduct(name, cost)
+   subCategoriesApi
+         .getSubCategories()
+         .then((subCategories) => {
+           localStorage.setItem('savedSubCategories', JSON.stringify(subCategories));
+           setSubCategories(subCategories);
+         })
+     .then(() => {
+       setTimeout(setShowTooltip, 1000, true);
+       chooseInfoTooltip({
+         image: success,
+         text: "ПодКатегория успешно создана",
+       });
+     })
+     .catch((err) => {
+
+     });
+ }
 
   function handleLogin(data) {
     const { email, password } = data;
@@ -278,10 +312,31 @@ function App() {
                   loggedIn={loggedIn}
                     category={selectedCategory}
                     onCreateSubCategory={createNewSubCategory}
+                    onCreateProduct={createProduct}
+                    onSubCategoryClick={handleSubCategoryClick}
                   />
+
+                  
                 </ProtectedRoute>}
             />
 
+<Route exact path="/categories/products/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}
+                  checkToken={checkToken}>
+                  <Products
+                  loggedIn={loggedIn}
+                    subCategory={selectedSubCategory}
+                    onCreateProduct={createProduct}
+                    onSubCategoryClick={handleSubCategoryClick}
+                  />
+
+                  
+                </ProtectedRoute>}
+            />
+
+
+handleSubCategoryClick
 
             <Route exact path="/profile"
               element={

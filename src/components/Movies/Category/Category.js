@@ -7,7 +7,7 @@ import { subCategoriesApi } from "../../../utils/SubCategoriesApi"
 import { useForm } from "react-hook-form";
 
 
-function Category({category, loggedIn, onCreateSubCategory, onSubCategoryClick}) {
+function Category({category, loggedIn, onCreateSubCategory }) {
     const [subCategories, setSubCategories] = useState([]);
     const queries = localStorage.getItem('subCategories');
     const [searchQuery, setSearchQuery] = useState([]);

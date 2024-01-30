@@ -1,28 +1,21 @@
 import React from "react";
-import './SubCategoriesList.css'
-import SubCategoryCard from "../SubCategoryCard/SubCategoryCard";
-import { subCategoriesApi } from "../../../utils/SubCategoriesApi";
+import './ProductsList.css'
+import ProductCard from "../ProductCard/ProductCard";
+import { productApi } from "../../../utils/ProductApi";
 import { useState, useEffect } from "react";
 
-function SubCategoriesList({ loggedIn, onSubCategoryClick, savedSubCategories, onCategoryClick }) {
+function ProductList({ loggedIn, savedProducts, onCategoryClick }) {
   const [moviesToPage, setMoviesToPage] = useState(12);
   const [moviesAdd, setMoviesAdd] = useState(3);
   const [buttonHiden, setButtonHiden] = useState(true)
   const [category, setCategory] = useState([]);
-    const [categoryName, setCategoryName] = useState([])
+ const [subCategoryName, setSubCategoryName] = useState([])
   const [categoryId, setCategoryId] = useState([])
+const [products, setProducts] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [subCategoryId, setSubCategoryId] = useState([]);
-  const [subCategoryName, setSubCategoryName] = useState([]);
 
 
-
-  useEffect(() => {
-    if (localStorage.getItem('selectedCategoryName')) {
-      setCategoryName(localStorage.getItem('selectedCategoryName'));
-      setCategoryId(localStorage.getItem('selectedCategoryId'))
-    }
-  }, [category]);
 
   useEffect(() => {
     if (localStorage.getItem('selectedSubCategoryName')) {
@@ -67,49 +60,52 @@ function SubCategoriesList({ loggedIn, onSubCategoryClick, savedSubCategories, o
     setMoviesToPage(moviesToPage + moviesAdd);
   };
 
+ 
   useEffect(() => {
     if (loggedIn) {
-      if (localStorage.getItem('subCategories')) {
-        setSubCategories(JSON.parse(localStorage.getItem('savedSubCategories')));
+      if (localStorage.getItem('products')) {
+        
+        setProducts(JSON.parse(localStorage.getItem('savedProducts')));
+        console.log(products)
           } else {
-       subCategoriesApi       
-          .getSubCategories(categoryId)
-          .then((subCategories) => {
-            localStorage.setItem('savedSubCategories', JSON.stringify(subCategories));
-            setSubCategories(subCategories);
+       productApi       
+          .getProducts(categoryId)
+          .then((products) => {
+            console.log(products)
+            localStorage.setItem('savedProducts', JSON.stringify(products));
+            setProducts(products);
           })
           .catch((error) => {
             console.log(error);
           });
-      }
+       }
     }
   }, [loggedIn]);
 
- 
   return (
     <section className="moviescardlist">
-      <h1> {categoryName}</h1>
-      <h2>Подкатегории</h2>
+      <h1> {subCategoryName}</h1>
+     
+      <h2>Товары</h2>
       <div className="moviescontent">
-        {subCategories.slice(0, moviesToPage).map((subCategory) => {
+        {products.slice(0, moviesToPage).map((product) => {
           return (
             <div>
 
-              <SubCategoryCard
+              <ProductCard
                 loggedIn={loggedIn}
-                key={subCategory._id || subCategory.subCategoryId}
-                subCategory={subCategory}
-                savedSubCategories={savedSubCategories}
-                onSubCategoryClick={onSubCategoryClick}
-                
-                
+                key={product._id || product.productId}
+                product={product}
+                savedProducts={savedProducts}
+                onCategoryClick={onCategoryClick}
+
               />
               
             </div>
           );
         })}
       </div>
-      
+
       <button
         className={`moviescardlist__button ${buttonHiden ? "moviescardlist__button_hidden" : ""
           }`}
@@ -119,4 +115,4 @@ function SubCategoriesList({ loggedIn, onSubCategoryClick, savedSubCategories, o
   );
 }
 
-export default SubCategoriesList;
+export default ProductList;
