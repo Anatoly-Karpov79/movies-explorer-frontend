@@ -71,7 +71,6 @@ const [products, setProducts] = useState([]);
        productApi       
           .getProducts(subCategoryId)
           .then((products) => {
-            console.log(products)
             localStorage.setItem('savedProducts', JSON.stringify(products));
             setProducts(products);
           })
@@ -80,7 +79,7 @@ const [products, setProducts] = useState([]);
           });
        }
     }
-  }, [loggedIn]);
+  }, [loggedIn, products]);
 
   return (
     <section className="moviescardlist">

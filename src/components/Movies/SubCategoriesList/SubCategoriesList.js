@@ -83,7 +83,7 @@ function SubCategoriesList({ loggedIn, onSubCategoryClick, savedSubCategories, o
           });
       }
     }
-  }, [loggedIn]);
+  }, [loggedIn, subCategories]);
 
  
   return (
