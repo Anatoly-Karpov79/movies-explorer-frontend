@@ -69,7 +69,7 @@ const [products, setProducts] = useState([]);
         console.log(products)
           } else {
        productApi       
-          .getProducts(categoryId)
+          .getProducts(subCategoryId)
           .then((products) => {
             console.log(products)
             localStorage.setItem('savedProducts', JSON.stringify(products));

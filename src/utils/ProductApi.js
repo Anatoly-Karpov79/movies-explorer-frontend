@@ -13,8 +13,8 @@ class ProductApi {
     };
 
     getProducts() {
-        const categoryId = localStorage.getItem('selectedCategoryId')
-        return fetch(this._baseUrl  + categoryId, {
+        const subCategoryId = localStorage.getItem('selectedSubCategoryId')
+        return fetch(this._baseUrl  + subCategoryId, {
             method: "GET",
             headers: this._headers,
             credentials: 'include',
